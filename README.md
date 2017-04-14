@@ -21,9 +21,12 @@ If you want a local copy of vueture, follow these steps:
 
 ## Built With
 * SCSS
+  * [Bulma](http://bulma.io/)
 * JavaScript
   * [Vue.js](https://vuejs.org/)
   * [vue-router](https://router.vuejs.org/en/essentials/getting-started.html)
+  * [vue-loader](https://github.com/vuejs/vue-loader)
+  * [buefy](https://buefy.github.io/#/)
 * [Firebase](https://firebase.google.com/)
 * HTML
 * [Visual Studio Code](https://code.visualstudio.com/)

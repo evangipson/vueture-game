@@ -1,7 +1,5 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
-import Foo from "../components/foo.vue"
-import Bar from "../components/bar.vue"
 
 // 0. Announce to vue we are using vue-router to handle routes.
 Vue.use(VueRouter);

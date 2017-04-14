@@ -8,6 +8,8 @@
     "vue-loader": "latest"
   },
   "devDependencies": {
+    "buefy": "^0.1.5",
+    "bulma": "^0.4.0",
     "gulp": "^3.9.1",
     "gulp-concat": "latest",
     "gulp-sass": "latest",

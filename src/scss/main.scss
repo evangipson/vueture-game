@@ -1,3 +1,15 @@
+@import "../../node_modules/bulma/bulma";
+@import "layout";
+@import "nav";
+
+/* Don't show vue stuff until it's loaded! */
 [v-cloak] {
   display: none;
+}
+
+/* Sizing up material icons */
+.material-icons.md-32 { font-size: 32px; }
+.material-icons.md-36 { font-size: 36px; }
+i {
+  margin: 0 0.25rem;
 }
