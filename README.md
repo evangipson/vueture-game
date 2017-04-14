@@ -11,7 +11,13 @@ vueture is a real-time multiplayer business game that is written using vue.js an
 | [License](#license) |
 
 ## Getting Started
-If you want a local copy of vueture, just fork the repository, and set this up in a folder somewhere on your computer. Open up a console in the directory and type ```npm install```. This will download the necessary packages through Node (which you need to install for npm anyways). After installing all necessary dependencies, type ```gulp``` to run the default gulp task and build your local copy of vueture. You can view your local copy simply by viewing the index.html file in Chrome.
+If you want a local copy of vueture, follow these steps:
+- Fork the repository
+- Open up a console in the directory and type ```npm install```.
+  - This will download the necessary packages through Node (which you need to install for npm anyways).
+- Instal webpack on your machine globally with ```npm install webpack -g```
+- Type ```gulp``` to run the default gulp task (which also triggers a webpack build) and build your local copy of vueture.
+- View the local copy by looking at the index.html file in Chrome.
 
 ## Built With
 * SCSS
@@ -22,6 +28,7 @@ If you want a local copy of vueture, just fork the repository, and set this up i
 * HTML
 * [Visual Studio Code](https://code.visualstudio.com/)
 * Google Chrome
+* [Webpack](https://webpack.github.io/)
 
 ## Contributing Code
 Have a look at the [issues with vueture](https://github.com/evangipson/vueture/issues), and create a pull request containing your code so it can be reviewed be merged into the source!
