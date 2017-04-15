@@ -1,5 +1,5 @@
 # Vueture
-vueture is a real-time multiplayer business game that is written using vue.js and firebase.
+Vueture is a real-time multiplayer business game that is written using vue.js and firebase, not to be confused with the [Vueture framework](https://github.com/vueture/vueture) for Vue.
 
 | Vueture Readme |
 |---|
@@ -34,7 +34,7 @@ If you want a local copy of vueture, follow these steps:
 * [Webpack](https://webpack.github.io/)
 
 ## Contributing Code
-Have a look at the [issues with vueture](https://github.com/evangipson/vueture/issues), and create a pull request containing your code so it can be reviewed be merged into the source!
+Have a look at the [issues with vueture](https://github.com/evangipson/vueture-game/issues), and create a pull request containing your code so it can be reviewed be merged into the source!
 
 I will run all new javascript through [JSHint](http://jshint.com/) before merging into master.
 
