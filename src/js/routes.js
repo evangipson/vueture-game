@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 // 1. Define route components.
 // These can be imported from other files
 const HomeView = () => System.import('../components/home.vue');
-const FooView = () => System.import('../components/foo.vue');
+const LoginView = () => System.import('../components/login.vue');
 const BarView = () => System.import('../components/bar.vue');
 
 // 2. Define some routes
@@ -17,7 +17,7 @@ const BarView = () => System.import('../components/bar.vue');
 // We'll talk about nested routes later.
 const routes = [
     { path: '/', component: HomeView },
-    { path: '/foo', component: FooView },
+    { path: '/login', component: LoginView },
     { path: '/bar', component: BarView }
 ];
 

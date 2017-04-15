@@ -13,7 +13,7 @@
         </span>
         <div id="nav-menu" class="nav-right nav-menu">
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Home</router-link>
-            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/foo">Foo</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/login">Login</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/bar">Bar</router-link>
         </div>
     </nav>
