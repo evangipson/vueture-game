@@ -1,12 +1,16 @@
 /* Set any overrides BEFORE importing Bulma per their docs */
 $primary: #FC4A1A;
 $info: #E40C01;
-/* Okay, now import Bulma */
+/* Okay, now import Bulma, then Buefy,
+ * then all the custom vueture SCSS. */
 @import "../../node_modules/bulma/bulma";
+@import "../../node_modules/buefy/src/scss/buefy";
 @import "layout";
 @import "nav";
 
-/* Don't show vue stuff until it's loaded! */
+/* Don't show vue stuff until it's loaded!
+ * You can and should use this class on any
+ * vue-y data (e.g.: <div v-cloak>{{message}}</div>) */
 [v-cloak] {
   display: none;
 }
@@ -15,6 +19,7 @@ $info: #E40C01;
     font-size: 32px; 
     margin-top: 3px;
 }
+/* Give the icon a little space in the nav */
 i {
   margin: 0 0.25rem;
 }
