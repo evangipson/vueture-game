@@ -2,7 +2,7 @@
     <nav class="nav is-info has-shadow">
         <div class="nav-left">
             <router-link class="nav-item button is-large is-info is-outlined" to='/' exact>
-                <i class="material-icons md-32">fiber_smart_record</i> Veuture 
+                <i class="material-icons md-32">fiber_smart_record</i> Vueture 
             </router-link>
         </div>
         <!-- Hamburger Menu for mobile -->
