@@ -1,16 +1,20 @@
 <template>
-    <nav class="nav is-mobile">
+    <nav class="nav is-info has-shadow">
         <div class="nav-left">
-            <router-link class="nav-item button is-large is-dark is-outlined" to='/'>
+            <router-link class="nav-item button is-large is-info is-outlined" to='/' exact>
                 <i class="material-icons md-32">fiber_smart_record</i> Veuture 
             </router-link>
         </div>
-        <div class="nav-right">
-            <!-- use router-link component for navigation. -->
-            <!-- specify the link by passing the `to` prop. -->
-            <!-- <router-link> will be rendered as an `<a>` tag by default -->
-            <router-link class="nav-item button is-large is-dark" to="/foo">Foo</router-link>
-            <router-link class="nav-item button is-large is-dark" to="/bar">Bar</router-link>
+        <!-- Hamburger Menu for mobile -->
+        <span id="nav-toggle" onclick="document.getElementById('nav-toggle').classList.toggle('is-active');document.getElementById('nav-menu').classList.toggle('is-active')" class="nav-toggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </span>
+        <div id="nav-menu" class="nav-right nav-menu">
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Home</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/foo">Foo</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/bar">Bar</router-link>
         </div>
     </nav>
 </template>

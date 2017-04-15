@@ -1,7 +1,10 @@
 nav {
     padding: 1rem 0.75rem;
+    .button {
+        min-width: 8rem;
+    }
 }
 
 .nav-item {
-    margin: 0 0.5rem;
+    margin: 0 0.75rem;
 }
