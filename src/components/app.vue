@@ -1,6 +1,6 @@
 <template>
     <div>
-        <navigation></navigation>
+        <navigation :authenticated="authenticated"></navigation>
         <div id="app">
             <router-view></router-view>
         </div>
@@ -9,8 +9,17 @@
 <!-- Set up our export -->
 <script>
 import Navigation from "./navigation.vue"
+import database from "../js/db"
 export default {
+  props: ["authenticated"],
   components: { Navigation },
+  computed: {
+      authenticated: {
+          get: function() {
+              return database.currentUser() == null ? false : true;
+          }
+      }
+  },
   data () {
     return {
     }

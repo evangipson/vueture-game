@@ -13,14 +13,29 @@
         </span>
         <div id="nav-menu" class="nav-right nav-menu">
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Home</router-link>
-            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/login">Login</router-link>
+            <a class="nav-item is-tab is-large" v-if="authenticated" v-on:click="logUserOut">Log Out</a>
+            <router-link active-class="is-active"  v-else class="nav-item is-tab is-large" to="/login">Login</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/bar">Bar</router-link>
         </div>
     </nav>
 </template>
 <!-- Set up our export -->
 <script>
+import database from "../js/db"
+import router from "../js/routes"
 export default {
+  methods: {
+      logUserOut: function() {
+        database.logout();
+      }
+  },
+  computed: {
+      authenticated: {
+          get: function() {
+              return database.currentUser() == null ? false : true;
+          }
+      }
+  },
   data () {
     return {
     }

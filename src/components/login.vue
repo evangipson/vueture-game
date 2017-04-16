@@ -22,8 +22,18 @@
                                 password-reveal>
                             </b-input>
                         </b-field>
-                        <button class="button is-primary is-large" v-bind:class="formInvalid" v-on:click="submit($event)">Log In</button>
+                        <button class="button is-primary is-large" v-bind:class="formInvalid" v-on:click="logInUser($event)">Log In</button>
+                        <button class="button is-success is-large" v-bind:class="formInvalid" v-on:click="registerUser($event)">Register</button>
                     </form>
+                    <div v-if="couldntFindUser" class="error-section">
+                        <p>Couldn't find that user!</p>
+                    </div>
+                    <div v-if="wrongPassword" class="error-section">
+                        <p>Password doesn't match ours!</p>
+                    </div>
+                    <div v-if="sameUser" class="error-section">
+                        <p>User already exists with that email!</p>
+                    </div>
                 </div>
             </section>
         </div>
@@ -31,17 +41,23 @@
 </template>
 
 <script>
-import db from "../js/db"
+import database from "../js/db"
+import router from "../js/routes"
+
+var couldntFindUser = false;
+var wrongPassword = false;
+var sameUser = false;
+
+// Try to log the user in initially - we might have storage locally!
+if(database.currentUser() != null) {
+    if(database.login(database.currentUser().email, database.currentUser().password)) {
+        router.go("/");
+    }
+}
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-var userRef = db.database().ref("users");
 
 export default {
-    // firebase binding
-    // https://github.com/vuejs/vuefire
-    firebase: {
-        users: userRef
-    },
     // computed property for form validation state
     computed: {
         validation: function () {
@@ -58,30 +74,42 @@ export default {
         },
         formInvalid: function() {
             if(!this.validation.email || !this.validation.password) {
-                return "is-disabled";
+                return "is-disabled"
             }
             else {
-                return "";
+                return ""
             }
         }
     },
     // methods
     methods: {
-        submit(e) {
+        logInUser(e) {
             e.stopPropagation();
-            if (this.isValid) {
-                userRef.push(this.newUser)
-                this.newUser.email = ''
-                this.newUser.password = ''
+            var loginReturn = database.login(this.newUser.email, this.newUser.password)
+            if (loginReturn == 1) {
+                this.couldntFindUser = true
             }
-        }
+            else if(loginReturn == 2) {
+                this.wrongPassword = true
+            }
+        },
+        registerUser(e) {
+            e.stopPropagation();
+            var signinReturn = database.signup(this.newUser.email, this.newUser.password)
+            if (signinReturn == 1) {
+                this.sameUser = true
+            }
+        },
     },
     data() {
         return {
             newUser: {
                 email: '',
                 password: ''
-            }
+            },
+            couldntFindUser: couldntFindUser,
+            wrongPassword: wrongPassword,
+            sameUser: sameUser
         }
     }
 }

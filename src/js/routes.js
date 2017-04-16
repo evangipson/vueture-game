@@ -1,5 +1,6 @@
 import Vue from "vue"
 import VueRouter from "vue-router"
+import database from "./db"
 
 // 0. Announce to vue we are using vue-router to handle routes.
 Vue.use(VueRouter);
@@ -16,14 +17,24 @@ const BarView = () => System.import('../components/bar.vue');
 // Vue.extend(), or just a component options object.
 // We'll talk about nested routes later.
 const routes = [
-    { path: '/', component: HomeView },
+    { path: '/', component: HomeView, loggedInOnly: true },
     { path: '/login', component: LoginView },
     { path: '/bar', component: BarView }
 ];
-
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
-export default new VueRouter({
+var router = new VueRouter({
     routes
 });
+
+router.beforeEach((to, from, next) => {
+    if (to.loggedInOnly && database.currentUser() == null) {
+        next("login");
+    }
+    else {
+        next();
+    }
+});
+
+export default router;
