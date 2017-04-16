@@ -29,8 +29,8 @@ var router = new VueRouter({
 });
 
 router.beforeEach((to, from, next) => {
-    if (to.loggedInOnly && database.currentUser() == null) {
-        next("login");
+    if (to.path !== "/login" && database.currentUser() == null) {
+        next({path: "/login"});
     }
     else {
         next();

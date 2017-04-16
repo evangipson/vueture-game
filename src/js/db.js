@@ -45,7 +45,7 @@ export default {
     login(email, password) {
         var loginWorked = 0;
         firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-            router.go("/");
+            router.go({path: "/"});
         }).catch(function(error) {
             // Handle Errors here.
             var errorCode = error.code;
@@ -67,7 +67,7 @@ export default {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(
             
             firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-                router.go("/");
+                router.go({path: "/"});
             }).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
@@ -92,7 +92,7 @@ export default {
     logout() {
         firebase.auth().signOut().then(function() {
             // Redirect to a specified route
-            router.go("login");
+            router.go({path:"/login"});
         }).catch(function(error) {
         // An error happened.
         });
