@@ -14,11 +14,11 @@ export default {
   props: ["authenticated"],
   components: { Navigation },
   computed: {
-      authenticated: {
-          get: function() {
-              return database.currentUser() == null ? false : true;
-          }
-      }
+        authenticated: {
+            get: function() {
+                return database.currentUser() == null ? false : true;
+            }
+        }
   },
   data () {
     return {

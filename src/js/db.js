@@ -41,53 +41,6 @@ export default {
         return theReturn;
     },
 
-    // Send a request to the login URL and save the returned JWT
-    login(email, password) {
-        var loginWorked = 0;
-        firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-            router.go({path: "/"});
-        }).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if(errorCode == "auth/user-not-found") {
-                console.log("user not found.");
-                loginWorked = 1;
-            }
-            else if(errorCode == "auth/wrong-password") {
-                console.log("password is wrong.");
-                loginWorked = 2;
-            }
-        });
-        return loginWorked;
-    },
-
-    signup(email, password) {
-        var signupWorked = 0;
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(
-            
-            firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
-                router.go({path: "/"});
-            }).catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                // ...
-            })
-
-        ).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            if (errorCode == "auth/email-already-in-use") {
-                console.log("Email already in use.");
-                signupWorked = 1;
-            }
-            // ...
-        });
-        return signupWorked;
-    },
-
     // To log out, we just need to remove the token
     logout() {
         firebase.auth().signOut().then(function() {
@@ -96,5 +49,10 @@ export default {
         }).catch(function(error) {
         // An error happened.
         });
+    },
+
+    data() {
+        return {
+        }
     }
 }

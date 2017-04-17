@@ -7,13 +7,17 @@
                         <div class="heading">
                             <h1 class="title">Login Page</h1>
                         </div>
-                        <b-field label="Email">
+                        <b-field label="Email"
+                                :type="userNameType"
+                                :message="userNameMessage">
                             <b-input type="email"
                                 value=""
                                 v-model="newUser.email">
                             </b-input>
                         </b-field>
-                        <b-field label="Password">
+                        <b-field label="Password"
+                                :type="passwordType"
+                                :message="passwordMessage">
                             <b-input type="password"
                                 value=""
                                 minlength="8"
@@ -22,18 +26,9 @@
                                 password-reveal>
                             </b-input>
                         </b-field>
-                        <button class="button is-primary is-large" v-bind:class="formInvalid" v-on:click="logInUser($event)">Log In</button>
-                        <button class="button is-success is-large" v-bind:class="formInvalid" v-on:click="registerUser($event)">Register</button>
+                        <button class="button is-primary is-large" :class="formInvalid" v-on:click="logInUser($event)">Log In</button>
+                        <button class="button is-success is-large" :class="formInvalid" v-on:click="registerUser($event)">Register</button>
                     </form>
-                    <div v-if="couldntFindUser" class="error-section">
-                        <p>Couldn't find that user!</p>
-                    </div>
-                    <div v-if="wrongPassword" class="error-section">
-                        <p>Password doesn't match ours!</p>
-                    </div>
-                    <div v-if="sameUser" class="error-section">
-                        <p>User already exists with that email!</p>
-                    </div>
                 </div>
             </section>
         </div>
@@ -44,17 +39,12 @@
 import database from "../js/db"
 import router from "../js/routes"
 
-var couldntFindUser = false;
-var wrongPassword = false;
-var sameUser = false;
-
 // Try to log the user in initially - we might have storage locally!
 if(database.currentUser() != null) {
     if(database.login(database.currentUser().email, database.currentUser().password)) {
         router.go("/");
     }
 }
-
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 
 export default {
@@ -79,26 +69,61 @@ export default {
             else {
                 return ""
             }
+        },
+    },
+    watch: {
+        // whenever authReturnCode changes
+        authReturnCode: function (newVal, oldVal) {
+            if(newVal === 1) {
+                this.userNameMessage = "Can't find anyone by that email - are you sure?"
+                this.userNameType = "is-danger"
+            }
+            else if(newVal === 2) {
+                this.passwordMessage = "Password incorrect"
+                this.passwordType = "is-danger"
+            }
+            else if(newVal === 3) {
+                this.userNameMessage = "User with this email address already exists"
+                this.userNameType = "is-danger"
+            }
         }
     },
     // methods
     methods: {
         logInUser(e) {
-            e.stopPropagation();
-            var loginReturn = database.login(this.newUser.email, this.newUser.password)
-            if (loginReturn == 1) {
-                this.couldntFindUser = true
-            }
-            else if(loginReturn == 2) {
-                this.wrongPassword = true
-            }
+            e.stopPropagation()
+            // Need to cast "this" because promises just don't understand
+            var vm = this;
+            database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
+                vm.authReturnCode = 0
+                router.go({path: "/"})
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code
+                var errorMessage = error.message
+                if(errorCode == "auth/user-not-found") {
+                    vm.authReturnCode = 1
+                }
+                else if(errorCode == "auth/wrong-password") {
+                    vm.authReturnCode = 2
+                }
+            });
         },
         registerUser(e) {
             e.stopPropagation();
-            var signinReturn = database.signup(this.newUser.email, this.newUser.password)
-            if (signinReturn == 1) {
-                this.sameUser = true
-            }
+            // Need to cast "this" because promises just don't understand
+            var vm = this;
+            database.firebaseInterface.auth.createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
+                this.logInUser();
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode == "auth/email-already-in-use") {
+                    vm.authReturnCode = 3
+                }
+                // ...
+            });
         },
     },
     data() {
@@ -107,9 +132,11 @@ export default {
                 email: '',
                 password: ''
             },
-            couldntFindUser: couldntFindUser,
-            wrongPassword: wrongPassword,
-            sameUser: sameUser
+            authReturnCode: '',
+            userNameMessage: '',
+            userNameType: '',
+            passwordMessage: '',
+            passwordType: ''
         }
     }
 }
