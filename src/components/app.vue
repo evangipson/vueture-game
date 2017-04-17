@@ -1,7 +1,7 @@
 <template>
     <div>
-        <navigation :authenticated="authenticated"></navigation>
         <div id="app">
+            <navigation :authenticated="authenticated"></navigation>
             <router-view></router-view>
         </div>
     </div>
