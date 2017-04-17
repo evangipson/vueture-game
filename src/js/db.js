@@ -1,14 +1,17 @@
 import Vue from "vue"
 import firebase from "firebase"
 import router from "./routes"
+import token from "./token"
 
+/* INPUT YOUR FIREBASE CONFIG HERE
+ * OR ELSE THIS WHOLE PROJECT DOESN'T WORK */
 var firebaseConfig = {
-    apiKey: "AIzaSyAgQR53lgPu39fWHUZ-kYqy4ZHO3xGuw-g",
-    authDomain: "vueture-caf88.firebaseapp.com",
-    databaseURL: "https://vueture-caf88.firebaseio.com",
-    projectId: "vueture-caf88",
-    storageBucket: "vueture-caf88.appspot.com",
-    messagingSenderId: "1026212136384"
+    apiKey: token.apiKey,
+    authDomain: token.authDomain,
+    databaseURL: token.databaseURL,
+    projectId: token.projectId,
+    storageBucket: token.storageBucket,
+    messagingSenderId: token.messagingSenderId
 };
 firebase.initializeApp(firebaseConfig);
 
