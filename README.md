@@ -15,8 +15,9 @@ If you want a local copy of vueture, follow these steps:
 - Fork the repository
 - Open up a console in the directory and type ```npm install```.
   - This will download the necessary packages through Node (which you need to install for npm anyways).
-- Instal webpack on your machine globally with ```npm install webpack -g```
+- Install webpack on your machine globally with ```npm install webpack -g```
 - Type ```gulp``` to run the default gulp task (which also triggers a webpack build) and build your local copy of vueture.
+- Before Firebase works at all, you need to spin up your own instance and fill in the API key in db.js, where I commented for you to do so.
 - View the local copy by looking at the index.html file in Chrome.
 
 ## Built With
