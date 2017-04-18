@@ -68,12 +68,8 @@ export default {
     watch: {
         // whenever authReturnCode changes
         authReturnCode: function (newVal, oldVal) {
-            // Successful login case
-            if(newVal === 0) {
-                router.go({path:"/"});
-            }
             // Unsuccessful login for various reasons
-            else if(newVal === 1) {
+            if(newVal === 1) {
                 console.log("setting usernameMessage to can't find anyone by that email");
                 this.userNameMessage = "Can't find anyone by that email - are you sure?";
                 this.userNameType = "is-danger";
@@ -110,6 +106,10 @@ export default {
             var vm = this;
             database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 vm.authReturnCode = 0;
+                // I need this here as well as the route.beforeEach rule
+                // that checks your router.path == "/login" w/ a redirect to home.
+                // TODO: Remove this and figure out why I need it.
+                router.go({path:"/"});
                 // We're redirecting to "/" in the chunk above this export default
                 // even though it'd fall here naturally.
             }).catch(function(error) {
@@ -129,7 +129,7 @@ export default {
             // Need to cast "this" because promises just don't understand
             var vm = this;
             database.firebaseInterface.auth.createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
-                vm.authReturnCode = 0;
+                vm.logInUser(e);
             }).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;

@@ -46,6 +46,11 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.loggedInOnly) && database.currentUser() == null) {
         next("/login");
     }
+    // TODO: Investigate why I need this and the line in login.vue
+    // router.go("/")-ing me.
+    else if(to.path == "/login" && database.currentUser()) {
+        next("/");
+    }
     else {
         next();
     }
