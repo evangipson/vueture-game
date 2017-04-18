@@ -12,10 +12,10 @@
             <span></span>
         </span>
         <div id="nav-menu" class="nav-right nav-menu">
-            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Home</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Dashboard</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/stats">Stats</router-link>
             <a class="nav-item is-tab is-large" v-if="authenticated" v-on:click="logUserOut">Log Out</a>
             <router-link active-class="is-active"  v-else class="nav-item is-tab is-large" to="/login">Login</router-link>
-            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/bar">Bar</router-link>
         </div>
     </nav>
 </template>
