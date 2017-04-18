@@ -109,7 +109,7 @@ export default {
                 // I need this here as well as the route.beforeEach rule
                 // that checks your router.path == "/login" w/ a redirect to home.
                 // TODO: Remove this and figure out why I need it.
-                router.go({path:"/"});
+                router.push({path:"/"});
                 // We're redirecting to "/" in the chunk above this export default
                 // even though it'd fall here naturally.
             }).catch(function(error) {
