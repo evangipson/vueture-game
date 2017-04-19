@@ -1,19 +1,25 @@
 <template>
-    <section class="columns">
-        <div class="column is-three-quarters">
-            <h1 class="title">
-                Random Number Generator
-            </h1>
-            <h2 class="subtitle">
+    <article>
+        <div class="columns">
+            <div class="columns is-half is-offset-one-quarter">
+                <h2 class="subtitle">
+                    Random Number Generator
+                </h2>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column">
                 Your random number is... <em><strong v-cloak>{{randomNumber}}</strong></em>!
-            </h2>
+            </div>
         </div>
-        <div class="column">
-            <button class="button content is-info" v-on:click="success">
-                Give me another number!
-            </button>
+        <div class="columns">
+            <div class="column">
+                <button class="button content is-info" v-on:click="success">
+                    Give me another number!
+                </button>
+            </div>
         </div>
-    </section>
+    </article>
 </template>
 
 <!-- Set up our export -->
