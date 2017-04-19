@@ -1,8 +1,14 @@
 <template>
     <nav class="nav is-info has-shadow">
         <div class="nav-left">
-            <router-link class="nav-item button is-large is-info is-outlined" to='/' exact>
-                <i class="material-icons md-32">fiber_smart_record</i> Vueture 
+            <router-link id="logo" class="nav-item button is-large is-info is-outlined" to='/' exact>
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 22">
+                    <g class="vueture-logo">
+                        <circle cx="9" cy="12" r="8"/>
+                        <path d="M17 4.26v2.09c2.33.82 4 3.04 4 5.65s-1.67 4.83-4 5.65v2.09c3.45-.89 6-4.01 6-7.74s-2.55-6.85-6-7.74z"/>
+                    </g>
+                </svg>
+                <p>Vueture</p>
             </router-link>
         </div>
         <!-- Hamburger Menu for mobile -->
