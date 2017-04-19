@@ -7,7 +7,7 @@ Vue.use(VueRouter);
 
 // 1. Define route components.
 // These can be imported from other files
-const HomeView = () => System.import('../components/home.vue');
+const DashboardView = () => System.import('../components/dashboard.vue');
 const LoginView = () => System.import('../components/login.vue');
 const StatsView = () => System.import('../components/stats.vue');
 
@@ -20,7 +20,7 @@ const StatsView = () => System.import('../components/stats.vue');
 const routes = [
     {
         path: '/',
-        component: HomeView,
+        component: DashboardView,
         // Meta properties set up per the documentation here: https://router.vuejs.org/en/advanced/meta.html
         meta: {loggedInOnly: true }
     },
