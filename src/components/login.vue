@@ -101,7 +101,7 @@ export default {
     // methods
     methods: {
         logInUser(e) {
-            e.stopPropagation();
+            e.preventDefault();
             // Need to cast "this" because promises just don't understand
             var vm = this;
             database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
@@ -125,7 +125,7 @@ export default {
             });
         },
         registerUser(e) {
-            e.stopPropagation();
+            e.preventDefault();
             // Need to cast "this" because promises just don't understand
             var vm = this;
             database.firebaseInterface.auth.createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
