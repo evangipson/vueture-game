@@ -1,29 +1,28 @@
 <template>
     <div>
         <hero></hero>
-        <section class="section">
-            <div class="container content">
-                <div class="heading">
-                    <h1 class="title">
-                        Home Page
-                    </h1>
+        <div class="container content">
+            <div class="columns">
+                <div class="column is-half">
+                    <div class="heading">
+                        <h1 class="title">
+                            Home Page
+                        </h1>
+                    </div>
+                    <p>Pretty soon you'll be creating businesses from here!</p>
                 </div>
-                <div v-if="authenticated">
+                <div class="column">
+                    <b><em>Profile Information</em></b>
                     <ul>
-                        <li><b><em>Profile Information</em></b></li>
-                        <li>{{user.email}}</li>
-                        <li>{{user.emailVerified}}</li>
-                        <li>{{user.uid}}</li>
+                        <li>User email: {{user.email}}</li>
+                        <li>User UID: {{user.uid}}</li>
+                        <li v-if="user.emailVerified">You've validated your email.</li>
+                        <li v-else>You haven't validated your email. But I haven't sent any yet so don't worry!</li>
                     </ul>
                 </div>
-                <div class="subtitle" v-else>
-                    <h2>
-                        If you were signed in, you'd see cool profile information here!
-                    </h2>
-                </div>
             </div>
-        </section>
-        <random-number></random-number>
+            <random-number></random-number>
+        </div>
     </div>
 </template>
 

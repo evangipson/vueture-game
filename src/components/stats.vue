@@ -4,13 +4,21 @@
             <div class="heading">
                 <h1 class="title">Statistics Page</h1>
             </div>
-            <p>I'll have some stuff to say about the server.</p>
+            <ul>
+                <li v-for="gold in goldRef">{{ gold['.key'] }}: {{ gold['.value'] }}</li>
+            </ul>
         </div>
     </section>
 </template>
 
 <script>
+import database from "../js/db"
+
 export default {
+    firebase: {
+        // can bind to either a direct Firebase reference or a query
+        goldRef: database.firebaseInterface.db.ref("/gold")
+    },
     data() {
         return {
         }
