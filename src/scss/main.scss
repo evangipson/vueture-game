@@ -7,6 +7,7 @@ $info: #E40C01;
 @import "../../node_modules/buefy/src/scss/buefy";
 @import "layout";
 @import "nav";
+@import "variables";
 
 /* Don't show vue stuff until it's loaded!
  * You can and should use this class on any
@@ -17,6 +18,27 @@ $info: #E40C01;
 /* GRID OVERRIDES */
 .columns {
   margin: 1rem 0;
+}
+/* FORM OVERRIDES */
+#form {
+  margin: auto auto 1.5rem;
+}
+// Custom style for the sign in/sign up buttons
+a.card-footer-item {
+  transition: background $animationTime ease,
+              color $animationTime ease;
+  background: lighten($grey, 25%);
+  color: $white;
+  pointer-events: none;
+  &.is-enabled {
+    background: $white;
+    color: $primary;
+    pointer-events: all;
+    &:hover {
+      background: $primary;
+      color: $white;
+    }
+  }
 }
 /* NAVIGATION */
 /* Custom Logo CSS */

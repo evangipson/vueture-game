@@ -1,12 +1,12 @@
 <template>
-    <section class="section">
-        <div class="container content">
-            <section class="columns">
-                <div class="column is-half is-offset-one-quarter">
+    <section class="section columns">
+        <div class="column is-half is-offset-one-quarter">        
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Vueture Login</p>
+                </header>
+                <div class="card-content">
                     <form id="form">
-                        <div class="heading">
-                            <h1 class="title">Login Page</h1>
-                        </div>
                         <b-field label="Email"
                                 :type="userNameType"
                                 :message="userNameMessage">
@@ -21,16 +21,17 @@
                             <b-input type="password"
                                 value=""
                                 minlength="8"
-                                maxlength="30"
                                 v-model="newUser.password"
                                 password-reveal>
                             </b-input>
                         </b-field>
-                        <button class="button is-primary is-large" :class="formInvalid" v-on:click="logInUser($event)">Log In</button>
-                        <button class="button is-success is-large" :class="formInvalid" v-on:click="registerUser($event)">Register</button>
                     </form>
                 </div>
-            </section>
+                <footer class="card-footer">
+                    <a :class="formValid" class="card-footer-item" v-on:click="logInUser($event)">Sign In</a>
+                    <a :class="formValid" class="card-footer-item" v-on:click="registerUser($event)">Sign Up</a>
+                </footer>
+            </div>
         </div>
     </section>
 </template>
@@ -56,9 +57,9 @@ export default {
                 return validation[key];
             });
         },
-        formInvalid: function() {
-            if(!this.validation.email || !this.validation.password) {
-                return "is-disabled";
+        formValid: function() {
+            if(this.validation.email && this.validation.password) {
+                return "is-enabled";
             }
             else {
                 return "";
@@ -71,7 +72,7 @@ export default {
             // Unsuccessful login for various reasons
             if(newVal === 1) {
                 console.log("setting usernameMessage to can't find anyone by that email");
-                this.userNameMessage = "Can't find anyone by that email - are you sure?";
+                this.userNameMessage = "Can't find anyone by that email - do you need to register?";
                 this.userNameType = "is-danger";
             }
             else if(newVal === 2) {
