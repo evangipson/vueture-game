@@ -36,6 +36,7 @@ In order to get your db working, you need to sign up for an account with [Fireba
   * [vue-router](https://router.vuejs.org/en/essentials/getting-started.html)
   * [vue-loader](https://github.com/vuejs/vue-loader)
   * [buefy](https://buefy.github.io/#/)
+  * [vuefire](https://github.com/vuejs/vuefire)
 * [Firebase](https://firebase.google.com/)
 * HTML
 * [Visual Studio Code](https://code.visualstudio.com/)
@@ -56,6 +57,7 @@ For instance, the first stable build of vueture will be 1.0.0.
 
 ## Authors
 * **Evan Gipson** - *[Evan's Website](https://evangipson.com/)*
+* **Aaron Case** - *[Aaron's GitHub](https://github.com/aacase)*
 
 ## License
 This project is licensed under the MIT License.
