@@ -15,10 +15,18 @@ If you want a local copy of vueture, follow these steps:
 - Fork the repository
 - Open up a console in the directory and type ```npm install```.
   - This will download the necessary packages through Node (which you need to install for npm anyways).
-- Install webpack on your machine globally with ```npm install webpack -g```
+- Install webpack on your machine globally with ```npm install webpack -g``` note that you may need sudo permissions depending on your environment.
+- Install gulp globally on your machine with ```npm install gulp -g``` 
 - Type ```gulp``` to run the default gulp task (which also triggers a webpack build) and build your local copy of vueture.
-- Before Firebase works at all, you need to spin up your own instance and fill in the API key in db.js, where I commented for you to do so.
+- Before Firebase works at all, you need to spin up your own instance and fill in the API key in db.js, where I commented for you to do so. See [Firebase Setup](#firebase-setup) for more details. 
 - View the local copy by looking at the index.html file in Chrome.
+
+## Firebase Setup
+In order to get your db working, you need to sign up for an account with [Firebase](https://firebase.google.com/)
+- Once you have your account, on the overview page click the "Add firebase to your web app" button. 
+![](http://i.imgur.com/i3xyERQ.png)
+- Take the information you were given on that screen and place it at the beinging of the db.js file located in src/js. 
+![](http://i.imgur.com/GriWUZp.png)
 
 ## Built With
 * SCSS
