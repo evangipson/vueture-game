@@ -41,6 +41,8 @@ import database from "../js/db"
 import router from "../js/routes"
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+var startingMoney = 10000;
+var usersRef = database.firebaseInterface.db.ref("users")
 
 export default {
     // computed property for form validation state
@@ -65,6 +67,9 @@ export default {
                 return "";
             }
         },
+    },
+    firebase: {
+        users: database.firebaseInterface.db.ref("users")
     },
     watch: {
         // whenever authReturnCode changes
@@ -101,12 +106,19 @@ export default {
     },
     // methods
     methods: {
-        logInUser(e) {
+        logInUser(e, createUser) {
             e.preventDefault();
             // Need to cast "this" because promises just don't understand
             var vm = this;
             database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 vm.authReturnCode = 0;
+                if(createUser) {
+                    // Write out this user to the userRef
+                    usersRef.push({
+                        uid: database.currentUser().uid,
+                        gold: startingMoney
+                    });
+                }
                 // I need this here as well as the route.beforeEach rule
                 // that checks your router.path == "/login" w/ a redirect to home.
                 // TODO: Remove this and figure out why I need it.
@@ -130,7 +142,8 @@ export default {
             // Need to cast "this" because promises just don't understand
             var vm = this;
             database.firebaseInterface.auth.createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
-                vm.logInUser(e);
+                // Passing in true here to indicate we want to create a user in the DB
+                vm.logInUser(e, true);
             }).catch(function(error) {
                 // Handle Errors here.
                 var errorCode = error.code;
