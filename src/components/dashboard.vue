@@ -4,12 +4,10 @@
         <div class="container content">
             <div class="columns">
                 <div class="column is-half">
-                    <div class="heading">
-                        <h1 v-if="currentUserNameRef" class="title">
-                            Welcome back {{currentUserName}}
-                        </h1>
-                    </div>
-                    <p>Pretty soon you'll be creating businesses from here!</p>
+                    <h1 v-if="currentUserNameRef" class="title">
+                        Welcome back {{currentUserName}}
+                    </h1>
+                    <business></business>
                 </div>
                 <div class="column">
                     <b><em>Profile Information</em></b>
@@ -30,10 +28,11 @@
 <script>
 import RandomNumber from "./random-number.vue"
 import Hero from "./hero.vue"
+import Business from "./business.vue"
 import database from "../js/db"
 
 export default {
-  components: { RandomNumber, Hero },
+  components: { RandomNumber, Hero, Business },
   computed: {
       currentUserGoldRef: {
           get: function() {
