@@ -12,6 +12,7 @@
                         </div>
                         <b-field label="name">
                             <b-input
+                                :placeholder="userName"
                                 v-model="user.name">
                             </b-input>
                         </b-field>
