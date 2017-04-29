@@ -15,7 +15,8 @@
                                 v-model="newUser.email">
                             </b-input>
                         </b-field>
-                        <b-field label="Password"
+                        <b-field class="passwordLabel"
+                                label="Password"
                                 :type="passwordType"
                                 :message="passwordMessage">
                             <b-input type="password"
@@ -42,7 +43,7 @@ import router from "../js/routes"
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 var startingMoney = 10000;
-var currentUserRef = database.firebaseInterface.db.ref("users")
+var usersRef = database.firebaseInterface.db.ref("users")
 
 export default {
     // computed property for form validation state
