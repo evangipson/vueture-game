@@ -47,6 +47,11 @@ export default {
             currentUserRef.update({
                 name: this.user.name
             });
+            // Let the user know we were successful in updating
+            this.$toast.open({
+                message: 'Profile updated!',
+                type: 'is-info'
+            })
         }
     },
     data() {
