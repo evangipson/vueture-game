@@ -16,6 +16,7 @@
                     <ul>
                         <li>User email: {{user.email}}</li>
                         <li>User UID: {{user.uid}}</li>
+                        <li v-if="currentUserGoldRef">User Money: {{currentUserGold}}</li>
                         <li v-if="user.emailVerified">You've validated your email.</li>
                         <li v-else>You haven't validated your email. But I haven't sent any yet so don't worry!</li>
                     </ul>
@@ -34,6 +35,14 @@ import database from "../js/db"
 export default {
   components: { RandomNumber, Hero },
   computed: {
+      currentUserGoldRef: {
+          get: function() {
+              var vm = this;
+              return database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
+                  vm.currentUserGold = snapshot.val();
+              });
+          }
+      },
       authenticated: {
           get: function() {
               return database.currentUser() == null ? false : true;
@@ -42,7 +51,8 @@ export default {
   },
   data() {
     return {
-        user: database.currentUser()
+        user: database.currentUser(),
+        currentUserGold: ''
     }
   }
 }

@@ -7,10 +7,7 @@
                 </header>
                 <div class="card-content">
                     <form id="form">
-                        <div v-cloak v-if="usernameExists">
-                            <p>Your username is currently {{userName}}</p>
-                        </div>
-                        <b-field label="name">
+                        <b-field v-if="usernameRef" label="Username">
                             <b-input
                                 :placeholder="userName"
                                 v-model="user.name">
@@ -33,7 +30,7 @@ var currentUserRef = database.firebaseInterface.db.ref("users/" + database.curre
 
 export default {
     computed: {
-        usernameExists: {
+        usernameRef: {
             get: function() {
                 var vm = this;
                 return currentUserRef.child("name").on("value", function(snapshot) {

@@ -42,7 +42,7 @@ import router from "../js/routes"
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 var startingMoney = 10000;
-var usersRef = database.firebaseInterface.db.ref("users")
+var currentUserRef = database.firebaseInterface.db.ref("users")
 
 export default {
     // computed property for form validation state
