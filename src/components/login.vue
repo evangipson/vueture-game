@@ -68,9 +68,6 @@ export default {
             }
         },
     },
-    firebase: {
-        users: database.firebaseInterface.db.ref("users")
-    },
     watch: {
         // whenever authReturnCode changes
         authReturnCode: function (newVal, oldVal) {
@@ -113,10 +110,12 @@ export default {
             database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 vm.authReturnCode = 0;
                 if(createUser) {
-                    // Write out this user to the userRef
-                    usersRef.push({
-                        uid: database.currentUser().uid,
-                        gold: startingMoney
+                    var currentUserUID = database.currentUser().uid;
+                    // Write out this user to the userRef and use the UID for the name
+                    usersRef.update({
+                        [currentUserUID]:{
+                            gold: startingMoney
+                        }
                     });
                 }
                 // I need this here as well as the route.beforeEach rule

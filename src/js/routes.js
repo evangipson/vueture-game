@@ -10,6 +10,7 @@ Vue.use(VueRouter);
 const DashboardView = () => System.import('../components/dashboard.vue');
 const LoginView = () => System.import('../components/login.vue');
 const StatsView = () => System.import('../components/stats.vue');
+const ProfileView = () => System.import('../components/profile.vue');
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -31,6 +32,11 @@ const routes = [
     {
         path: '/stats',
         component: StatsView,
+        meta: {loggedInOnly: true }
+    },
+    {
+        path: '/profile',
+        component: ProfileView,
         meta: {loggedInOnly: true }
     }
 ];
