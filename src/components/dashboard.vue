@@ -5,8 +5,8 @@
             <div class="columns">
                 <div class="column is-half">
                     <div class="heading">
-                        <h1 class="title">
-                            Home Page
+                        <h1 v-if="currentUserNameRef" class="title">
+                            Welcome back {{currentUserName}}
                         </h1>
                     </div>
                     <p>Pretty soon you'll be creating businesses from here!</p>
@@ -43,6 +43,14 @@ export default {
               });
           }
       },
+      currentUserNameRef: {
+          get: function() {
+              var vm = this;
+              return database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
+                  vm.currentUserName = snapshot.val();
+              });
+          }
+      },
       authenticated: {
           get: function() {
               return database.currentUser() == null ? false : true;
@@ -52,7 +60,8 @@ export default {
   data() {
     return {
         user: database.currentUser(),
-        currentUserGold: ''
+        currentUserGold: '',
+        currentUserName: database.currentUser().email
     }
   }
 }
