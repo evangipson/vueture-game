@@ -3,7 +3,7 @@
         <hero></hero>
         <div class="container content">
             <div class="columns">
-                <div class="column is-half">
+                <div class="column is-two-thirds">
                     <h1 v-if="currentUserNameRef" class="title">
                         Welcome back {{currentUserName}}
                     </h1>
