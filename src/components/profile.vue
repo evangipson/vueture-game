@@ -6,9 +6,12 @@
                     <p class="card-header-title">User Profile</p>
                 </header>
                 <div class="card-content">
-                    <form id="form" v-on:submit.prevent="updateUserSettings">
-                        <b-field label="username">
-                            <b-input value=""
+                    <form id="form">
+                        <div v-cloak v-if="usernameExists">
+                            <p>Your username is currently {{userName}}</p>
+                        </div>
+                        <b-field label="name">
+                            <b-input
                                 v-model="user.name">
                             </b-input>
                         </b-field>
@@ -25,9 +28,19 @@
 <script>
 import database from "../js/db"
 
-var currentUserRef = database.firebaseInterface.db.ref("users/" + database.currentUser().uid)
+var currentUserRef = database.firebaseInterface.db.ref("users/" + database.currentUser().uid);
 
 export default {
+    computed: {
+        usernameExists: {
+            get: function() {
+                var vm = this;
+                return currentUserRef.child("name").on("value", function(snapshot) {
+                    vm.userName = snapshot.val();
+                });
+            }
+        }
+    },
     // methods
     methods: {
         updateUser(e) {
@@ -42,7 +55,8 @@ export default {
         return {
             user: {
                 name: ''
-            }
+            },
+            userName: ''
         }
     }
 }
