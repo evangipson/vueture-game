@@ -74,8 +74,7 @@ export default {
         authReturnCode: function (newVal, oldVal) {
             // Unsuccessful login for various reasons
             if(newVal === 1) {
-                console.log("setting usernameMessage to can't find anyone by that email");
-                this.userNameMessage = "Can't find anyone by that email - do you need to register?";
+                this.userNameMessage = "Account not found - Sign Up to continue";
                 this.userNameType = "is-danger";
             }
             else if(newVal === 2) {
@@ -98,7 +97,7 @@ export default {
                 var vm = this;
                 setTimeout(function(){
                     vm.authReturnCode = -1;
-                }, 2000);
+                }, 4000);
             }
         }
     },

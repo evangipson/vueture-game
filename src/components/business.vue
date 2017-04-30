@@ -27,15 +27,15 @@ export default {
     },
     methods: {
         createBusiness: function() {
-            this.generatedBusiness = business.constructBusiness()
+            this.generatedBusiness = business.constructBusiness();
         },
         buyBusiness: function() {
-            currentUserBusinessRef.update({[generatedBusiness.name] : generatedBusiness})
+            currentUserBusinessRef.update(generatedBusiness);
             // Let the user know we were successful in buying the business
             this.$toast.open({
                 message: 'Business Purchased!',
                 type: 'is-success'
-            })
+            });
         }
     },
     data() {
