@@ -1,9 +1,9 @@
 <template>
     <div class="column">
         <h2>Owned Businesses</h2>
-        <p v-if="currentUserBusinessRef">{{this.userBusinesses}}</p>
-        <h2>Businesses for sale</h2>
-        <h3>Business #1</h3>
+        <p :ref="currentUserBusinessRef" v-if="userBusinesses">{{this.userBusinesses}}</p>
+        <p v-else>None</p>
+        <h2>Business for sale</h2>
         <p>{{this.generatedBusiness}}</p>
         <a class="button is-success" v-on:click="createBusiness()">Create Business</a>
         <a class="button is-info" v-on:click="buyBusiness()">Buy Business</a>
@@ -14,18 +14,13 @@
 import business from "../js/business"
 import database from "../js/db"
 
-
-var currentUserBusinessRef = database.firebaseInterface.db.ref("/users/" + database.currentUser().uid + "/businesses");
-
 export default {
     computed: {
-        currentUserBusinessRef: {
-            get: function() {
-                var vm = this;
-                return currentUserBusinessRef.on("value", function(snapshot) {
-                    vm.userBusinesses = snapshot.val();
-                });
-            }
+        currentUserBusinessRef: function() {
+            var vm = this;
+            database.firebaseInterface.db.ref("/users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+                vm.userBusinesses = snapshot.val();
+            });
         }
     },
     methods: {

@@ -5,7 +5,7 @@
                 <h1 class="title">Statistics Page</h1>
             </div>
             <ul>
-                <li>Stats will be here</li>
+                <li :ref="goldRef">{{gold}}</li>
             </ul>
         </div>
     </section>
@@ -14,12 +14,18 @@
 <script>
 import database from "../js/db"
 
-var goldRef = database.firebaseInterface.db.ref("/gold");
-
 export default {
+    computed: {
+        goldRef: function() {
+            var vm = this;
+            database.firebaseInterface.db.ref("/gold").on("value", function(snapshot) {
+                vm.gold = snapshot.val();
+            });
+        }
+    },
     data() {
         return {
-            goldRef : goldRef
+            gold: ''
         }
     }
 }

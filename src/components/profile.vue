@@ -7,7 +7,7 @@
                 </header>
                 <div class="card-content">
                     <form id="form">
-                        <b-field v-if="usernameRef" label="Username">
+                        <b-field :ref="userNameRef" label="Username">
                             <b-input
                                 :placeholder="userName"
                                 v-model="user.name">
@@ -26,17 +26,13 @@
 <script>
 import database from "../js/db"
 
-var currentUserRef = database.firebaseInterface.db.ref("users/" + database.currentUser().uid);
-
 export default {
     computed: {
-        usernameRef: {
-            get: function() {
-                var vm = this;
-                return currentUserRef.child("name").on("value", function(snapshot) {
-                    vm.userName = snapshot.val();
-                });
-            }
+        userNameRef: function() {
+            var vm = this;
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
+                vm.userName = snapshot.val();
+            });
         }
     },
     // methods

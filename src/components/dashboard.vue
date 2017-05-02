@@ -4,7 +4,7 @@
         <div class="container content">
             <div class="columns">
                 <div class="column is-two-thirds">
-                    <h1 v-if="currentUserNameRef" class="title">
+                    <h1 :ref="currentUserNameRef" class="title">
                         Welcome back {{currentUserName}}
                     </h1>
                     <business></business>
@@ -14,7 +14,7 @@
                     <ul>
                         <li>User email: {{user.email}}</li>
                         <li>User UID: {{user.uid}}</li>
-                        <li v-if="currentUserGoldRef">User Money: {{currentUserGold}}</li>
+                        <li :ref="currentUserGoldRef">User Money: {{currentUserGold}}</li>
                         <li v-if="user.emailVerified">You've validated your email.</li>
                         <li v-else>You haven't validated your email. But I haven't sent any yet so don't worry!</li>
                     </ul>
@@ -34,33 +34,29 @@ import database from "../js/db"
 export default {
   components: { RandomNumber, Hero, Business },
   computed: {
-      currentUserGoldRef: {
-          get: function() {
-              var vm = this;
-              return database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
-                  vm.currentUserGold = snapshot.val();
-              });
-          }
-      },
-      currentUserNameRef: {
-          get: function() {
-              var vm = this;
-              return database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
-                  vm.currentUserName = snapshot.val();
-              });
-          }
-      },
-      authenticated: {
-          get: function() {
-              return database.currentUser() == null ? false : true;
-          }
-      }
+    authenticated: {
+        get: function() {
+            return database.currentUser() == null ? false : true;
+        }
+    },
+    currentUserGoldRef: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
+            vm.currentUserGold = snapshot.val();
+        });
+    },
+    currentUserNameRef: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
+            vm.currentUserName = snapshot.val();
+        });
+    }
   },
   data() {
     return {
         user: database.currentUser(),
         currentUserGold: '',
-        currentUserName: database.currentUser().email
+        currentUserName: database.currentUser().email,
     }
   }
 }
