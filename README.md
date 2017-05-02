@@ -36,7 +36,6 @@ In order to get your db working, you need to sign up for an account with [Fireba
   * [vue-router](https://router.vuejs.org/en/essentials/getting-started.html)
   * [vue-loader](https://github.com/vuejs/vue-loader)
   * [buefy](https://buefy.github.io/#/)
-  * [vuefire](https://github.com/vuejs/vuefire)
 * [Firebase](https://firebase.google.com/)
 * HTML
 * [Visual Studio Code](https://code.visualstudio.com/)
@@ -47,6 +46,33 @@ In order to get your db working, you need to sign up for an account with [Fireba
 Have a look at the [issues with vueture](https://github.com/evangipson/vueture-game/issues), and create a pull request containing your code so it can be reviewed be merged into the source!
 
 I will run all new javascript through [JSHint](http://jshint.com/) before merging into master.
+
+### Code Style Guidelines
+
+#### Vue
+- When writing an interactive database item, you're going to need to handle binding yourself (because I'm not using vuefire because I'm difficult), like so:
+```
+...
+<div :ref="fooRef">{{foo}}</div>
+...
+<script>
+  export default {
+    computed: {
+      fooRef: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("foo").on("value", function(snapshot) {
+          vm.foo = snapshot.val();
+        })
+      }
+    }
+    data() {
+      return {
+        foo: '',
+      }
+    }
+  }
+</script>
+```
 
 ## Versioning
 vueture is maintained using a 3-digit versioning system, represented by:
