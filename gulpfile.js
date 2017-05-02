@@ -20,7 +20,7 @@ gulp.task("begin", function() {
 
 gulp.task("sass", function() {
     gutil.log(logs.sass);
-    return gulp.src("src/scss/*.scss")
+    return gulp.src("src/scss/main.scss")
     .pipe(sass({outputStyle: 'extended'})
         .on("error", function(e) {
             gutil.log(e);

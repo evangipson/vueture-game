@@ -1,1 +1,10 @@
+/* Set any overrides BEFORE importing Bulma per their docs */
+$primary: #FC4A1A;
+$info: #E40C01;
+/* Okay, now import Bulma, then Buefy,
+ * then all the custom vueture SCSS. */
+@import "../../node_modules/bulma/bulma";
+@import "../../node_modules/buefy/src/scss/buefy";
+
+// Define other non-Bulma variables
 $animationTime: 0.175s;

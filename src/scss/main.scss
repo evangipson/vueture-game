@@ -1,23 +1,16 @@
-/* Set any overrides BEFORE importing Bulma per their docs */
-$primary: #FC4A1A;
-$info: #E40C01;
-/* Okay, now import Bulma, then Buefy,
- * then all the custom vueture SCSS. */
-@import "../../node_modules/bulma/bulma";
-@import "../../node_modules/buefy/src/scss/buefy";
-@import "layout";
-@import "nav";
+/* Include all the other SCSS files here,
+ * and make sure to import variables first
+ * so the other files can use the variables. */
 @import "variables";
+@import "layout";
+@import "login";
+@import "nav";
 
 /* Don't show vue stuff until it's loaded!
  * You can and should use this class on any
  * vue-y data (e.g.: <div v-cloak>{{message}}</div>) */
 [v-cloak] {
   display: none;
-}
-/* GRID OVERRIDES */
-.columns {
-  margin: 1rem 0;
 }
 /* FORM OVERRIDES */
 #form {
@@ -39,16 +32,4 @@ a.card-footer-item {
       color: $white;
     }
   }
-}
-/* NAVIGATION */
-/* Custom Logo CSS */
-.vueture-logo {
-  margin: 0.5rem 0.5rem 0 0;
-  fill: $info;
-}
-#logo:hover .vueture-logo {
-  fill: $white;
-}
-#logo p {
-  margin: 0 0 0 0.25rem;
 }
