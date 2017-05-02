@@ -1,7 +1,6 @@
-import Vue from "vue"
-import firebase from "firebase"
-import router from "./routes"
-import token from "./token"
+import firebase from "firebase";
+import router from "./routes";
+import token from "./token";
 
 /* INPUT YOUR FIREBASE CONFIG HERE
  * OR ELSE THIS WHOLE PROJECT DOESN'T WORK */
@@ -25,14 +24,14 @@ export default {
     fireInit: function(func) {
         firebase.auth().onAuthStateChanged(function (user) {
             if (user) {
-                func(true)
+                func(true);
                 console.log("user logged in " + user.email);
             } else {
-                func(false)
+                func(false);
                 console.log("user not logged in.");
             }
         }, function(error) {
-            console.log(error)
+            console.log(error);
         });
     },
 
@@ -56,6 +55,6 @@ export default {
 
     data() {
         return {
-        }
+        };
     }
-}
+};

@@ -1,4 +1,4 @@
-import utils from "./utilities"
+import utils from "./utilities";
 
 const businessModel = {
     class: [
@@ -138,7 +138,7 @@ const businessModel = {
     debt: 0,
     employees: 0,
     operationalCost: 0
-}
+};
 
 function constructBusiness() {
     let newBusiness = {};
@@ -148,9 +148,9 @@ function constructBusiness() {
     newBusiness.name = utils.randomElement(businessModel.type[newBusiness.type].names);
     newBusiness.employees = 0; //TODO: CreateEmployee (with salary and stuff)
     newBusiness.operationalCost = 0; //TODO: CalculateOperationCost (employees * their salary + something * debtPayment)
-    return newBusiness
+    return newBusiness;
 }
 
 export default {
     constructBusiness: constructBusiness
-}
+};

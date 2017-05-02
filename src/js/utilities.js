@@ -16,7 +16,7 @@ const getRandomRange = function(min = 0, max = 100) {
  */
 const getRandomElement = function(array) {
     return array[getRandomRange(0,array.length-1)];
-}
+};
 
 // Return our utilities module 
 module.exports = {

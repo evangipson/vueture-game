@@ -1,16 +1,16 @@
-import Vue from "vue"
-import VueRouter from "vue-router"
-import database from "./db"
+import Vue from "vue";
+import VueRouter from "vue-router";
+import database from "./db";
 
-// 0. Announce to vue we are using vue-router to handle routes.
+// 0. Announce to vue we are using vue-router to handle routes
 Vue.use(VueRouter);
 
-// 1. Define route components.
+// 1. Define route components
 // These can be imported from other files
-const DashboardView = () => System.import('../components/dashboard.vue');
-const LoginView = () => System.import('../components/login.vue');
-const StatsView = () => System.import('../components/stats.vue');
-const ProfileView = () => System.import('../components/profile.vue');
+import DashboardView from "../components/dashboard.vue";
+import LoginView from "../components/login.vue";
+import StatsView from "../components/stats.vue";
+import ProfileView from "../components/profile.vue";
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -40,6 +40,7 @@ const routes = [
         meta: {loggedInOnly: true }
     }
 ];
+
 // 3. Create the router instance and pass the `routes` option
 // You can pass in additional options here, but let's
 // keep it simple for now.
@@ -47,9 +48,10 @@ var router = new VueRouter({
     routes
 });
 
+// 4. Augment router with any custom routing logic
 router.beforeEach((to, from, next) => {
     // Access our meta property from the route
-    if (to.matched.some(record => record.meta.loggedInOnly) && database.currentUser() == null) {
+    if (to.matched.some(record => record.meta.loggedInOnly) && database.currentUser() === null) {
         next("/login");
     }
     // TODO: Investigate why I need this and the line in login.vue
