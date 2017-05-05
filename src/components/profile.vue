@@ -10,10 +10,17 @@
                         <b-field :ref="userNameRef" label="Username">
                             <b-input
                                 :placeholder="userName"
-                                v-model="user.name">
+                                v-model="userNameInput">
                             </b-input>
                         </b-field>
                     </form>
+                    <ul>
+                        <li>User email: {{user.email}}</li>
+                        <li>User UID: {{user.uid}}</li>
+                        <li :ref="currentUserGoldRef">User Money: {{currentUserGold}}</li>
+                        <li v-if="user.emailVerified">You've validated your email.</li>
+                        <li v-else>You haven't validated your email. But I haven't sent any yet so don't worry!</li>
+                    </ul>
                 </div>
                 <footer class="card-footer">
                     <a class="card-footer-item is-enabled" v-on:click="updateUser($event)">Update Info</a>
@@ -32,6 +39,12 @@ export default {
             var vm = this;
             database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
                 vm.userName = snapshot.val();
+            });
+        },
+        currentUserGoldRef: function() {
+            var vm = this;
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
+                vm.currentUserGold = snapshot.val();
             });
         }
     },
@@ -52,10 +65,10 @@ export default {
     },
     data() {
         return {
-            user: {
-                name: ''
-            },
-            userName: ''
+            user: database.currentUser(),
+            userName: '',
+            userNameInput: '',
+            currentUserGold: '',
         }
     }
 }
