@@ -78,7 +78,7 @@ import business from "../js/business"
 import database from "../js/db"
 
 // List all types of business cards used for our clearActiveOptions function.
-var businessCardTypes = [ "business-type", "business-card" ];
+var businessCardTypes = [ "business-type", "business-class" ];
 
 export default {
     computed: {
