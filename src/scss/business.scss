@@ -1,17 +1,40 @@
-.business-type, .business-class {
-    transition: background $animationTime ease,
-                color $animationTime ease;
-    &:hover, &.active {
-        background: $primary;
-        color: #fff;
+.business {
+    h3, .submit-button {
+        text-align: center;
     }
-}
-svg#newBusinessPlus {
-    max-width: 14rem;
-    margin: 0 auto;
-    fill: #363636;
-    transition: fill $animationTime ease;
-    &:hover {
-        fill: $primary;
+    h3 {
+        margin-bottom: 1.5rem;
+    }
+    .submit-button {
+        margin-top: 1.5rem;
+    }
+    .business-type, .business-class, #newBusinessPlus {
+        cursor: pointer;
+    }
+
+    .plus-center {
+        text-align: center;
+    }
+
+    .business-type, .business-class {
+        display: inline-block;
+        margin: 0 0 0.5rem 0.5rem;
+        transition: background $animationTime ease,
+                    color $animationTime ease;
+        &:hover, &.active {
+            background: $primary;
+            color: #fff;
+        }
+    }
+
+    #newBusinessPlus {
+        fill: $dark;
+        margin: 2rem auto;
+        max-width: 14rem;
+        margin: 0 auto;
+        transition: fill $animationTime ease;
+        &:hover {
+            fill: $primary;
+        }
     }
 }

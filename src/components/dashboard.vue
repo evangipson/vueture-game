@@ -4,7 +4,7 @@
         <div class="container content">
             <div class="columns">
                 <div class="column">
-                    <business></business>
+                    <business-router></business-router>
                 </div>
             </div>
         </div>
@@ -13,10 +13,10 @@
 
 <script>
 import Hero from "./hero.vue"
-import Business from "./business.vue"
+import BusinessRouter from "./business-router.vue"
 
 export default {
-  components: { Hero, Business },
+  components: { Hero, BusinessRouter },
   data() {
     return {
     }
