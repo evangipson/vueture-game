@@ -10,19 +10,17 @@
                     <business></business>
                 </div>
             </div>
-            <random-number></random-number>
         </div>
     </div>
 </template>
 
 <script>
-import RandomNumber from "./random-number.vue"
 import Hero from "./hero.vue"
 import Business from "./business.vue"
 import database from "../js/db"
 
 export default {
-  components: { RandomNumber, Hero, Business },
+  components: { Hero, Business },
   computed: {
     currentUserNameRef: function() {
         var vm = this;
@@ -34,7 +32,7 @@ export default {
   data() {
     return {
         user: database.currentUser(),
-        currentUserName: this.user.email,
+        currentUserName: database.currentUser().email,
     }
   }
 }
