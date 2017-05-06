@@ -2,11 +2,11 @@
     <section class="hero is-primary is-bold">
         <div class="hero-body">
             <div class="container content">
-                <h1 class="title">
-                    Vueture
+                <h1 class="title is-spaced">
+                    Vueture <span class="tiny-title">Realtime Multiplayer Business Simulation</span>
                 </h1>
-                <h2 class="subtitle">
-                    Realtime Multiplayer Business Simulation
+                <h2 :ref="currentUserNameRef" class="subtitle">
+                    Welcome back, {{currentUserName}}.
                 </h2>
             </div>
         </div>
@@ -15,10 +15,32 @@
 
 <!-- Set up our export -->
 <script>
+import database from "../js/db"
+
 export default {
+  computed: {
+    currentUserNameRef: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
+            vm.currentUserName = snapshot.val();
+        });
+    }
+  },
   data () {
     return {
+        user: database.currentUser(),
+        currentUserName: database.currentUser().email,
     }
   }
 }
 </script>
+
+<style scoped>
+.tiny-title {
+    font-size: 1.2rem;
+    font-weight: 300;
+    position: relative;
+    margin-left: 0.5rem;
+    top: -0.15rem;
+}
+</style>

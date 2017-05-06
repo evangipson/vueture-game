@@ -1,0 +1,17 @@
+.business-type, .business-class {
+    transition: background $animationTime ease,
+                color $animationTime ease;
+    &:hover, &.active {
+        background: $primary;
+        color: #fff;
+    }
+}
+svg#newBusinessPlus {
+    max-width: 18rem;
+    margin: 0 auto;
+    fill: #363636;
+    transition: fill $animationTime ease;
+    &:hover {
+        fill: $primary;
+    }
+}

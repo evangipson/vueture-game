@@ -5,12 +5,17 @@
 @import "layout";
 @import "login";
 @import "nav";
+@import "business";
 
 /* Don't show vue stuff until it's loaded!
  * You can and should use this class on any
  * vue-y data (e.g.: <div v-cloak>{{message}}</div>) */
 [v-cloak] {
   display: none;
+}
+/* TYPOGRAPHY */
+h1, h2, h3, h4, h5, h6 {
+  margin: 0 0 1rem 0;
 }
 /* FORM OVERRIDES */
 #form {

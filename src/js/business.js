@@ -140,6 +140,7 @@ const businessModel = {
     operationalCost: 0
 };
 
+// TODO: Needs to be updated
 function constructBusiness() {
     let newBusiness = {};
     newBusiness.class = businessModel.class[0]; // Starting small
@@ -152,5 +153,5 @@ function constructBusiness() {
 }
 
 export default {
-    constructBusiness: constructBusiness
+    model: businessModel
 };
