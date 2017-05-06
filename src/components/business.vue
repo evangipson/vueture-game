@@ -36,10 +36,10 @@
                     </div>
                 </div>
                 <div v-if="selectedBusinessClass" class="submit-button">
-                    <a class="button is-medium is-primary" v-on:click="pickBusinessClass()">Start the {{selectedBusinessClass}} {{selectedBusinessType}} Business</a>
+                    <a class="button is-primary" v-on:click="pickBusinessClass()">Create {{selectedBusinessClass}} {{selectedBusinessType}} Business</a>
                 </div>
                 <div class="submit-button">
-                    <a class="button is-medium is-info is-outlined" v-on:click="resetBusinessClass()">Back to Business Types</a>
+                    <a class="button is-info is-outlined" v-on:click="resetBusinessClass()">Back to Business Types</a>
                 </div>
             </div>
             <!-- Business type selection cards -->
@@ -51,11 +51,11 @@
                     </div>
                 </div>
                 <div v-if="selectedBusinessType" class="submit-button">
-                    <a class="button is-medium is-primary" v-on:click="pickBusinessType()">Start a {{selectedBusinessType}} Business</a>
+                    <a class="button is-primary" v-on:click="pickBusinessType()">Start a {{selectedBusinessType}} Business</a>
                 </div>
             </div>
             <div class="submit-button">
-                <a class="button is-medium is-info is-outlined" v-on:click="resetBusinessCreationProgress()">Back to Dashboard</a>
+                <a class="button is-info is-outlined" v-on:click="resetBusinessCreationProgress()">Back to Dashboard</a>
             </div>
         </div>
         <div v-else class="column is-half is-offset-one-quarter">
