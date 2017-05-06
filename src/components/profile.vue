@@ -29,16 +29,13 @@
                 </div>
             </div>
         </div>
-        <random-number></random-number>
     </section>
 </template>
 
 <script>
 import database from "../js/db"
-import RandomNumber from "./random-number.vue"
 
 export default {
-    components: { RandomNumber },
     computed: {
         userNameRef: function() {
             var vm = this;

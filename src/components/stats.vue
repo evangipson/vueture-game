@@ -8,13 +8,18 @@
                 <li :ref="goldRef">{{gold}}</li>
             </ul>
         </div>
+        <div class="container content">
+            <random-number></random-number>
+        </div>
     </section>
 </template>
 
 <script>
 import database from "../js/db"
+import RandomNumber from "./random-number.vue"
 
 export default {
+    components: { RandomNumber },
     computed: {
         goldRef: function() {
             var vm = this;

@@ -1,24 +1,12 @@
 <template>
     <article>
-        <div class="columns">
-            <div class="columns is-half is-offset-one-quarter">
-                <h2 class="subtitle">
-                    Random Number Generator
-                </h2>
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                Your random number is... <em><strong v-cloak>{{randomNumber}}</strong></em>!
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                <button class="button content is-info" v-on:click="success">
-                    Give me another number!
-                </button>
-            </div>
-        </div>
+        <h2 class="subtitle">
+            Random Number Generator
+        </h2>
+        <p>Your random number is... <em><strong v-cloak>{{randomNumber}}</strong></em>!</p>
+        <button class="button content is-info" v-on:click="success">
+            Give me another number!
+        </button>
     </article>
 </template>
 
