@@ -1,7 +1,5 @@
 .business {
-    h3, .submit-button {
-        text-align: center;
-    }
+    text-align: center;
     h3 {
         margin-bottom: 1.5rem;
     }
@@ -12,18 +10,19 @@
         cursor: pointer;
     }
 
-    .plus-center {
-        text-align: center;
-    }
-
     .business-type, .business-class {
         display: inline-block;
         margin: 0 0 0.5rem 0.5rem;
-        transition: background $animationTime ease,
-                    color $animationTime ease;
+        transition: background $animationTime ease;
+        h4 {
+            transition: color $animationTime ease;
+            margin: 0;
+        }
         &:hover, &.active {
             background: $primary;
-            color: #fff;
+            h4 {
+                color: #fff;
+            }
         }
     }
 

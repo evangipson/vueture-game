@@ -10,7 +10,7 @@
             <h3>How big do you think your {{selectedBusinessType}} Business should be?</h3>
             <div v-for="businessClass in businessClasses" class="card business-class" v-on:click="toggleActiveOption($event)">
                 <div class="card-content">
-                    <p>{{ businessClass }}</p>
+                    <h4>{{ businessClass }}</h4>
                 </div>
             </div>
             <div v-if="selectedBusinessClass" class="submit-button">
@@ -25,7 +25,7 @@
             <h3>What type of Business do you want to start?</h3>
             <div v-for="(key, value) in businessTypes" class="card business-type" v-on:click="toggleActiveOption($event)">
                 <div class="card-content">
-                    <p>{{ value }}</p>
+                    <h4>{{ value }}</h4>
                 </div>
             </div>
             <div v-if="selectedBusinessType" class="submit-button">
