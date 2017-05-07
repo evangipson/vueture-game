@@ -6,7 +6,7 @@
                     <p class="card-header-title">Vueture Login</p>
                 </header>
                 <div class="card-content">
-                    <form id="form">
+                    <form id="form" v-on:keyup.enter="logInUser">
                         <b-field label="Email"
                                 :type="userNameType"
                                 :message="userNameMessage">
