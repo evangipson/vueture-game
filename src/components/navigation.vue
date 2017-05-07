@@ -12,12 +12,12 @@
             </router-link>
         </div>
         <!-- Hamburger Menu for mobile -->
-        <span id="nav-toggle" onclick="document.getElementById('nav-toggle').classList.toggle('is-active');document.getElementById('nav-menu').classList.toggle('is-active')" class="nav-toggle">
+        <span id="nav-toggle" v-on:click="handleNavToggle()" class="nav-toggle">
             <span></span>
             <span></span>
             <span></span>
         </span>
-        <div id="nav-menu" class="nav-right nav-menu">
+        <div id="nav-menu"  v-on:click="handleNavClicks()" class="nav-right nav-menu">
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Dashboard</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/profile">Profile</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/stats">Stats</router-link>
@@ -30,10 +30,21 @@
 <script>
 import database from "../js/db"
 import router from "../js/routes"
+
 export default {
   methods: {
       logUserOut: function() {
         database.logout();
+      },
+      handleNavToggle: function() {
+        document.getElementById('nav-toggle').classList.toggle('is-active');
+        document.getElementById('nav-menu').classList.toggle('is-active');
+      },
+      handleNavClicks: function() {
+        var mobileNavToggle = document.getElementById("nav-toggle");
+        if(mobileNavToggle.classList.contains("is-active")) {
+            mobileNavToggle.click();
+        }
       }
   },
   computed: {
