@@ -1,13 +1,7 @@
 <template>
     <div>
         <hero></hero>
-        <div class="container content">
-            <div class="columns">
-                <div class="column">
-                    <business-router></business-router>
-                </div>
-            </div>
-        </div>
+        <business-router></business-router>
     </div>
 </template>
 

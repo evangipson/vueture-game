@@ -1,7 +1,7 @@
 <template>
-    <div v-if="generatedBusiness">
+    <div v-if="generatedBusiness" class="column is-three-quarters">
         <!-- The last menu in business creation -->
-        <div v-if="typeSelected && classSelected" class="column is-half is-offset-one-quarter">
+        <div v-if="typeSelected && classSelected">
             <div class="card">
                 <header class="card-header">
                     <p class="card-header-title">Business Contract</p>
@@ -51,10 +51,10 @@
             <a class="button is-info is-outlined" v-on:click="resetBusinessCreationProgress()">Back to Dashboard</a>
         </div>
     </div>
-    <div v-else class="column is-half is-offset-one-quarter">
+    <div v-else class="column is-three-quarters">
         <div class="card">
             <header class="card-header">
-                <p class="card-header-title">Start your first Business!</p>
+                <p class="card-header-title">Start a New Business!</p>
             </header>
             <div class="card-content plus-center">
                 <svg v-on:click="createBusiness()" id="newBusinessPlus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 42 42" xml:space="preserve">
@@ -77,7 +77,7 @@ export default {
     computed: {
         businessRef: function() {
             var vm = this;
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name/businesses").on("value", function(snapshot) {
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
                 vm.userBusinesses = snapshot.val();
             });
         }
@@ -100,11 +100,11 @@ export default {
         toggleActiveOption: function(event) {
             // Set the relevant vue data
             if(event.currentTarget.classList.contains("business-type")) {
-                this.selectedBusinessType = event.currentTarget.innerText;
+                this.selectedBusinessType = event.currentTarget.innerText.trim();
             }
             else if(event.currentTarget.classList.contains("business-class")) {
                 // Select the one we picked!
-                this.selectedBusinessClass = event.currentTarget.innerText;
+                this.selectedBusinessClass = event.currentTarget.innerText.trim();
             }
             this.clearActiveOptions();
             // Then finally make the one the user clicked the "active" one.
@@ -152,7 +152,7 @@ export default {
             this.generatedBusiness = true;
         },
         buyBusiness: function() {
-            businessRef.push().update({
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
                 name: this.businessName,
                 type: this.selectedBusinessType,
                 class: this.selectedBusinessClass
@@ -161,12 +161,13 @@ export default {
             this.$toast.open({
                 message: this.businessName + ' purchased!',
                 type: 'is-success'
-            })
+            });
+            this.resetBusinessCreationProgress();
         },
         getNewBusinessName: function() {
             var bizName = "";
             if(this.selectedBusinessType) {
-                bizName = utils.randomElement(business.model.type[this.selectedBusinessType.trim()].names);
+                bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
             }
             this.businessName = bizName;
         }
