@@ -1,9 +1,24 @@
 <template>
     <div v-if="generatedBusiness">
         <!-- The last menu in business creation -->
-        <div v-if="typeSelected && classSelected">
-            <p>This is where you will toggle final options in regards to your {{selectedBusinessClass}} {{selectedBusinessType}} business.</p>
-            <p>For now, just go back to the dashboard and try again!</p>
+        <div v-if="typeSelected && classSelected" class="column is-half is-offset-one-quarter">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">Business Contract</p>
+                </header>
+                <div class="card-content">
+                    <p>Okay, you have a great idea! I can see your {{selectedBusinessClass}} {{selectedBusinessType}} business succeeding. The only thing it needs is a name!</p>
+                    <b-field :ref="businessRef" label="Business Name">
+                        <b-input
+                            v-model="businessName">
+                        </b-input>
+                    </b-field>
+                </div>
+                <footer class="card-footer">
+                    <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
+                    <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Rename Business</a>
+                </footer>
+            </div>
         </div>
         <!-- Business class selection cards -->
         <div v-else-if="typeSelected && !classSelected">
@@ -14,10 +29,10 @@
                 </div>
             </div>
             <div v-if="selectedBusinessClass" class="submit-button">
-                <a class="button is-primary" v-on:click="pickBusinessClass()">Create {{selectedBusinessClass}} {{selectedBusinessType}} Business</a>
+                <a class="button is-primary" v-on:click="pickBusinessClass()">Name Business</a>
             </div>
             <div class="submit-button">
-                <a class="button is-info is-outlined" v-on:click="resetBusinessClass()">Back to Business Types</a>
+                <a class="button is-info is-outlined" v-on:click="resetBusinessClass()">Choose Type Again</a>
             </div>
         </div>
         <!-- Business type selection cards -->
@@ -29,7 +44,7 @@
                 </div>
             </div>
             <div v-if="selectedBusinessType" class="submit-button">
-                <a class="button is-primary" v-on:click="pickBusinessType()">Start a {{selectedBusinessType}} Business</a>
+                <a class="button is-primary" v-on:click="pickBusinessType()">Pick your Business Class</a>
             </div>
         </div>
         <div class="submit-button">
@@ -53,11 +68,20 @@
 <script>
 import business from "../js/business"
 import database from "../js/db"
+import utils from "../js/utilities"
 
 // List all types of business cards used for our clearActiveOptions function.
 var businessCardTypes = [ "business-type", "business-class" ];
 
 export default {
+    computed: {
+        businessRef: function() {
+            var vm = this;
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name/businesses").on("value", function(snapshot) {
+                vm.userBusinesses = snapshot.val();
+            });
+        }
+    },
     methods: {
         // Clears all "active" classes on all business cards.
         clearActiveOptions: function() {
@@ -121,11 +145,31 @@ export default {
             this.typeSelected = true;
         },
         pickBusinessClass: function() {
+            this.getNewBusinessName();
             this.classSelected = true;
         },
         createBusiness: function() {
             this.generatedBusiness = true;
         },
+        buyBusiness: function() {
+            businessRef.push().update({
+                name: this.businessName,
+                type: this.selectedBusinessType,
+                class: this.selectedBusinessClass
+            });
+            // Let the user know we were successful in updating
+            this.$toast.open({
+                message: this.businessName + ' purchased!',
+                type: 'is-success'
+            })
+        },
+        getNewBusinessName: function() {
+            var bizName = "";
+            if(this.selectedBusinessType) {
+                bizName = utils.randomElement(business.model.type[this.selectedBusinessType.trim()].names);
+            }
+            this.businessName = bizName;
+        }
     },
     data() {
         return {
@@ -137,6 +181,7 @@ export default {
             businessClasses: business.model.class,
             selectedBusinessClass: '',
             classSelected: false,
+            businessName: ''
         }
     }
 }

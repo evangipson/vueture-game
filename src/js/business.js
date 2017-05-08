@@ -1,5 +1,7 @@
 import utils from "./utilities";
 
+/* Object which represents the master "skeleton"
+ * for the business object. */
 const businessModel = {
     class: [
         "Small",
@@ -21,15 +23,34 @@ const businessModel = {
                 "Applewood"
             ]
         },
-        "Retail": {
+        "Arts, Crafts, and Collectibles": {
             names: [
-                "Clonn's",
-                "Binguss Saminns",
-                "Farbit's",
+                "Bead's Beads",
+                "Simply Beads",
+                "Beads And Other Small Items",
+                "New Anitques",
+                "Baseball Card Store",
+                "Sport Memora-Deal-ia"
+            ]
+        },
+        "Beauty and Fragrances": {
+            names: [
+                "Gregio Vollaire Fragrances",
+                "Anton Wuembre",
+                "Petals Inc.",
+                "Fumers",
+                "Nose Invaders"
+            ]
+        },
+        "Clothing, accessories, and shoes": {
+            names: [
+                "Forever 15",
+                "Dry Cat",
+                "Mallister",
+                "Tunix",
                 "General Clothes Outlet",
                 "Trendy Chic",
-                "A E R O",
-                "BingBap Trendsetters"
+                "A E R O"
             ]
         },
         "Creative Studio": {
@@ -45,9 +66,20 @@ const businessModel = {
                 "Trendatt",
             ]
         },
+        "Health and Personal Care": {
+            names: [
+                "Gambis & Gambler",
+                "Beach Life",
+                "Dr. Yankis",
+                "Madler M.D.",
+                "Rockter Chiropracty",
+                "Corkter Chiro-Rhinoplasty"
+            ]
+        },
         "Real Estate": {
             names: [
                 "Honey & Vinegar Realty",
+                "Sugar & Salt Realty",
                 "David & Davis",
                 "Clover & Samson",
                 "Harshbaw, Yeodel & Driggers",
@@ -58,33 +90,20 @@ const businessModel = {
                 "4 Closures"
             ]
         },
-        "Transportation": {
-            names: [
-                "Stega Cars",
-                "Logo Automoto",
-                "Rigatoni Automoni",
-                "Leopard",
-                "Grindhini",
-                "Vegast",
-                "Locus",
-                "Focus",
-                "Focust",
-                "Yubbit Automotive",
-                "Canninban Cars",
-                "Dangler's Used Autos",
-                "Drinbin Used Auto Lot"
-            ]
-        },
-        "Technology": {
+        "Electronics and Technology": {
             names: [
                 "Rainbow Tech",
                 "OfficePro",
                 "Nerd Squad",
                 "Geek Fixers",
+                "Motherboard Mansion",
                 "Software Hardware",
                 "Yum Software",
                 "AE Games",
-                "Daxis"
+                "Daxis Video Games",
+                "Clonn's Old School Electronics",
+                "Binguss Saminns' Computers",
+                "Farbit's Hard Disks"
             ]
         },
         "Sanitation": {
@@ -103,7 +122,34 @@ const businessModel = {
                 "Mutual Butlers"
             ]
         },
-        "Legal": {
+        "Sports and Outdoor": {
+            names: [
+                "Rebola's",
+                "Territory Outdoor",
+                "Krazy Kayaks"
+            ]
+        },
+        "Pets and Animals": {
+            names: [
+                "PetGo",
+                "Pet Inc.",
+                "Adorable Store",
+                "Binkus N' Friends",
+                "Take Me Home!",
+                "Bird Food & Other Things",
+                "Buy Lizards Here"   
+            ]
+        },
+        "Nonprofit": {
+            names: [
+                "LOL",
+                "WHY",
+                "NO",
+                "STOP",
+                "QUIT"
+            ]
+        },
+        "Legal and Financial Services": {
             names: [
                 "Mippit Law",
                 "Harer Law",
@@ -119,7 +165,7 @@ const businessModel = {
                 "Law Offices Of Dayumit"
             ]
         },
-        "Food Service": {
+        "Food Retail & Service": {
             names: [
                 "Non-Vegetarian Food",
                 "Plants N' Things",
@@ -133,7 +179,36 @@ const businessModel = {
                 "Table To Farm, Inc.",
                 "Farm To Fable"
             ]
-        }
+        },
+        "Vehicle Sales": {
+            names: [
+                "Tulip City Motors",
+                "ABD Cars",
+                "Hambis Automotive",
+                "Carz",
+                "Stega Cars",
+                "Logo Automoto",
+                "Leopard",
+                "Grindhini",
+                "Vegast",
+                "Locus",
+                "Focus",
+                "Focust",
+                "Dangler's Used Autos",
+                "Drinbin Used Auto Lot",
+                "Canninban Car"
+            ]
+        },
+        "Vehicle Repair": {
+            names: [
+                "A Carz Life",
+                "Yubbit Automotive",
+                "Rigatoni Automoni",
+                "Canninban Car Repair",
+                "Heineke",
+                "AutoPlus"
+            ]
+        },
     },
     debt: 0,
     employees: 0,

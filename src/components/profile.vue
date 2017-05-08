@@ -1,7 +1,7 @@
 <template>
     <section>
         <div class="section columns">
-            <div class="column is-half is-offset-one-quarter">        
+            <div class="column is-half is-offset-one-quarter">
                 <div class="card">
                     <header class="card-header">
                         <p class="card-header-title">User Profile</p>
@@ -10,8 +10,7 @@
                         <form id="form">
                             <b-field :ref="userNameRef" label="Username">
                                 <b-input
-                                    :placeholder="userName"
-                                    v-model="userNameInput">
+                                    v-model="userName">
                                 </b-input>
                             </b-field>
                         </form>
@@ -24,7 +23,7 @@
                         </ul>
                     </div>
                     <footer class="card-footer">
-                        <a class="card-footer-item is-enabled" v-on:click="updateUser($event)">Update Info</a>
+                        <a class="card-footer-item is-enabled" v-on:click="updateUser()">Update Info</a>
                     </footer>
                 </div>
             </div>
@@ -52,11 +51,10 @@ export default {
     },
     // methods
     methods: {
-        updateUser(e) {
-            e.preventDefault();
+        updateUser() {
             // Write out this user to the userRef
-            currentUserRef.update({
-                name: this.user.name
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
+                name: this.userName
             });
             // Let the user know we were successful in updating
             this.$toast.open({
@@ -69,7 +67,6 @@ export default {
         return {
             user: database.currentUser(),
             userName: '',
-            userNameInput: '',
             currentUserGold: '',
         }
     }
