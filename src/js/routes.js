@@ -11,6 +11,7 @@ import DashboardView from "../components/dashboard.vue";
 import LoginView from "../components/login.vue";
 import StatsView from "../components/stats.vue";
 import ProfileView from "../components/profile.vue";
+import NewBusinessView from "../components/new-business.vue";
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -23,7 +24,7 @@ const routes = [
         path: '/',
         component: DashboardView,
         // Meta properties set up per the documentation here: https://router.vuejs.org/en/advanced/meta.html
-        meta: {loggedInOnly: true }
+        meta: { loggedInOnly: true }
     },
     {
         path: '/login',
@@ -32,12 +33,17 @@ const routes = [
     {
         path: '/stats',
         component: StatsView,
-        meta: {loggedInOnly: true }
+        meta: { loggedInOnly: true }
     },
     {
         path: '/profile',
         component: ProfileView,
-        meta: {loggedInOnly: true }
+        meta: { loggedInOnly: true }
+    },
+    {
+        path: '/new-business',
+        component: NewBusinessView,
+        meta: { loggedInOnly: true }
     }
 ];
 

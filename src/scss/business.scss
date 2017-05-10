@@ -26,15 +26,19 @@
             }
         }
     }
+}
 
-    #newBusinessPlus {
-        fill: $dark;
-        margin: 2rem auto;
-        max-width: 14rem;
-        margin: 0 auto;
-        transition: fill $animationTime ease;
-        &:hover {
-            fill: $primary;
-        }
+.plus-center {
+    text-align: center;
+}
+
+#newBusinessPlus {
+    fill: $dark;
+    margin: 2rem auto;
+    max-width: 14rem;
+    margin: 0 auto;
+    transition: fill $animationTime ease;
+    &:hover {
+        fill: $primary;
     }
 }

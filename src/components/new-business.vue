@@ -1,68 +1,58 @@
 <template>
-    <div v-if="generatedBusiness" class="column is-three-quarters">
-        <!-- The last menu in business creation -->
-        <div v-if="typeSelected && classSelected">
-            <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">Business Contract</p>
-                </header>
-                <div class="card-content">
-                    <p>Okay, you have a great idea! I can see your {{selectedBusinessClass}} {{selectedBusinessType}} business succeeding. The only thing it needs is a name!</p>
-                    <b-field :ref="businessRef" label="Business Name">
-                        <b-input
-                            v-model="businessName">
-                        </b-input>
-                    </b-field>
+    <section class="content columns">
+        <div class="business column">
+            <!-- The last menu in business creation -->
+            <div v-if="typeSelected && classSelected">
+                <div class="card">
+                    <header class="card-header">
+                        <p class="card-header-title">Business Contract</p>
+                    </header>
+                    <div class="card-content">
+                        <p>Okay, you have a great idea! I can see your {{selectedBusinessClass}} {{selectedBusinessType}} business succeeding. The only thing it needs is a name!</p>
+                        <b-field :ref="businessRef" label="Business Name">
+                            <b-input
+                                v-model="businessName">
+                            </b-input>
+                        </b-field>
+                    </div>
+                    <footer class="card-footer">
+                        <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
+                        <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Rename Business</a>
+                    </footer>
                 </div>
-                <footer class="card-footer">
-                    <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
-                    <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Rename Business</a>
-                </footer>
-            </div>
-        </div>
-        <!-- Business class selection cards -->
-        <div v-else-if="typeSelected && !classSelected">
-            <h3>How big do you think your {{selectedBusinessType}} Business should be?</h3>
-            <div v-for="businessClass in businessClasses" class="card business-class" v-on:click="toggleActiveOption($event)">
-                <div class="card-content">
-                    <h4>{{ businessClass }}</h4>
+                <div v-if="selectedBusinessType" class="submit-button">
+                    <a class="button is-medium is-primary" v-on:click="resetBusinessName()">Reslect Business Class</a>
                 </div>
             </div>
-            <div v-if="selectedBusinessClass" class="submit-button">
-                <a class="button is-primary" v-on:click="pickBusinessClass()">Name Business</a>
-            </div>
-            <div class="submit-button">
-                <a class="button is-info is-outlined" v-on:click="resetBusinessClass()">Choose Type Again</a>
-            </div>
-        </div>
-        <!-- Business type selection cards -->
-        <div v-else>
-            <h3>What type of Business do you want to start?</h3>
-            <div v-for="(key, value) in businessTypes" class="card business-type" v-on:click="toggleActiveOption($event)">
-                <div class="card-content">
-                    <h4>{{ value }}</h4>
+            <!-- Business class selection cards -->
+            <div v-else-if="typeSelected && !classSelected">
+                <h3>How big do you think your {{selectedBusinessType}} Business should be?</h3>
+                <div v-for="businessClass in businessClasses" class="card business-class" v-on:click="toggleActiveOption($event)">
+                    <div class="card-content">
+                        <h4>{{ businessClass }}</h4>
+                    </div>
+                </div>
+                <div v-if="selectedBusinessClass" class="submit-button">
+                    <a class="button is-medium is-primary" v-on:click="pickBusinessClass()">Name Business</a>
+                </div>
+                <div class="submit-button">
+                    <a class="button is-medium is-info is-outlined" v-on:click="resetBusinessClass()">Reselect Business Type</a>
                 </div>
             </div>
-            <div v-if="selectedBusinessType" class="submit-button">
-                <a class="button is-primary" v-on:click="pickBusinessType()">Pick your Business Class</a>
+            <!-- Business type selection cards -->
+            <div v-else>
+                <h3>What type of Business do you want to start?</h3>
+                <div v-for="(key, value) in businessTypes" class="card business-type" v-on:click="toggleActiveOption($event)">
+                    <div class="card-content">
+                        <h4>{{ value }}</h4>
+                    </div>
+                </div>
+                <div v-if="selectedBusinessType" class="submit-button">
+                    <a class="button is-medium is-primary" v-on:click="pickBusinessType()">Pick your Business Class</a>
+                </div>
             </div>
         </div>
-        <div class="submit-button">
-            <a class="button is-info is-outlined" v-on:click="resetBusinessCreationProgress()">Back to Dashboard</a>
-        </div>
-    </div>
-    <div v-else class="column is-three-quarters">
-        <div class="card">
-            <header class="card-header">
-                <p class="card-header-title">Start a New Business!</p>
-            </header>
-            <div class="card-content plus-center">
-                <svg v-on:click="createBusiness()" id="newBusinessPlus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 42 42" xml:space="preserve">
-                    <polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22"></polygon>
-                </svg>
-            </div>
-        </div>
-    </div>
+    </section>
 </template>
 
 <script>
@@ -117,7 +107,6 @@ export default {
             /* Now tell the program we haven't hit that plus, or selected
              * a business type, so it will go back. */
             this.typeSelected = false;
-            this.generatedBusiness = false;
             // Wipe the user's type if they had one.
             this.selectedBusinessType = '';
         },
@@ -144,12 +133,13 @@ export default {
         pickBusinessType: function() {
             this.typeSelected = true;
         },
+        // Called when you want to back out of the name creation
+        resetBusinessName: function() {
+            this.classSelected = false;
+        },
         pickBusinessClass: function() {
             this.getNewBusinessName();
             this.classSelected = true;
-        },
-        createBusiness: function() {
-            this.generatedBusiness = true;
         },
         buyBusiness: function() {
             database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
@@ -175,7 +165,6 @@ export default {
     data() {
         return {
             userBusinesses: '',
-            generatedBusiness: false,
             businessTypes: business.model.type,
             selectedBusinessType: '',
             typeSelected: false,
