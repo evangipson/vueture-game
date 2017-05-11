@@ -56,9 +56,10 @@
 </template>
 
 <script>
-import business from "../js/business"
-import database from "../js/db"
-import utils from "../js/utilities"
+import business from "../js/business";
+import database from "../js/db";
+import utils from "../js/utilities";
+import router from "../js/routes";
 
 // List all types of business cards used for our clearActiveOptions function.
 var businessCardTypes = [ "business-type", "business-class" ];
@@ -153,6 +154,8 @@ export default {
                 type: 'is-success'
             });
             this.resetBusinessCreationProgress();
+            // Redirect to a specified route
+            router.push({path:"/"});
         },
         getNewBusinessName: function() {
             var bizName = "";
