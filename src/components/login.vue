@@ -2,10 +2,13 @@
     <section class="section columns">
         <div class="column is-half is-offset-one-quarter">        
             <div class="card">
-                <header class="card-header">
-                    <p class="card-header-title">Vueture Login</p>
-                </header>
                 <div class="card-content">
+                    <div style="text-align: center">
+                        <p>Welcome to <b>Vueture</b>!</p>
+                        <p>Sign <b>in</b> if you're a user.</p>
+                        <p>You can sign <b>up</b> too.</p>
+                    </div>
+                    <hr />
                     <form id="form" v-on:keyup.enter="logInUser">
                         <b-field label="Email"
                                 :type="userNameType"
