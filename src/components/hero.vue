@@ -22,7 +22,8 @@ export default {
     currentUserNameRef: function() {
         var vm = this;
         database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
-            vm.currentUserName = snapshot.val();
+            var oldUserName = vm.currentUserName;
+            vm.currentUserName = snapshot.val().length > 0 ? snapshot.val() : oldUserName;
         });
     }
   },
