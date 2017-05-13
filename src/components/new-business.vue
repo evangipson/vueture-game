@@ -3,25 +3,29 @@
         <div class="business column">
             <!-- The last menu in business creation -->
             <div v-if="typeSelected && classSelected">
-                <div class="card">
-                    <header class="card-header">
-                        <p class="card-header-title">Business Contract</p>
-                    </header>
-                    <div class="card-content">
-                        <p>Okay, you have a great idea! I can see your {{selectedBusinessClass}} {{selectedBusinessType}} business succeeding. The only thing it needs is a name!</p>
-                        <b-field label="Business Name">
-                            <b-input
-                                v-model="businessName">
-                            </b-input>
-                        </b-field>
+                <div class="columns">
+                    <div class="column is-half is-offset-one-quarter">
+                        <div class="card">
+                            <header class="card-header">
+                                <p class="card-header-title">Business Contract</p>
+                            </header>
+                            <div class="card-content">
+                                <p>Okay, you have a great idea! I can see your {{selectedBusinessClass}} {{selectedBusinessType}} business succeeding. The only thing it needs is a name!</p>
+                                <b-field label="Business Name">
+                                    <b-input
+                                        v-model="businessName">
+                                    </b-input>
+                                </b-field>
+                            </div>
+                            <footer class="card-footer">
+                                <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
+                                <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Rename Business</a>
+                            </footer>
+                        </div>
+                        <div v-if="selectedBusinessType" class="submit-button">
+                            <a class="button is-medium is-primary" v-on:click="resetBusinessName()">Reslect Business Class</a>
+                        </div>
                     </div>
-                    <footer class="card-footer">
-                        <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
-                        <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Rename Business</a>
-                    </footer>
-                </div>
-                <div v-if="selectedBusinessType" class="submit-button">
-                    <a class="button is-medium is-primary" v-on:click="resetBusinessName()">Reslect Business Class</a>
                 </div>
             </div>
             <!-- Business class selection cards -->
@@ -122,7 +126,7 @@ export default {
                 var allTypeCards = document.getElementsByClassName("business-type");
                 for(var card in allTypeCards) {
                     if(allTypeCards.hasOwnProperty(card)) {
-                        if(allTypeCards[card].innerText == vm.selectedBusinessType) {
+                        if(allTypeCards[card].innerText.trim() == vm.selectedBusinessType) {
                             allTypeCards[card].classList.add("active");
                         }
                     }
@@ -135,6 +139,17 @@ export default {
         // Called when you want to back out of the name creation
         resetBusinessName: function() {
             this.classSelected = false;
+            var vm = this;
+            setTimeout(function() {
+                var allClassCards = document.getElementsByClassName("business-class");
+                for(var card in allClassCards) {
+                    if(allClassCards.hasOwnProperty(card)) {
+                        if(allClassCards[card].innerText.trim() == vm.selectedBusinessClass) {
+                            allClassCards[card].classList.add("active");
+                        }
+                    }
+                }
+            }, 50);
         },
         pickBusinessClass: function() {
             this.getNewBusinessName();
