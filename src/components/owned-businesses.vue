@@ -3,7 +3,7 @@
         <header class="card-header">
             <p class="card-header-title">Owned Businesses</p>
         </header>
-        <div :ref="userBusinessesRef" class="card-content">
+        <div class="card-content">
             <div v-if="userBusinesses">
                 <ul>
                     <li v-for="(key, value) in userBusinesses">
@@ -23,17 +23,20 @@
 import database from "../js/db";
 
 export default {
-    computed: {
-        userBusinessesRef: function() {
-            var vm = this;
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
-                vm.userBusinesses = snapshot.val();
-            });
-        }
+    mounted: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+            vm.userBusinesses = snapshot.val();
+        });
     },
     methods: {
         removeUserBusiness: function() {
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").remove()
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").remove();
+            // Let the user know we were successful in updating
+            this.$toast.open({
+                message: 'All businesses removed!',
+                type: 'is-info'
+            })
         }
     },
     data() {

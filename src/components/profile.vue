@@ -8,7 +8,7 @@
                     </header>
                     <div class="card-content">
                         <form id="form">
-                            <b-field :ref="userNameRef" label="Username">
+                            <b-field label="Username">
                                 <b-input
                                     v-model="userName">
                                 </b-input>
@@ -17,7 +17,7 @@
                         <ul>
                             <li>User email: {{user.email}}</li>
                             <li>User UID: {{user.uid}}</li>
-                            <li :ref="currentUserGoldRef">User Money: {{currentUserGold}}</li>
+                            <li>User Money: {{currentUserGold}}</li>
                             <li v-if="user.emailVerified">You've validated your email.</li>
                             <li v-else>You haven't validated your email. But I haven't sent any yet so don't worry!</li>
                         </ul>
@@ -32,43 +32,43 @@
 </template>
 
 <script>
-import database from "../js/db"
+import database from "../js/db";
+
+var currentUserRef = {};
 
 export default {
-    computed: {
-        userNameRef: function() {
-            var vm = this;
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
-                vm.userName = snapshot.val();
-            });
-        },
-        currentUserGoldRef: function() {
-            var vm = this;
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
-                vm.currentUserGold = snapshot.val();
-            });
-        }
+    mounted: function() {
+        // Fill our firebase-y variables
+        currentUserRef = database.firebaseInterface.db.ref("users/" + database.currentUser().uid);
+        this.user = database.currentUser();
+        var vm = this;
+        currentUserRef.child("name").on("value", function(snapshot) {
+            vm.userName = snapshot.val();
+        });
+        currentUserRef.child("gold").on("value", function(snapshot) {
+            vm.currentUserGold = snapshot.val();
+        });
     },
     // methods
     methods: {
         updateUser() {
             // Write out this user to the userRef
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
+            currentUserRef.update({
                 name: this.userName
             });
             // Let the user know we were successful in updating
             this.$toast.open({
-                message: 'Profile updated!',
+                message: 'Profile name updated, ' + this.userName + '!',
                 type: 'is-info'
-            })
+            });
         }
     },
     data() {
         return {
-            user: database.currentUser(),
+            user: '',
             userName: '',
-            currentUserGold: '',
-        }
+            currentUserGold: ''
+        };
     }
 }
 </script>

@@ -5,7 +5,7 @@
                 <h1 class="title is-spaced">
                     Vueture <span class="tiny-title">Realtime Multiplayer Business Simulation</span>
                 </h1>
-                <h2 :ref="currentUserNameRef" class="subtitle">
+                <h2 class="subtitle">
                     Welcome back, {{currentUserName}}.
                 </h2>
             </div>
@@ -15,24 +15,22 @@
 
 <!-- Set up our export -->
 <script>
-import database from "../js/db"
+import database from "../js/db";
 
 export default {
-  computed: {
-    currentUserNameRef: function() {
+    mounted: function() {
         var vm = this;
         database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
             var oldUserName = vm.currentUserName;
             vm.currentUserName = snapshot.val().length > 0 ? snapshot.val() : oldUserName;
         });
+    },
+    data () {
+        return {
+            user: database.currentUser(),
+            currentUserName: database.currentUser().email,
+        };
     }
-  },
-  data () {
-    return {
-        user: database.currentUser(),
-        currentUserName: database.currentUser().email,
-    }
-  }
 }
 </script>
 

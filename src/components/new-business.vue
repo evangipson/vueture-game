@@ -9,7 +9,7 @@
                     </header>
                     <div class="card-content">
                         <p>Okay, you have a great idea! I can see your {{selectedBusinessClass}} {{selectedBusinessType}} business succeeding. The only thing it needs is a name!</p>
-                        <b-field :ref="businessRef" label="Business Name">
+                        <b-field label="Business Name">
                             <b-input
                                 v-model="businessName">
                             </b-input>
@@ -65,13 +65,11 @@ import router from "../js/routes";
 var businessCardTypes = [ "business-type", "business-class" ];
 
 export default {
-    computed: {
-        businessRef: function() {
-            var vm = this;
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
-                vm.userBusinesses = snapshot.val();
-            });
-        }
+    mounted: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+            vm.userBusinesses = snapshot.val();
+        });
     },
     methods: {
         // Clears all "active" classes on all business cards.
@@ -175,7 +173,7 @@ export default {
             selectedBusinessClass: '',
             classSelected: false,
             businessName: ''
-        }
+        };
     }
 }
 </script>

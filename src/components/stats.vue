@@ -5,7 +5,7 @@
                 <h1 class="title">Statistics Page</h1>
             </div>
             <ul>
-                <li :ref="goldRef">{{gold}}</li>
+                <li>{{gold}}</li>
             </ul>
         </div>
         <div class="container content">
@@ -15,23 +15,21 @@
 </template>
 
 <script>
-import database from "../js/db"
-import RandomNumber from "./random-number.vue"
+import database from "../js/db";
+import RandomNumber from "./random-number.vue";
 
 export default {
     components: { RandomNumber },
-    computed: {
-        goldRef: function() {
-            var vm = this;
-            database.firebaseInterface.db.ref("/gold").on("value", function(snapshot) {
-                vm.gold = snapshot.val();
-            });
-        }
+    mounted: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("/gold").on("value", function(snapshot) {
+            vm.gold = snapshot.val();
+        });
     },
     data() {
         return {
             gold: ''
-        }
+        };
     }
 }
 </script>

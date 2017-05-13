@@ -51,24 +51,31 @@ I will run all new javascript through [JSHint](http://jshint.com/) before mergin
 
 #### Vue
 - When writing an interactive database item, you're going to need to handle binding yourself (because I'm not using vuefire because I'm difficult), like so:
-```
+```html
 ...
-<div :ref="fooRef">{{foo}}</div>
+<div>{{foo}}</div>
 ...
 <script>
-  export default {
-    computed: {
-      fooRef: function() {
+// We need our database for the firebaseInterface
+import database from "../js/db";
+
+export default {
+    /* We can run the firebase stuff when the component gets "mounted"
+     * in the vue lifecycle:
+     * https://vuejs.org/v2/guide/instance.html#Instance-Lifecycle-Hooks */
+    mounted: function() {
+        /* Cast our instance of "this" to a scope that
+         * firebase can understand. */
         var vm = this;
         database.firebaseInterface.db.ref("foo").on("value", function(snapshot) {
-          vm.foo = snapshot.val();
-        })
-      }
-    }
+            vm.foo = snapshot.val();
+        });
+    },
     data() {
-      return {
-        foo: '',
-      }
+        return {
+            // We'll fill this when the component is mounted
+            foo: '',
+        }
     }
   }
 </script>
