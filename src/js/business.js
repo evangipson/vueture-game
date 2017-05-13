@@ -42,7 +42,7 @@ const businessModel = {
                 "Nose Invaders"
             ]
         },
-        "Clothing, accessories, and shoes": {
+        "Clothing, Accessories, and Shoes": {
             names: [
                 "Forever 15",
                 "Dry Cat",
@@ -215,18 +215,33 @@ const businessModel = {
     operationalCost: 0
 };
 
-// TODO: Needs to be updated
-function constructBusiness() {
-    let newBusiness = {};
-    newBusiness.class = businessModel.class[0]; // Starting small
-    newBusiness.type = utils.randomElement(Object.keys(businessModel.type));
-    newBusiness.debt = utils.random(0,utils.random(50,300));
-    newBusiness.name = utils.randomElement(businessModel.type[newBusiness.type].names);
-    newBusiness.employees = 0; //TODO: CreateEmployee (with salary and stuff)
-    newBusiness.operationalCost = 0; //TODO: CalculateOperationCost (employees * their salary + something * debtPayment)
-    return newBusiness;
+/**
+ * Will calculate the cost of a business
+ * based on the type of business, which should
+ * be passed in.
+ * @param {String} businessClass
+ * @return {Number} Cost of the business.
+ */
+function calculateBusinessCost(businessClass) {
+    var businessCost = 3000000;
+    if(businessClass === "Small") {
+        businessCost = utils.random(4000, 6000);
+    }
+    else if(businessClass === "Medium") {
+        businessCost = utils.random(11000, 22000);
+    }
+    else if(businessClass === "Large") {
+        businessCost = utils.random(25000, 88000);
+    }
+    else if(businessClass === "Enterprise") {
+        businessCost = utils.random(105000, 800000);
+    }
+    // Now modify based on randomness
+    businessCost = businessCost * (Math.random() * (1.55 - 0.75) + 0.75);
+    return businessCost.toFixed(2);
 }
 
 export default {
-    model: businessModel
+    model: businessModel,
+    calculateCost: calculateBusinessCost
 };

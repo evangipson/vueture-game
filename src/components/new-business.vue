@@ -16,6 +16,7 @@
                                         v-model="businessName">
                                     </b-input>
                                 </b-field>
+                                <h3>Total Business Cost: ${{businessCost}}</h3>
                             </div>
                             <footer class="card-footer">
                                 <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
@@ -74,6 +75,16 @@ export default {
         database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             vm.userBusinesses = snapshot.val();
         });
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
+            vm.playerMoney = snapshot.val();
+        });
+    },
+    computed: {
+        businessCost: {
+            get: function() {
+                return business.calculateCost(this.selectedBusinessClass);
+            }
+        }
     },
     methods: {
         // Clears all "active" classes on all business cards.
@@ -156,19 +167,34 @@ export default {
             this.classSelected = true;
         },
         buyBusiness: function() {
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
-                name: this.businessName,
-                type: this.selectedBusinessType,
-                class: this.selectedBusinessClass
-            });
-            // Let the user know we were successful in updating
-            this.$toast.open({
-                message: this.businessName + ' purchased!',
-                type: 'is-success'
-            });
-            this.resetBusinessCreationProgress();
-            // Redirect to a specified route
-            router.push({path:"/"});
+            if(this.businessCost < this.playerMoney) {
+                // Update the database with the user's new business
+                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
+                    name: this.businessName,
+                    type: this.selectedBusinessType,
+                    class: this.selectedBusinessClass
+                });
+                // And take their money!
+                var moneyRemaining = this.playerMoney - this.businessCost;
+                database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
+                    gold: moneyRemaining
+                });
+                // Let the user know we were successful in updating
+                this.$toast.open({
+                    message: this.businessName + ' purchased!',
+                    type: 'is-success'
+                });
+                this.resetBusinessCreationProgress();
+                // Redirect to a specified route
+                router.push({path:"/"});
+            }
+            else {
+                // Let the user know we were successful in updating
+                this.$toast.open({
+                    message: "Couldn't afford " + this.businessName + "!",
+                    type: "is-info"
+                });
+            }
         },
         getNewBusinessName: function() {
             var bizName = "";
@@ -187,7 +213,8 @@ export default {
             businessClasses: business.model.class,
             selectedBusinessClass: '',
             classSelected: false,
-            businessName: ''
+            businessName: '',
+            playerMoney: ''
         };
     }
 }
