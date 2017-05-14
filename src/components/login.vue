@@ -1,6 +1,6 @@
 <template>
     <section class="section columns">
-        <div class="column is-12-mobile is-half-desktop">
+        <div class="column is-12-mobile is-half-desktop is-offset-one-quarter-desktop">
             <div class="card">
                 <div class="card-content">
                     <div style="text-align: center">
