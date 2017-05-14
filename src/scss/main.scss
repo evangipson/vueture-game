@@ -18,6 +18,10 @@
 #form {
   margin: auto auto 1.5rem;
 }
+.submit-button {
+    position: relative;
+    margin-top: 1.5rem;
+}
 // Custom style for the sign in/sign up buttons
 a.card-footer-item {
   transition: background $animationTime ease,

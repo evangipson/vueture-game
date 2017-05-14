@@ -1,17 +1,35 @@
 <template>
     <section class="content columns">
-        <div v-if="userBusinesses" class="column">
+        <div class="column is-12-mobile is-three-quarters-desktop">
             <b-table
                 :data="userBusinesses"
                 :bordered="isBordered"
                 :striped="isStriped"
                 :narrowed="isNarrowed"
-                :checkable="isCheckable"
                 :mobile-cards="hasMobileCards"
                 :paginated="isPaginated"
                 :per-page="perPage"
                 :pagination-simple="isPaginationSimple"
-                :selected.sync="selected" />
+                :selected.sync="selected"
+                @click="select($event)">
+                <template scope="props">
+                    <b-table-column field="name" label="Name" sortable>
+                        {{ props.row.name }}
+                    </b-table-column>
+
+                    <b-table-column field="type" label="Type" sortable>
+                        {{ props.row.type }}
+                    </b-table-column>
+
+                    <b-table-column field="class" label="Class" sortable>
+                        {{ props.row.class }}
+                    </b-table-column>
+                </template>
+            </b-table>
+        </div>
+        <div class="column">
+            <h3 class="subtitle">Selected</h3>
+            <pre class="content">{{ selected }}</pre>
         </div>
     </section>
 </template>
@@ -31,18 +49,21 @@ export default {
                     returnArray.push(databaseObj[business]);
                 }
             }
-            console.log(returnArray);
             vm.userBusinesses = returnArray;
         });
     },
+    methods: {
+        select: function(row) {
+            this.selected = row;
+        },
+    },
     data() {
         return {
-            userBusinesses: '',
+            userBusinesses: [],
             selected: {},
             isBordered: false,
             isStriped: true,
             isNarrowed: false,
-            isCheckable: false,
             hasMobileCards: true,
             isPaginated: true,
             isPaginationSimple: true,

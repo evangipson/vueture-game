@@ -1,12 +1,11 @@
 <template>
     <article>
-        <h2 class="subtitle">
-            Random Number Generator
-        </h2>
         <p>Your random number is... <em><strong v-cloak>{{randomNumber}}</strong></em>!</p>
-        <button class="button content is-info" v-on:click="success">
-            Give me another number!
-        </button>
+        <div class="submit-button">
+            <button class="button content is-info" v-on:click="success">
+                Give me another number!
+            </button>
+        </div>
     </article>
 </template>
 
