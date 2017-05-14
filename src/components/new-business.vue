@@ -179,7 +179,7 @@ export default {
             this.classSelected = true;
         },
         buyBusiness: function() {
-            if(this.businessCost < this.playerMoney) {
+            if(Number(this.businessCost) < this.playerMoney) {
                 // Update the database with the user's new business
                 database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
                     name: this.businessName,
