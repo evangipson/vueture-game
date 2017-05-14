@@ -28,7 +28,7 @@ const getRandomElement = function(array) {
 const formatNumberAsMoney = function(number) {
     var re = '\\d(?=(\\d{' + 3 + '})+' + '\\.' + ')';
     return Number(number).toFixed(Math.max(0, ~~2)).replace(new RegExp(re, 'g'), '$&,');
-}
+};
 
 // Return our utilities module 
 module.exports = {
