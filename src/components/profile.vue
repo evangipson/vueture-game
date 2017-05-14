@@ -1,6 +1,6 @@
 <template>
     <div class="section columns">
-        <div class="column is-12-mobile is-half-desktop is-offset-one-quarter-desktop">
+        <div class="column is-12-mobile is-half-desktop">
             <div class="card">
                 <header class="card-header">
                     <p class="card-header-title">User Profile</p>
@@ -25,16 +25,21 @@
                 </footer>
             </div>
         </div>
+        <div class="column is-12-mobile is-half-desktop">
+            <owned-businesses></owned-businesses>
+        </div>
     </div>
 </template>
 
 <script>
+import OwnedBusinesses from "./owned-businesses.vue";
 import database from "../js/db";
 import utils from "../js/utilities";
 
 var currentUserRef = {};
 
 export default {
+    components: { OwnedBusinesses },
     mounted: function() {
         // Fill our firebase-y variables
         currentUserRef = database.firebaseInterface.db.ref("users/" + database.currentUser().uid);
