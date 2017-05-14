@@ -76,4 +76,10 @@ router.beforeEach((to, from, next) => {
     }
 });
 
+// 5. After the router loads up the router, define custom logic.
+router.afterEach((to, from) => {
+    // Scroll the user to the topmost, leftmost point before each route.
+    window.scrollTo(0, 0);
+});
+
 export default router;
