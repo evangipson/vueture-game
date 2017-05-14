@@ -226,7 +226,8 @@ export default {
             classSelected: false,
             businessName: '',
             playerMoney: '',
-            businessCostAsMoney: ''
+            businessCostAsMoney: '',
+            businessCost: ''
         };
     }
 }
