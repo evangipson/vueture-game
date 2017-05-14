@@ -18,8 +18,21 @@ const getRandomElement = function(array) {
     return array[getRandomRange(0,array.length-1)];
 };
 
+/**
+ * Will return the number given to it as money,
+ * seperated by ',' and '.'
+ * formatNumberAsMoney(156443.4633); // returns $156,443.46
+ * formatNumberAsMoney(15788); // returns $15,788.00
+ * @param {Number} number
+ */
+const formatNumberAsMoney = function(number) {
+    var re = '\\d(?=(\\d{' + 3 + '})+' + '\\.' + ')';
+    return Number(number).toFixed(Math.max(0, ~~2)).replace(new RegExp(re, 'g'), '$&,');
+}
+
 // Return our utilities module 
 module.exports = {
     random: getRandomRange,
-    randomElement: getRandomElement
+    randomElement: getRandomElement,
+    formatNumberAsMoney
 };

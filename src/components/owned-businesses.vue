@@ -7,7 +7,7 @@
             <div v-if="userBusinesses">
                 <ul>
                     <li v-for="(key, value) in userBusinesses">
-                        <em><b>{{key.name}}</b></em>: {{key.class}} {{key.type}}
+                        <em><b><router-link to="/view-business">{{key.name}}</router-link></b></em>: {{key.class}} {{key.type}}
                     </li>
                 </ul>
                 <div style="text-align:center">

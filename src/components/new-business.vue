@@ -16,15 +16,15 @@
                                         v-model="businessName">
                                     </b-input>
                                 </b-field>
-                                <h3>Total Business Cost: ${{businessCost}}</h3>
+                                <p v-if="businessCostAsMoney" class="currency">Total: <sup>$</sup>{{dollars}}<sup>.{{cents}}</sup></p>
                             </div>
                             <footer class="card-footer">
                                 <a class="card-footer-item is-enabled" v-on:click="buyBusiness()">Start Business</a>
-                                <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Rename Business</a>
+                                <a class="card-footer-item is-enabled" v-on:click="getNewBusinessName()">Generate New Name</a>
                             </footer>
                         </div>
                         <div v-if="selectedBusinessType" class="submit-button">
-                            <a class="button is-medium is-primary" v-on:click="resetBusinessName()">Reslect Business Class</a>
+                            <a class="button is-medium is-primary" v-on:click="resetBusinessName()">Reselect Business Class</a>
                         </div>
                     </div>
                 </div>
@@ -80,9 +80,14 @@ export default {
         });
     },
     computed: {
-        businessCost: {
+        dollars: {
             get: function() {
-                return business.calculateCost(this.selectedBusinessClass);
+                return this.businessCostAsMoney.split(".")[0];
+            }
+        },
+        cents: {
+            get: function() {
+                return this.businessCostAsMoney.split(".")[1];
             }
         }
     },
@@ -164,6 +169,13 @@ export default {
         },
         pickBusinessClass: function() {
             this.getNewBusinessName();
+            /* The businessCost will be stored as a "money format" in businessCostAsMoney
+             * because I do actual calculations with businessCost, so I can't
+             * have that looking like money. */
+            var temporaryBusinessCost = business.calculateCost(this.selectedBusinessClass);
+            this.businessCostAsMoney = utils.formatNumberAsMoney(temporaryBusinessCost);
+            this.businessCost = temporaryBusinessCost;
+            // Now flag the page to go to the "name" section!
             this.classSelected = true;
         },
         buyBusiness: function() {
@@ -175,9 +187,8 @@ export default {
                     class: this.selectedBusinessClass
                 });
                 // And take their money!
-                var moneyRemaining = this.playerMoney - this.businessCost;
                 database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
-                    gold: moneyRemaining
+                    gold: (this.playerMoney - this.businessCost).toFixed(2)
                 });
                 // Let the user know we were successful in updating
                 this.$toast.open({
@@ -214,7 +225,8 @@ export default {
             selectedBusinessClass: '',
             classSelected: false,
             businessName: '',
-            playerMoney: ''
+            playerMoney: '',
+            businessCostAsMoney: ''
         };
     }
 }

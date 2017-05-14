@@ -12,6 +12,7 @@ import LoginView from "../components/login.vue";
 import StatsView from "../components/stats.vue";
 import ProfileView from "../components/profile.vue";
 import NewBusinessView from "../components/new-business.vue";
+import ViewBusinessView from "../components/view-business.vue";
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -43,6 +44,11 @@ const routes = [
     {
         path: '/new-business',
         component: NewBusinessView,
+        meta: { loggedInOnly: true }
+    },
+    {
+        path: '/view-business',
+        component: ViewBusinessView,
         meta: { loggedInOnly: true }
     }
 ];
