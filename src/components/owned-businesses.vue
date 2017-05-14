@@ -10,7 +10,7 @@
                         <em><b><router-link to="/view-business">{{key.name}}</router-link></b></em>: {{key.class}} {{key.type}}
                     </li>
                 </ul>
-                <div style="text-align:center">
+                <div class="submit-button">
                     <button class="button content is-primary" v-on:click="removeUserBusiness()">Remove User Businesses</button>
                 </div>
             </div>

@@ -25,7 +25,7 @@
                 </footer>
             </div>
         </div>
-        <div class="column is-12-mobile is-half-desktop">
+        <div class="business column is-12-mobile is-half-desktop">
             <owned-businesses></owned-businesses>
         </div>
     </div>
