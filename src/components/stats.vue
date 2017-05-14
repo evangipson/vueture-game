@@ -5,7 +5,7 @@
                 <h1 class="title">Statistics Page</h1>
             </div>
             <ul>
-                <li>{{gold}}</li>
+                <li>{{money}}</li>
             </ul>
         </div>
         <div class="container content">
@@ -22,13 +22,13 @@ export default {
     components: { RandomNumber },
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("/gold").on("value", function(snapshot) {
-            vm.gold = snapshot.val();
+        database.firebaseInterface.db.ref("/money").on("value", function(snapshot) {
+            vm.money = snapshot.val();
         });
     },
     data() {
         return {
-            gold: ''
+            money: ''
         };
     }
 }

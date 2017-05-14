@@ -117,7 +117,7 @@ export default {
                     // Write out this user to the userRef and use the UID for the name
                     usersRef.update({
                         [currentUserUID]:{
-                            gold: startingMoney
+                            money: startingMoney
                         }
                     });
                 }

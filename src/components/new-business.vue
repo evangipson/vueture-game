@@ -75,7 +75,7 @@ export default {
         database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             vm.userBusinesses = snapshot.val();
         });
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/money").on("value", function(snapshot) {
             vm.playerMoney = snapshot.val();
         });
     },
@@ -188,7 +188,7 @@ export default {
                 });
                 // And take their money!
                 database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
-                    gold: (this.playerMoney - this.businessCost).toFixed(2)
+                    money: (this.playerMoney - this.businessCost).toFixed(2)
                 });
                 // Let the user know we were successful in updating
                 this.$toast.open({

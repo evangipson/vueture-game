@@ -28,7 +28,7 @@ export default {
     },
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/gold").on("value", function(snapshot) {
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/money").on("value", function(snapshot) {
             vm.money = utils.formatNumberAsMoney(snapshot.val());
         });
     },

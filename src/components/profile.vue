@@ -43,19 +43,19 @@ export default {
         currentUserRef.child("name").on("value", function(snapshot) {
             vm.userName = snapshot.val();
         });
-        currentUserRef.child("gold").on("value", function(snapshot) {
-            vm.currentUserGold = utils.formatNumberAsMoney(snapshot.val());
+        currentUserRef.child("money").on("value", function(snapshot) {
+            vm.currentUserMoney = utils.formatNumberAsMoney(snapshot.val());
         });
     },
     computed: {
         dollars: {
             get: function() {
-                return this.currentUserGold.split(".")[0];
+                return this.currentUserMoney.split(".")[0];
             }
         },
         cents: {
             get: function() {
-                return this.currentUserGold.split(".")[1];
+                return this.currentUserMoney.split(".")[1];
             }
         }
     },
@@ -77,7 +77,7 @@ export default {
         return {
             user: '',
             userName: '',
-            currentUserGold: ''
+            currentUserMoney: ''
         };
     }
 }
