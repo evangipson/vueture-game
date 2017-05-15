@@ -1,6 +1,6 @@
 <template>
     <div class="section columns">
-        <div class="column is-12-mobile is-half-desktop is-offset-one-quarter-desktop">
+        <div class="column is-12-mobile is-half-desktop">
             <div class="card">
                 <header class="card-header">
                     <p class="card-header-title">User Profile</p>
