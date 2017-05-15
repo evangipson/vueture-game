@@ -1,6 +1,11 @@
 <template>
     <section class="content columns">
+        <div class="column">
+            <h3 class="subtitle">Selected</h3>
+            <pre class="content">{{ selected }}</pre>
+        </div>
         <div class="column is-12-mobile is-three-quarters-desktop">
+            <h2>Businesses Owned</h2>
             <b-table
                 :data="userBusinesses"
                 :bordered="isBordered"
@@ -11,7 +16,8 @@
                 :per-page="perPage"
                 :pagination-simple="isPaginationSimple"
                 :selected.sync="selected"
-                @click="select($event)">
+                @click="select($event)"
+                class="business-table">
                 <template scope="props">
                     <b-table-column field="name" label="Name" sortable>
                         {{ props.row.name }}
@@ -26,10 +32,6 @@
                     </b-table-column>
                 </template>
             </b-table>
-        </div>
-        <div class="column">
-            <h3 class="subtitle">Selected</h3>
-            <pre class="content">{{ selected }}</pre>
         </div>
     </section>
 </template>

@@ -3,12 +3,59 @@ html, body {
     margin: 0;
 }
 
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+#app {
+  flex: 1;
+}
+
 .columns .card {
     margin-bottom: 1rem;
 }
 
 section {
     padding: 1.5rem 2.5rem;
+}
+
+/* FOOTER */
+body > footer {
+    background: $primary;
+    color: white;
+    fill: white;
+    text-align: right;
+    padding: 0.8rem 2rem 0.6rem;
+    .copy {
+        position: relative;
+        display: block;
+        margin-bottom: 1rem;
+    }
+    @media screen and (min-width: 768px) {
+        .copy {
+            text-align: left;
+            position: absolute;
+            left: 2rem;
+            margin-top: 0.5rem;
+        }
+    }
+    svg {
+        fill: white;
+        transition: fill $animationTime ease;
+        &:hover {
+            fill: black;
+        }
+    }
+    a {
+        color: white;
+        font-weight: bold;
+        margin: 0 1rem 0 0;
+        &:last-child {
+            margin-right: 0rem;
+        }
+    }
 }
 
 /* GRID OVERRIDES */

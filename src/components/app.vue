@@ -1,9 +1,7 @@
 <template>
-    <div>
-        <div id="app">
-            <navigation :authenticated="authenticated"></navigation>
-            <router-view></router-view>
-        </div>
+    <div id="app">
+        <navigation :authenticated="authenticated"></navigation>
+        <router-view></router-view>
     </div>
 </template>
 <!-- Set up our export -->
