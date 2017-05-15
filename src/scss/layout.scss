@@ -26,14 +26,15 @@ body > footer {
     background: $primary;
     color: white;
     fill: white;
-    text-align: right;
     padding: 0.8rem 2rem 0.6rem;
+    text-align: center;
     .copy {
         position: relative;
         display: block;
         margin-bottom: 1rem;
     }
     @media screen and (min-width: 768px) {
+        text-align: right;
         .copy {
             text-align: left;
             position: absolute;
