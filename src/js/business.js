@@ -73,7 +73,11 @@ const businessModel = {
                 "Dr. Yankis",
                 "Madler M.D.",
                 "Rockter Chiropracty",
-                "Corkter Chiro-Rhinoplasty"
+                "Corkter Chiro-Rhinoplasty",
+                "Doctors N' Doctors",
+                "White Mage, M.D.",
+                "Black Mage, D.D.S.",
+                "Red Mage, M.D."
             ]
         },
         "Real Estate": {
@@ -126,7 +130,11 @@ const businessModel = {
             names: [
                 "Rebola's",
                 "Territory Outdoor",
-                "Krazy Kayaks"
+                "Krazy Kayaks",
+                "Mobela's",
+                "Rettela's",
+                "Outdoor Lifestyles",
+                "Indoors Shmindoors"
             ]
         },
         "Pets and Animals": {

@@ -15,7 +15,7 @@ const getRandomRange = function(min = 0, max = 100) {
  * @param {Array} array
  */
 const getRandomElement = function(array) {
-    return array[getRandomRange(0,array.length-1)];
+    return array[getRandomRange(0,array.length)];
 };
 
 /**

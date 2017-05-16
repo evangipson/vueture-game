@@ -209,8 +209,13 @@ export default {
         },
         getNewBusinessName: function() {
             var bizName = "";
+            var oldBizName = this.businessName;
             if(this.selectedBusinessType) {
                 bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                // Ensure we don't get a duplicate
+                while(bizName === oldBizName) {
+                    bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                }
             }
             this.businessName = bizName;
         }
