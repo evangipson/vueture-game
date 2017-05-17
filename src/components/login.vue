@@ -15,7 +15,8 @@
                                 :message="userNameMessage">
                             <b-input type="email"
                                 value=""
-                                v-model="newUser.email">
+                                v-model="newUser.email"
+                                :autofocus="autofocus">
                             </b-input>
                         </b-field>
                         <b-field class="passwordLabel"
@@ -46,7 +47,7 @@ import router from "../js/routes"
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 var startingMoney = 10000;
-var usersRef = database.firebaseInterface.db.ref("users")
+var usersRef = database.firebaseInterface.db.ref("users");
 
 export default {
     // computed property for form validation state
@@ -71,6 +72,13 @@ export default {
                 return "";
             }
         },
+        autofocus: function() {
+            // Ensure the "email" input is autofocused. Buefy really should find a way to do this!
+            window.onload = function() {
+                console.log(document.getElementsByTagName("input"));
+                document.getElementsByTagName("input")[0].focus();
+            };
+        }
     },
     watch: {
         // whenever authReturnCode changes
