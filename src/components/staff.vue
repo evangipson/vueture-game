@@ -56,11 +56,10 @@ export default {
                 }
             }
             else {
-                // Let the user know we were successful in updating
-                this.$toast.open({
-                    message: "Hire someone before generating more staff!",
-                    type: "is-info"
-                });
+                this.availableStaff = "";
+                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").remove();
+                // WHACHYA SAY- WHACHYA SAY- WHACHYA SAY- WHAT!!!
+                this.generateStaff();
             }
         }
     },
