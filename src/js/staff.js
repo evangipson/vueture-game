@@ -56,11 +56,11 @@ function createStaffName() {
 
 function generateExpectedSalary(experience) {
     // TODO: Base this off of type AND experience!
-    return utils.random(12000, 25000) * (experience + 1);
+    return (utils.random(0, 10000) * experience) + utils.random(15000, 35000);
 }
 
 function generateExperience() {
-    return utils.random(0, 8);
+    return utils.random(0, 15);
 }
 
 function createStaff() {
