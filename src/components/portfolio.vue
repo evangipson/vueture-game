@@ -1,19 +1,21 @@
 <template>
     <section class="content portfolio">
-        <div v-if="selected.name">
-            <h2>Available <router-link to="/staff">Staff</router-link></h2>
-            <div v-for="(key, property) in availableStaff" class="card staff-member" v-on:click="toggleActiveStaff($event, key)">
-                <div class="card-content">
-                    <p>{{ key.name }}</p>
-                    <p>{{ key.experience }}y / ${{ formatPrice(key.salary) }}</p>
-                    <hr />
-                    <p v-for="(key, skill) in key.skills">
-                        {{skill}}
-                    </p>
+        <div v-if="selected.name" class="columns">
+            <div class="column">
+                <h2>Available <router-link to="/staff">Staff</router-link></h2>
+                <div v-for="(key, property) in availableStaff" class="card staff-member" v-on:click="toggleActiveStaff($event, key)">
+                    <div class="card-content">
+                        <p>{{ key.name }}</p>
+                        <p>{{ key.experience }}y / ${{ formatPrice(key.salary) }}</p>
+                        <hr />
+                        <p v-for="(key, skill) in key.skills">
+                            {{skill}}
+                        </p>
+                    </div>
                 </div>
-            </div>
-            <div v-if="selectedStaff.name" class="submit-button">
-                <a class="button is-medium is-primary" v-on:click="hireStaff($event)">Hire {{selectedStaff.name.split(" ")[0]}} for {{selected.name}}</a>
+                <div v-if="selectedStaff.name" class="submit-button">
+                    <a class="button is-medium is-primary" v-on:click="hireStaff($event)">Hire {{selectedStaff.name.split(" ")[0]}} for {{selected.name}}</a>
+                </div>
             </div>
         </div>
         <div class="columns">
