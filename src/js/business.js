@@ -1,4 +1,5 @@
 import utils from "./utilities";
+import skills from "./skills";
 
 /* Object which represents the master "skeleton"
  * for the business object. */
@@ -10,6 +11,8 @@ const businessModel = {
         "Enterprise",
         "Conglomeration",
     ],
+    /* If you add a new type, remember
+     * to update some skills in staff.js! */
     type: {
         "Manufacturing": {
             names: [
@@ -247,6 +250,12 @@ function calculateBusinessCost(businessClass) {
     // Now modify based on randomness
     businessCost = businessCost * (Math.random() * (1.55 - 0.75) + 0.75);
     return businessCost.toFixed(2);
+}
+
+function calculateValue(selectedBusinessType, selectedBusinessClass) {
+    evaluation = 0;
+
+    return evaluation;
 }
 
 export default {

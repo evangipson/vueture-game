@@ -10,6 +10,123 @@ const getRandomRange = function(min = 0, max = 100) {
 };
 
 /**
+ * Will create a name made up of 2 or
+ * 3 syllables.
+ * @returns {String} A name.
+ */
+function createName() {
+    // First syllables(ish)
+    var firstSyllables = [
+        "Bot",
+        "Bant",
+        "Ban",
+        "Bam",
+        "Che",
+        "Chi",
+        "Cha",
+        "Hi",
+        "He",
+        "Del",
+        "Dip",
+        "Ev",
+        "Kev",
+        "Kin",
+        "Kee",
+        "Kag",
+        "Jen",
+        "Shy",
+        "Sty",
+        "Gia",
+        "Mich",
+        "Bel",
+        "Don",
+        "Rem",
+        "Cro",
+        "Jame",
+        "Mil",
+        "Mor",
+        "Mon",
+        "Ni",
+        "Nu",
+        "Swe",
+        "Nor",
+        "Ear",
+        "Ma",
+        "Well",
+        "Dam",
+        "Dan",
+        "Dal",
+        "Dol",
+        "La",
+        "Lan",
+        "Lam",
+        "Lol",
+        "Al",
+        "Am",
+        "An",
+        "Ba",
+        "Bo",
+        "Nitt",
+        "Mi",
+        "Mi",
+    ];
+    // Second and Third syllables(ish)
+    var secondSyllables = [
+        "ov",
+        "ski",
+        "wate",
+        "ate",
+        "te",
+        "er",
+        "isk",
+        "it",
+        "ter",
+        "bal",
+        "fal",
+        "tal",
+        "wi",
+        "zo"
+    ];
+    var thirdSyllables = [
+        "son",
+        "sson",
+        "orn",
+        "is",
+        "es",
+        "ins",
+        "ens",
+        "ons",
+        "uns",
+        "ims",
+        "ems",
+        "oms",
+        "ums",
+        "wood",
+        "e",
+        "er",
+        "man",
+        "sun",
+        "ig",
+        "ing",
+        "ting",
+        "wes",
+        "ien"
+    ];
+    // 15% chance return three syllables.
+    // Note: default for getRandomRange is 0 - 100
+    if(getRandomRange() < 15) {
+        return getRandomElement(firstSyllables) + getRandomElement(secondSyllables) + getRandomElement(thirdSyllables);
+    }
+    // Otherwise, just return two syllables.
+    if(getRandomRange() < 50) {
+        return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
+    }
+    else {
+        return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
+    }
+};
+
+/**
  * Returns an element from the array passed in at
  * random, based on getRandomRange.
  * @param {Array} array
@@ -17,6 +134,22 @@ const getRandomRange = function(min = 0, max = 100) {
 const getRandomElement = function(array) {
     return array[getRandomRange(0,array.length)];
 };
+
+/**
+ * Returns a random property of an objec that
+ * will be provided.
+ * @param {Object} An object to get a random property of
+ * @returns {Array} The property and object property that was picked.
+ */
+const getRandomProperty = function(obj) {
+      var result = "";
+      var count = 0;
+      for (var prop in obj)
+        if(obj.hasOwnProperty(prop))
+          if (Math.random() < 1/++count)
+             result = prop;
+      return result;
+}
 
 /**
  * Will return the number given to it as money,
@@ -34,5 +167,7 @@ const formatNumberAsMoney = function(number) {
 module.exports = {
     random: getRandomRange,
     randomElement: getRandomElement,
+    randomObject: getRandomProperty,
+    createName,
     formatNumberAsMoney
 };

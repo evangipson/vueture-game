@@ -21,6 +21,18 @@
             </div>
           </router-link>
         </div>
+        <div class="card">
+          <header class="card-header">
+            <p class="card-header-title">Hire new Staff!</p>
+          </header>
+          <router-link to="/view-staff">
+            <div class="card-content plus-center">
+              <svg id="newBusinessPlus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100%" height="100%" viewBox="0 0 42 42" xml:space="preserve">
+                <polygon points="42,20 22,20 22,0 20,0 20,20 0,20 0,22 20,22 20,42 22,42 22,22 42,22"></polygon>
+              </svg>
+            </div>
+          </router-link>
+        </div>
       </div>
     </section>
   </div>
