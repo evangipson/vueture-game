@@ -1,6 +1,6 @@
 import firebase from "firebase";
-import token from "./token";
-import business from "./business";
+import token from "../js/token";
+import business from "../js/business";
 
 /* INPUT YOUR FIREBASE CONFIG HERE
  * OR ELSE THIS WHOLE PROJECT DOESN'T WORK */

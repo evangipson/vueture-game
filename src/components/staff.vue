@@ -8,7 +8,7 @@
                         <h3>{{ key.name }}</h3>
                         <p>Expected Salary: ${{ formatPrice(key.salary) }}</p>
                         <p>Year(s) experience: {{ key.experience }}</p>
-                        <p>Favorite color: {{ key.portrait }}</p>
+                        <p style="color: white" :style="{ background: key.portrait }">Favorite color: {{ key.portrait }}</p>
                         <hr />
                         <p><b>Skills:</b></p>
                         <p v-for="(key, skill) in key.skills">

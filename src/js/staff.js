@@ -8,7 +8,16 @@ function createStaffPortrait() {
         "#F77B7B",
         "#D76BA1",
         "#BA6BD7",
-        "#B37BF7"
+        "#B37BF7",
+        "#7C64E0",
+        "#5059C9",
+        "#25B274",
+        "#189B3D",
+        "#A4453D",
+        "#E84A00",
+        "#E88B00",
+        "#FF2C00",
+        "#FF0068"
     ];
     return utils.randomElement(availableColors);
 }
