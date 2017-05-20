@@ -9,6 +9,7 @@
                 <ul>
                   <li>Lost? <a href="https://github.com/evangipson/vueture-game/wiki">Read the Wiki</a>!</li>
                   <li>Curious? <a href="https://github.com/evangipson/vueture-game">Read the code</a>!</li>
+                  <li>Love numbers? <router-link to="/stats">Check out some stats</router-link>!</li>
                 </ul>
             </div>
         </div>

@@ -9,7 +9,7 @@
                     <h2 v-cloak>Registered Users: {{registeredUserNumber}}</h2>
                     <ul>
                         <li v-for="(key, value) in userBusinesses">
-                            <em><b><router-link to="/view-business">{{key.name}}</router-link></b></em>: {{key.class}} {{key.type}}
+                            <em><b><router-link to="/portfolio">{{key.name}}</router-link></b></em>: {{key.class}} {{key.type}}
                         </li>
                     </ul>
                 </div>

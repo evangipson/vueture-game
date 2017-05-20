@@ -1,25 +1,29 @@
-.business {
+.business, .staff {
     text-align: center;
-    h3 {
+    h3, h2 {
         margin-bottom: 1.5rem;
     }
-    .business-type, .business-class, #newBusinessPlus {
-        cursor: pointer;
-    }
+}
 
-    .business-type, .business-class {
+.business-type, .business-class, .staff-member, #newBusinessPlus {
+    cursor: pointer;
+}
+
+.business-type, .business-class, .staff-member {
+    display: block;
+    margin: 0 0 0.5rem 0.5rem;
+    transition: background $animationTime ease;
+    @media screen and (min-width: 550px) {
         display: inline-block;
-        margin: 0 0 0.5rem 0.5rem;
-        transition: background $animationTime ease;
-        h4 {
-            transition: color $animationTime ease;
-            margin: 0;
-        }
-        &:hover, &.active {
-            background: $primary;
-            h4 {
-                color: #fff;
-            }
+    }
+    h4, h3, p, li {
+        transition: color $animationTime ease;
+        margin: 0;
+    }
+    &:hover, &.active {
+        background: $primary;
+        h4, h3, p, li {
+            color: #fff;
         }
     }
 }

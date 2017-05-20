@@ -20,7 +20,8 @@
         <div id="nav-menu"  v-on:click="handleNavClicks()" class="nav-right nav-menu">
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Dashboard</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/profile">Profile</router-link>
-            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/stats">Stats</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/portfolio">Portfolio</router-link>
+            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/staff">Staff</router-link>
             <a class="nav-item is-tab is-large" v-if="authenticated" v-on:click="logUserOut">Log Out</a>
             <router-link active-class="is-active"  v-else class="nav-item is-tab is-large" to="/login">Login</router-link>
         </div>
