@@ -64,6 +64,7 @@
 
 // Random start times for these SVGs
 $randomAnimationStart: random(3);
+$randomAnimationStart2: random(3);
 
 #newBusinessPlus, #newStaffPlus {
     fill: $dark;
@@ -73,7 +74,7 @@ $randomAnimationStart: random(3);
     transition: fill $animationTime ease;
     animation: pulse 2.5s ease-in-out;
     animation-iteration-count: infinite;
-    animation-delay: random(3) + s;
+    animation-delay: $randomAnimationStart2 + s;
     &:hover {
         fill: $primary;
     }
