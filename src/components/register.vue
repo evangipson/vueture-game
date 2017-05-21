@@ -4,8 +4,7 @@
             <div class="card">
                 <div class="card-content">
                     <div style="text-align: center">
-                        <p>Welcome to Vueture!</p>
-                        <p>Do you want to know more <b><router-link to="/about">about Vueture</router-link></b>?</p>
+                        <p>Welcome back to <b><router-link to="/about">Vueture</router-link></b>!</p>
                         <p>If you already have an account, just <b><router-link to="/login">login</router-link></b>.</p>
                         <p>Enter your email and password to create an account and get started!</p>
                     </div>

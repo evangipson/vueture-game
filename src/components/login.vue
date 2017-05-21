@@ -4,9 +4,8 @@
             <div class="card">
                 <div class="card-content">
                     <div style="text-align: center">
-                        <p>Welcome to Vueture!</p>
-                        <p>Do you want to know more <b><router-link to="/about">about Vueture</router-link></b>?</p>
-                        <p><b><router-link to="/register">Register</router-link></b> if you don't have an account.</p>
+                        <p>Welcome back to <b><router-link to="/about">Vueture!</router-link></b></p>
+                        <p><b><router-link to="/register">Sign up</router-link></b> if you don't have an account.</p>
                     </div>
                     <hr />
                     <form id="form" v-on:keyup.enter="logInUser">
@@ -34,6 +33,7 @@
                 </div>
                 <footer class="card-footer">
                     <a :class="formValid" class="card-footer-item" v-on:click="logInUser($event)">Log In</a>
+                    <router-link to="/register" class="is-enabled card-footer-item">Sign Up</router-link>
                 </footer>
             </div>
         </div>
