@@ -153,7 +153,7 @@ export default {
         generateStaff: function() {
             var staffMember = {};
             if(!this.availableStaff) {
-                for(var i = 0; i < 10; i++) {
+                for(var i = 0; i < 5; i++) {
                     staffMember = staff.createStaff();
                     database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").push().update(staffMember);
                 }

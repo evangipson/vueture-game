@@ -112,17 +112,27 @@ function createName() {
         "wes",
         "ien"
     ];
-    // 15% chance return three syllables.
+    // Low chance to return three syllables.
     // Note: default for getRandomRange is 0 - 100
-    if(getRandomRange() < 15) {
+    if(getRandomRange() < 8) {
         return getRandomElement(firstSyllables) + getRandomElement(secondSyllables) + getRandomElement(thirdSyllables);
     }
-    // Otherwise, just return two syllables.
-    if(getRandomRange() < 50) {
-        return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
+    // Low chance to return one syllable.
+    if(getRandomRange() < 8) {
+        return getRandomElement(firstSyllables);
+    }
+    // Otherwise, just return two syllables made up of either...
+    if(getRandomRange() < 33) {
+        // Two first syllables
+        return getRandomElement(firstSyllables) + getRandomElement(firstSyllables).toLowerCase();
+    }
+    else if(getRandomRange() < 50) {
+        // first + second syllable
+        return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
     }
     else {
-        return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
+        // first + third syllable
+        return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
     }
 };
 
