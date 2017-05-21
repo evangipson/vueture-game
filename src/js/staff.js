@@ -63,6 +63,15 @@ function generateExperience() {
     return utils.random(0, 15);
 }
 
+function findHappiness(staffMember, jobType) {
+    const skillList = staffMember.skills;
+    for(let skill in skillList) {
+        for(let happyType in skill.happpiness) {
+            console.log(happyType);
+        }
+    }
+}
+
 function createStaff() {
     const experience = generateExperience();
     return {
