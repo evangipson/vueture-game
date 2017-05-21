@@ -38,13 +38,46 @@
     text-align: center;
 }
 
-#newBusinessPlus {
+// Animations for CTAs
+@keyframes pulse {
+    0% { 
+        -ms-transform: rotate(0deg); /* IE 9 */
+        -webkit-transform: rotate(0deg); /* Chrome, Safari, Opera */
+        transform: rotate(0deg);
+    }
+    10% { 
+        -ms-transform: rotate(-4deg);
+        -webkit-transform: rotate(-4deg);
+        transform: rotate(-4deg);
+    }
+    25% { 
+        -ms-transform: rotate(6deg);
+        -webkit-transform: rotate(6deg);
+        transform: rotate(6deg);
+    }
+    50%, 100% { 
+        -ms-transform: rotate(0deg);
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+}
+
+// Random start times for these SVGs
+$randomAnimationStart: random(3);
+
+#newBusinessPlus, #newStaffPlus {
     fill: $dark;
     margin: 2rem auto;
     max-width: 14rem;
     margin: 0 auto;
     transition: fill $animationTime ease;
+    animation: pulse 2.5s ease-in-out;
+    animation-iteration-count: infinite;
+    animation-delay: random(3) + s;
     &:hover {
         fill: $primary;
     }
+}
+#newStaffPlus {
+    animation-delay: $randomAnimationStart + s;
 }
