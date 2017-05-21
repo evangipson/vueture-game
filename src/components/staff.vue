@@ -160,6 +160,8 @@ export default {
             }
             else {
                 this.availableStaff = "";
+                this.selectedStaff = "";
+                this.clearActiveOptions();
                 database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").remove();
                 // WHACHYA SAY- WHACHYA SAY- WHACHYA SAY- WHAT!!!
                 this.generateStaff();
