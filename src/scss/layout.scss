@@ -31,7 +31,6 @@ body > footer {
     .copy {
         position: relative;
         display: block;
-        margin-bottom: 1rem;
     }
     @media screen and (min-width: 768px) {
         text-align: right;
@@ -39,7 +38,7 @@ body > footer {
             text-align: left;
             position: absolute;
             left: 2rem;
-            margin-top: 0.5rem;
+            margin-top: 0.3rem;
         }
     }
     svg {
@@ -52,7 +51,6 @@ body > footer {
     a {
         color: white;
         font-weight: bold;
-        margin: 0 1rem 0 0;
         &:last-child {
             margin-right: 0rem;
         }

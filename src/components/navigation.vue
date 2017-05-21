@@ -1,7 +1,7 @@
 <template>
     <nav class="nav is-info has-shadow">
         <div class="nav-left">
-            <router-link id="logo" class="nav-item button is-large is-info is-outlined" to='/' exact>
+            <router-link id="logo" class="nav-item button is-large is-info" to='/' exact>
                 <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 22">
                     <g class="vueture-logo">
                         <circle cx="9" cy="12" r="8"/>
@@ -34,10 +34,12 @@ import router from "../js/routes"
 
 export default {
     mounted: function() {
-        var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
-            vm.availableBusinesses = snapshot.val();
-        });
+        if(this.authenticated) {
+            var vm = this;
+            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+                vm.availableBusinesses = snapshot.val();
+            });
+        }
     },
     methods: {
         logUserOut: function() {

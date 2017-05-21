@@ -9,11 +9,13 @@ Vue.use(VueRouter);
 // These can be imported from other files
 import DashboardView from "../components/dashboard.vue";
 import LoginView from "../components/login.vue";
+import RegisterView from "../components/register.vue";
 import StatsView from "../components/stats.vue";
 import ProfileView from "../components/profile.vue";
 import NewBusinessView from "../components/new-business.vue";
 import PortfolioView from "../components/portfolio.vue";
 import StaffView from "../components/staff.vue";
+import AboutView from "../components/about.vue";
 
 // 2. Define some routes
 // Each route should map to a component. The "component" can
@@ -31,6 +33,14 @@ const routes = [
     {
         path: '/login',
         component: LoginView
+    },
+    {
+        path: '/about',
+        component: AboutView
+    },
+    {
+        path: '/register',
+        component: RegisterView
     },
     {
         path: '/stats',

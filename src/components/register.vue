@@ -6,10 +6,11 @@
                     <div style="text-align: center">
                         <p>Welcome to Vueture!</p>
                         <p>Do you want to know more <b><router-link to="/about">about Vueture</router-link></b>?</p>
-                        <p><b><router-link to="/register">Register</router-link></b> if you don't have an account.</p>
+                        <p>If you already have an account, just <b><router-link to="/login">login</router-link></b>.</p>
+                        <p>Enter your email and password to create an account and get started!</p>
                     </div>
                     <hr />
-                    <form id="form" v-on:keyup.enter="logInUser">
+                    <form id="form" v-on:keyup.enter="registerUser">
                         <b-field label="Email"
                                 :type="userNameType"
                                 :message="userNameMessage">
@@ -33,7 +34,7 @@
                     </form>
                 </div>
                 <footer class="card-footer">
-                    <a :class="formValid" class="card-footer-item" v-on:click="logInUser($event)">Log In</a>
+                    <a :class="formValid" class="card-footer-item" v-on:click="registerUser($event)">Register</a>
                 </footer>
             </div>
         </div>
@@ -45,6 +46,7 @@ import database from "../js/db"
 import router from "../js/routes"
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+var startingMoney = 10000;
 var usersRef = database.firebaseInterface.db.ref("users");
 
 export default {
@@ -118,6 +120,15 @@ export default {
             var vm = this;
             database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 vm.authReturnCode = 0;
+                if(createUser) {
+                    var currentUserUID = database.currentUser().uid;
+                    // Write out this user to the userRef and use the UID for the name
+                    usersRef.update({
+                        [currentUserUID]:{
+                            money: startingMoney
+                        }
+                    });
+                }
                 // I need this here as well as the route.beforeEach rule
                 // that checks your router.path == "/login" w/ a redirect to home.
                 // TODO: Remove this and figure out why I need it.
@@ -134,6 +145,23 @@ export default {
                 else if(errorCode == "auth/wrong-password") {
                     vm.authReturnCode = 2;
                 }
+            });
+        },
+        registerUser(e) {
+            e.preventDefault();
+            // Need to cast "this" because promises just don't understand
+            var vm = this;
+            database.firebaseInterface.auth.createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
+                // Passing in true here to indicate we want to create a user in the DB
+                vm.logInUser(e, true);
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                if (errorCode == "auth/email-already-in-use") {
+                    vm.authReturnCode = 3;
+                }
+                // ...
             });
         }
     },
