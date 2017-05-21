@@ -21,7 +21,7 @@
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/" exact>Dashboard</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/profile">Profile</router-link>
             <router-link active-class="is-active" class="nav-item is-tab is-large" to="/portfolio">Portfolio</router-link>
-            <router-link active-class="is-active" class="nav-item is-tab is-large" to="/staff">Staff</router-link>
+            <router-link active-class="is-active" v-if="availableBusinesses" class="nav-item is-tab is-large" to="/staff">Staff</router-link>
             <a class="nav-item is-tab is-large" v-if="authenticated" v-on:click="logUserOut">Log Out</a>
             <router-link active-class="is-active"  v-else class="nav-item is-tab is-large" to="/login">Login</router-link>
         </div>
@@ -33,31 +33,38 @@ import database from "../js/db"
 import router from "../js/routes"
 
 export default {
-  methods: {
-      logUserOut: function() {
-        database.logout();
-      },
-      handleNavToggle: function() {
-        document.getElementById('nav-toggle').classList.toggle('is-active');
-        document.getElementById('nav-menu').classList.toggle('is-active');
-      },
-      handleNavClicks: function() {
-        var mobileNavToggle = document.getElementById("nav-toggle");
-        if(mobileNavToggle.classList.contains("is-active")) {
-            mobileNavToggle.click();
+    mounted: function() {
+        var vm = this;
+        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+            vm.availableBusinesses = snapshot.val();
+        });
+    },
+    methods: {
+        logUserOut: function() {
+            database.logout();
+        },
+        handleNavToggle: function() {
+            document.getElementById('nav-toggle').classList.toggle('is-active');
+            document.getElementById('nav-menu').classList.toggle('is-active');
+        },
+        handleNavClicks: function() {
+            var mobileNavToggle = document.getElementById("nav-toggle");
+            if(mobileNavToggle.classList.contains("is-active")) {
+                mobileNavToggle.click();
+            }
         }
-      }
-  },
-  computed: {
-      authenticated: {
-          get: function() {
-              return database.currentUser() == null ? false : true;
-          }
-      }
-  },
-  data () {
-    return {
+    },
+    computed: {
+        authenticated: {
+            get: function() {
+                return database.currentUser() == null ? false : true;
+            }
+        }
+    },
+    data () {
+        return {
+            availableBusinesses: ''
+        }
     }
-  }
 }
 </script>
