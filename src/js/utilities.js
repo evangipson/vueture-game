@@ -18,7 +18,7 @@ function createName() {
     // First syllables(ish)
     var firstSyllables = [
         "Bot",
-        "Bant",
+        "Ba",
         "Ban",
         "Bam",
         "Che",
@@ -26,47 +26,44 @@ function createName() {
         "Cha",
         "Hi",
         "He",
-        "Del",
-        "Dip",
+        "De",
+        "Di",
         "Ev",
-        "Kev",
-        "Kin",
-        "Kee",
-        "Kag",
+        "Ki",
+        "Ke",
+        "Ka",
         "Jen",
         "Shy",
         "Sty",
         "Gia",
-        "Mich",
+        "Mi",
         "Bel",
         "Don",
         "Rem",
         "Cro",
-        "Jame",
-        "Mil",
-        "Mor",
-        "Mon",
+        "Ja",
+        "Mi",
+        "Mo",
         "Ni",
         "Nu",
         "Swe",
         "Nor",
         "Ear",
         "Ma",
-        "Well",
+        "We",
         "Dam",
-        "Dan",
-        "Dal",
-        "Dol",
+        "Da",
+        "Do",
         "La",
         "Lan",
         "Lam",
-        "Lol",
+        "Lo",
         "Al",
         "Am",
         "An",
         "Ba",
         "Bo",
-        "Nitt",
+        "Ni",
         "Mi",
         "Mi",
     ];
@@ -102,7 +99,6 @@ function createName() {
         "oms",
         "ums",
         "wood",
-        "e",
         "er",
         "man",
         "sun",
@@ -118,21 +114,46 @@ function createName() {
         return getRandomElement(firstSyllables) + getRandomElement(secondSyllables) + getRandomElement(thirdSyllables);
     }
     // Low chance to return one syllable.
-    if(getRandomRange() < 8) {
-        return getRandomElement(firstSyllables);
+    if(getRandomRange() < 4) {
+        let syllable = getRandomElement(thirdSyllables);
+        if(getRandomRange() < 66) {
+            syllable = getRandomElement(firstSyllables);
+        }
+        else if(getRandomRange() < 50) {
+            syllable = getRandomElement(secondSyllables);
+        }
+        return getRandomElement(syllable).charAt(0).toUpperCase() + syllable.slice(1);
     }
-    // Otherwise, just return two syllables made up of either...
-    if(getRandomRange() < 33) {
-        // Two first syllables
+    // Maybe even return two first syllables.
+    if(getRandomRange() < 4) {
         return getRandomElement(firstSyllables) + getRandomElement(firstSyllables).toLowerCase();
     }
-    else if(getRandomRange() < 50) {
-        // first + second syllable
-        return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
+    // Otherwise, let's use first and second syllables.
+    if(getRandomRange() < 50) {
+        let syllable = getRandomElement(secondSyllables);
+        if(getRandomRange() < 66) {
+            return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
+        }
+        else if(getRandomRange() < 50) {
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1)  + getRandomElement(firstSyllables).toLowerCase();
+        }
+        else {
+            syllable = getRandomElement(thirdSyllables);
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1) + getRandomElement(firstSyllables).toLowerCase();
+        }
     }
+    // Of course, we can always just use first and third syllables.
     else {
-        // first + third syllable
-        return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
+        let syllable = getRandomElement(thirdSyllables);
+        if(getRandomRange() < 66) {
+            return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
+        }
+        else if(getRandomRange() < 50) {
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1)  + getRandomElement(secondSyllables);
+        }
+        else {
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1) + getRandomElement(firstSyllables).toLowerCase();
+        }
     }
 };
 
