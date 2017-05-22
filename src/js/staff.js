@@ -65,11 +65,15 @@ function generateExperience() {
 
 function findHappiness(staffMember, jobType) {
     const skillList = staffMember.skills;
+    let happyIndex = 0;
     for(let skill in skillList) {
         for(let happyType in skill.happpiness) {
-            console.log(happyType);
+            if(happyType === jobType) {
+                happyIndex++;
+            }
         }
     }
+    return happyIndex;
 }
 
 function createStaff() {
@@ -95,5 +99,6 @@ function createManager() {
 
 export default {
     createStaff,
-    createManager
+    createManager,
+    findHappiness
 };

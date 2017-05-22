@@ -184,8 +184,7 @@ export default {
                 database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
                     name: this.businessName,
                     type: this.selectedBusinessType,
-                    class: this.selectedBusinessClass,
-                    employees: 0
+                    class: this.selectedBusinessClass
                     // TODO: value: business.calculateValue(this.selectedBusinessType, this.selectedBusinessClass)
                 });
                 // And take their money!

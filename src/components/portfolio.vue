@@ -44,8 +44,8 @@
                             {{ props.row.class }}
                         </b-table-column>
 
-                        <b-table-column field="employees" label="Employees" sortable numeric>
-                            {{ props.row.employees }}
+                        <b-table-column field="employees" label="Employees" sortable numeric
+                            v-html="parseInt(employeeCount(props.row.staff))">
                         </b-table-column>
                     </template>
                 </b-table>
@@ -80,6 +80,17 @@ export default {
         },
         select: function(row) {
             this.selected = row;
+        },
+        employeeCount: function(staffObj) {
+            var returnArray = [];
+            if(staffObj) {
+                for(var staff in staffObj) {
+                    if(staffObj.hasOwnProperty(staff)) {
+                        returnArray.push(staffObj[staff]);
+                    }
+                }
+            }
+            return returnArray.length;
         }
     },
     data() {

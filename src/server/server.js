@@ -1,6 +1,7 @@
 import firebase from "firebase";
 import token from "../js/token";
 import business from "../js/business";
+import staff from "../js/staff";
 
 /* INPUT YOUR FIREBASE CONFIG HERE
  * OR ELSE THIS WHOLE PROJECT DOESN'T WORK */
@@ -14,18 +15,35 @@ const firebaseConfig = {
 };
 firebase.initializeApp(firebaseConfig);
 
-function createStaff() {
-    // Create a staff member and put him in the database
-};
-
 function monitorUserBusiness() {
     // Look at user's businesses and evaulate them
+    firebase.database().ref("users/").once("value", function(data) {
+        // do some stuff once
+        var userList = data.val();
+        var businessRef = {};
+        var businessList = [];
+        var happyIndex = 0;
+        for(user in userList) {
+            businessList = userList.user.businesses;
+            for(business in businessList) {
+                staffList = businessList.business.staff;
+                businessRef = firebase.database().ref("users/" + user + "/businesses");
+                for(employee in staffList) {
+                    happyIndex = staff.findHappiness(staffList.employee, businessList.business.type);
+                    if(happyIndex > 1) {
+                        businessRef.child(business).update({
+                            value: happyIndex
+                        });
+                    }
+                }
+            }
+        }
+    });
 };
 
 firebase.auth().signInWithEmailAndPassword(token.email, token.password).then(function() {
     console.log("signed into firebase!");
-    firebase.database().ref("staff/").push().update({
-    });
+    monitorUserBusiness();
 }).catch(function(error) {
     // Handle Errors here.
     console.log(error);

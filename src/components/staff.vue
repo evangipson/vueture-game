@@ -45,8 +45,8 @@
                                 {{ props.row.class }}
                             </b-table-column>
 
-                            <b-table-column field="employees" label="Employees" sortable numeric>
-                                {{ props.row.employees }}
+                            <b-table-column field="employees" label="Employees" sortable numeric
+                                v-html="parseInt(employeeCount(props.row.staff))">
                             </b-table-column>
                         </template>
                     </b-table>
@@ -96,6 +96,7 @@
 import database from "../js/db";
 import staff from "../js/staff";
 import utils from "../js/utilities";
+import router from "../js/routes";
 
 export default {
     mounted: function() {
@@ -106,6 +107,8 @@ export default {
         database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             // Turn userBusinesses into an array
             var databaseObj = snapshot.val();
+            // Save our businesses for later use
+            vm.availableBusinesses = databaseObj;
             var returnArray = [];
             for(var business in databaseObj) {
                 if(databaseObj.hasOwnProperty(business)) {
@@ -141,7 +144,35 @@ export default {
             this.staffInterview = false;
         },
         hireStaffAtBusiness: function() {
-            console.log("Sending the interview invite now!");
+            // Find out which business and staff we have to update in the database
+            var businessKey = "";
+            var staffKey = "";
+            for(var business in this.availableBusinesses) {
+                if(this.availableBusinesses[business].name === this.selectedBusiness.name) {
+                    businessKey = business;
+                }
+            }
+            for(var staff in this.availableStaff) {
+                if(this.availableStaff[staff].name === this.selectedStaff.name) {
+                    staffKey = staff;
+                }
+            }
+            if(businessKey !== "" && staffKey !== "") {
+                // Add the staff member to the businesses section of the user
+                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses/" + businessKey + "/staff").push().update(this.selectedStaff);
+                // remove the staff that was hired
+                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff/" + staffKey).remove();
+                // Let the user know we were successful in updating
+                this.$toast.open({
+                    message: "Hired " + this.selectedStaff.name.split(" ")[0] + " at " + this.selectedBusiness.name + "!",
+                    type: "is-info"
+                });
+                // Redirect to a specified route
+                router.push({path:"/"});
+            }
+            else {
+                console.log("There was an error hiring the employee!");
+            }
         },
         formatPrice: function(value) {
             let val = utils.formatNumberAsMoney(value);
@@ -166,6 +197,17 @@ export default {
                 // WHACHYA SAY- WHACHYA SAY- WHACHYA SAY- WHAT!!!
                 this.generateStaff();
             }
+        },
+        employeeCount: function(staffObj) {
+            var returnArray = [];
+            if(staffObj) {
+                for(var staff in staffObj) {
+                    if(staffObj.hasOwnProperty(staff)) {
+                        returnArray.push(staffObj[staff]);
+                    }
+                }
+            }
+            return returnArray.length;
         }
     },
     data() {
@@ -178,7 +220,7 @@ export default {
             hasMobileCards: true,
             isPaginated: true,
             isPaginationSimple: true,
-            perPage: 10,
+            perPage: 5,
             availableStaff: '',
             availableBusinesses: '',
             staffInterview: '',
