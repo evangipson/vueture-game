@@ -3,10 +3,13 @@ var webpack = require("webpack");
 
 module.exports = {
     context: __dirname + "/src/js",
-    entry: "./main.js",
+    entry: {
+        vueture: __dirname + "/src/js/main.js",
+        server: __dirname + "/src/server/server.js"
+    },
     output: {
         path: __dirname + "/dist/js",
-        filename: "./vueture.js"
+        filename: "[name].js"
     },
     // vue-loader configuration
     module: {
