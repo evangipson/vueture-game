@@ -56,7 +56,7 @@ const businessModel = {
                 "A E R O"
             ]
         },
-        "Creative Studio": {
+        "Advertising Agency": {
             names: [
                 "We Do You",
                 "Screwers",
