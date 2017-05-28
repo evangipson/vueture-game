@@ -76,14 +76,28 @@ function findHappiness(staffMember, jobType) {
     return happyIndex;
 }
 
+function generateFavoriteType(skillList) {
+    let favoriteType = "";
+    let happyTypes = [];
+    for(let skill in skillList) {
+        for(let jobType in skillList[skill].happiness) {
+            happyTypes.push(jobType);
+        }
+    }
+    console.log(happyTypes);
+}
+
 function createStaff() {
     const experience = generateExperience();
+    const skills = pickStaffSkills();
     return {
         name: createStaffName(),
         portrait: createStaffPortrait(),
-        skills: pickStaffSkills(),
+        skills: skills,
         experience: experience,
-        salary: generateExpectedSalary(experience)
+        salary: generateExpectedSalary(experience),
+        favoriteType: generateFavoriteType(skills),
+        //leastFavoriteType: generateLeastFavoriteType()
     };
 };
 
