@@ -76,15 +76,18 @@ function findHappiness(staffMember, jobType) {
     return happyIndex;
 }
 
-function generateFavoriteType(skillList) {
-    let favoriteType = "";
-    let happyTypes = [];
-    for(let skill in skillList) {
-        for(let jobType in skillList[skill].happiness) {
-            happyTypes.push(jobType);
+function generateFavoriteJob(skillList) {
+    let targetBusinessType = [];
+    let currentSkill = {};
+    for(let i = 0; i < Object.keys(skillList).length; i++) {
+        targetBusinessType[i] = [];
+        currentSkill = skillList[Object.keys(skillList)[i]];
+        for(let jobType in currentSkill.happy) {
+            targetBusinessType[i].push(currentSkill.happy[jobType]);
         }
     }
-    console.log(happyTypes);
+    targetBusinessType = utils.getSimilarEntries(targetBusinessType);
+    return targetBusinessType;
 }
 
 function createStaff() {
@@ -96,8 +99,7 @@ function createStaff() {
         skills: skills,
         experience: experience,
         salary: generateExpectedSalary(experience),
-        favoriteType: generateFavoriteType(skills),
-        //leastFavoriteType: generateLeastFavoriteType()
+        favoriteJob: generateFavoriteJob(skills)
     };
 };
 

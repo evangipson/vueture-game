@@ -20,7 +20,7 @@ const skills = {
     "Writing": {
         happy: [
             "Manufacturing",
-            "Creative Studio",
+            "Advertising Agency",
             "Legal and Financial Services"
         ]
     },
@@ -39,7 +39,7 @@ const skills = {
     "Planning": {
         happy: [
             "Manufacturing",
-            "Creative Studio",
+            "Advertising Agency",
             "Legal and Financial Services",
             "Vehicle Sales"
         ]
@@ -47,7 +47,7 @@ const skills = {
     "Flexibility": {
         happy: [
             "Arts, Crafts, and Collectibles",
-            "Creative Studio",
+            "Advertising Agency",
             "Real Estate",
             "Electronics and Technology",
                 "Vehicle Repair"
@@ -55,7 +55,7 @@ const skills = {
     },
     "Team Building": {
         happy: [
-            "Creative Studio",
+            "Advertising Agency",
             "Health and Personal Care",
             "Legal and Financial Services",
             "Food Retail & Service"
@@ -71,7 +71,7 @@ const skills = {
     "Programming": {
         happy: [
             "Manufacturing",
-            "Creative Studio",
+            "Advertising Agency",
             "Electronics and Technology",
             "Health and Personal Care"
         ]
@@ -99,7 +99,7 @@ const skills = {
             "Arts, Crafts, and Collectibles",
             "Beauty and Fragrances",
             "Clothing, Accessories, and Shoes",
-            "Creative Studio",
+            "Advertising Agency",
             "Real Estate",
             "Vehicle Sales"
         ]
@@ -119,14 +119,14 @@ const skills = {
     "Creativity": {
         happy: [
             "Manufacturing",
-            "Creative Studio",
+            "Advertising Agency",
             "Electronics and Technology"
         ]
     },
     "Problem Solving": {
         happy: [
             "Manufacturing",
-            "Creative Studio",
+            "Advertising Agency",
             "Health and Personal Care",
             "Electronics and Technology",
             "Sanitation",

@@ -180,7 +180,34 @@ const getRandomProperty = function(obj) {
           if (Math.random() < 1/++count)
              result = prop;
       return result;
-}
+};
+
+/**
+ * Will return any similar entires between
+ * the two passed in array of arrays.
+ * @param {MultidimensionalArray}
+ */
+const getSimilarEntries = function(mdArray) {
+    // Using a set here because we only want unique entries.
+    let similarEntries = new Set();
+    let indexArray = [];
+    let dimensions = mdArray.length;
+    for(let i = 0; i < dimensions; i++) {
+        /* Use the first element of the multi-dimensional
+         * array as the "master" array to key off of. */
+        indexArray = mdArray[i];
+        for(let array in mdArray) {
+            for(let element in mdArray[array]) {
+                if(mdArray[array][element] === indexArray[i]) {
+                    similarEntries.add(mdArray[array][element]);
+                }
+            }
+        }
+    }
+    // Cast the Set back to an array
+    similarEntries = [...similarEntries];
+    return similarEntries;
+};
 
 /**
  * Will return the number given to it as money,
@@ -200,5 +227,6 @@ module.exports = {
     randomElement: getRandomElement,
     randomObject: getRandomProperty,
     createName,
-    formatNumberAsMoney
+    formatNumberAsMoney,
+    getSimilarEntries
 };

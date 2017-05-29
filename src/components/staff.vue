@@ -67,7 +67,12 @@
                     <h3>{{ key.name }}</h3>
                     <p>Expected Salary: ${{ formatPrice(key.salary) }}</p>
                     <p>Year(s) experience: {{ key.experience }}</p>
-                    <p style="color: white" :style="{ background: key.portrait }">Favorite color: {{ key.portrait }}</p>
+                    <div v-if="key.favoriteJob.length > 1">
+                        <p><b>Favorite Businesses:</b></p>
+                        <p v-for="favoriteJob in key.favoriteJob">{{ favoriteJob }}</p>
+                    </div>
+                    <p v-else><b>Favorite Business:</b> {{ key.favoriteJob[0] }}</p>
+                    <p style="color: white; margin-top: 1rem;" :style="{ background: key.portrait }">Favorite color: {{ key.portrait }}</p>
                     <hr />
                     <p><b>Skills:</b></p>
                     <p v-for="(key, skill) in key.skills">
