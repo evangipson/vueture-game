@@ -5,7 +5,6 @@ module.exports = {
     context: __dirname + "/src/js",
     entry: {
         vueture: __dirname + "/src/js/main.js",
-        server: __dirname + "/src/server/server.js"
     },
     output: {
         path: __dirname + "/dist/js",

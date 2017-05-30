@@ -252,10 +252,25 @@ function calculateBusinessCost(businessClass) {
     return businessCost.toFixed(2);
 }
 
-function calculateValue(selectedBusinessType, selectedBusinessClass) {
-    evaluation = 0;
+/**
+ * Calculates the value that modifies the
+ * value of the business.
+ * @param {Number} selectedBusinessType 
+ * @param {Number} selectedBusinessClass 
+ */
+function calculateValueModifier(selectedBusinessType, selectedBusinessClass) {
+    valueModifier = 0;
+    // If staff at business
+        // If they are happy
+            // Add to evaluation
+    // If company has been around
+        // If they are historically good
+            // Add to evalution
+    return valueModifier;
+}
 
-    return evaluation;
+function calculateValue() {
+    //return previousValue + calculateValueModifier();
 }
 
 export default {
