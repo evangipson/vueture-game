@@ -17,6 +17,8 @@
     "gulp-sass": "latest",
     "gulp-util": "latest",
     "run-sequence": "latest",
+    "ts-loader": "^2.1.0",
+    "typescript": "^2.3.4",
     "webpack": "^2.3.3"
   }
 }

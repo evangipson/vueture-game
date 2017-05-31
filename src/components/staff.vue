@@ -100,7 +100,7 @@
 <script>
 import database from "../js/db";
 import staff from "../js/staff";
-import utils from "../js/utilities";
+import utils from "../ts/utilities.ts";
 import router from "../js/routes";
 
 export default {

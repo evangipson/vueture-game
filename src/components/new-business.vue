@@ -63,7 +63,7 @@
 <script>
 import business from "../js/business";
 import database from "../js/db";
-import utils from "../js/utilities";
+import utils from "../ts/utilities.ts";
 import router from "../js/routes";
 
 // List all types of business cards used for our clearActiveOptions function.

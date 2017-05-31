@@ -1,4 +1,4 @@
-import utils from "./utilities";
+import utils from "../ts/utilities.ts";
 import skills from "./skills";
 
 // TODO: Make this an SVG and not just a color

@@ -1,4 +1,4 @@
-import utils from "./utilities";
+import utils from "../ts/utilities.ts";
 import skills from "./skills";
 
 /* Object which represents the master "skeleton"

@@ -34,7 +34,7 @@
 <script>
 import OwnedBusinesses from "./owned-businesses.vue";
 import database from "../js/db";
-import utils from "../js/utilities";
+import utils from "../ts/utilities.ts";
 
 var currentUserRef = {};
 
