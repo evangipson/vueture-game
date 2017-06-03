@@ -63,7 +63,7 @@
 <script>
 import business from "../js/business";
 import database from "../js/db";
-import utils from "../ts/utilities.ts";
+import * as Utils from "../ts/utilities.ts";
 import router from "../js/routes";
 
 // List all types of business cards used for our clearActiveOptions function.
@@ -173,7 +173,7 @@ export default {
              * because I do actual calculations with businessCost, so I can't
              * have that looking like money. */
             var temporaryBusinessCost = business.calculateCost(this.selectedBusinessClass);
-            this.businessCostAsMoney = utils.formatNumberAsMoney(temporaryBusinessCost);
+            this.businessCostAsMoney = Utils.formatNumberAsMoney(temporaryBusinessCost);
             this.businessCost = temporaryBusinessCost;
             // Now flag the page to go to the "name" section!
             this.classSelected = true;
@@ -212,10 +212,10 @@ export default {
             var bizName = "";
             var oldBizName = this.businessName;
             if(this.selectedBusinessType) {
-                bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                bizName = Utils.randomElement(business.model.type[this.selectedBusinessType].names);
                 // Ensure we don't get a duplicate
                 while(bizName === oldBizName) {
-                    bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                    bizName = Utils.randomElement(business.model.type[this.selectedBusinessType].names);
                 }
             }
             this.businessName = bizName;

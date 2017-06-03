@@ -1,5 +1,5 @@
 import utils from "../ts/utilities.ts";
-import skills from "./skills";
+import skills from "../ts/skills.ts";
 
 /* Object which represents the master "skeleton"
  * for the business object. */

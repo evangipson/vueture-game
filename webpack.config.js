@@ -10,6 +10,9 @@ module.exports = {
         path: __dirname + "/dist/js",
         filename: "[name].js"
     },
+    resolve: {
+        extensions: ['.js', '.vue', '.ts'],
+    },
     // vue-loader configuration
     module: {
         rules: [

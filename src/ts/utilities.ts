@@ -1,9 +1,13 @@
+/* ========================= */
+/* VUETURE UTILITY FUNCTIONS */
+/* ========================= */
+
 /**
  * Returns a number that is random within range.
  * @param {number} minimum value for the random range.
  * @param {number} maximum value for the random range.
  */
-function getRandomRange(min = 0, max = 100): number {
+export function random(min: number = 0, max: number = 100): number {
     return Math.floor(Math.random() * (max - min) + min);
 }
 
@@ -11,7 +15,7 @@ function getRandomRange(min = 0, max = 100): number {
  * Will create a name made up of 2 or
  * 3 syllables.
  */
-function createName(): string {
+export function createName(): string {
     let syllable: string = "";
     // Set up the syllables that we will pull from.
     const firstSyllables: string[] = [
@@ -106,76 +110,76 @@ function createName(): string {
         "ien",
     ];
     // Low chance to return three syllables.
-    // Note: default for getRandomRange is 0 - 100
-    if (getRandomRange() < 8) {
-        return getRandomElement(firstSyllables) + getRandomElement(secondSyllables) + getRandomElement(thirdSyllables);
+    // Note: default for random is 0 - 100
+    if (random() < 8) {
+        return randomElement(firstSyllables) + randomElement(secondSyllables) + randomElement(thirdSyllables);
     }
     // Low chance to return one syllable.
-    if (getRandomRange() < 4) {
-        if (getRandomRange() < 66) {
-            syllable = getRandomElement(firstSyllables);
+    if (random() < 4) {
+        if (random() < 66) {
+            syllable = randomElement(firstSyllables);
         }
-        else if (getRandomRange() < 50) {
-            syllable = getRandomElement(secondSyllables);
+        else if (random() < 50) {
+            syllable = randomElement(secondSyllables);
         }
         else {
-            syllable = getRandomElement(thirdSyllables).charAt(0).toUpperCase() + syllable.slice(1);
+            syllable = randomElement(thirdSyllables).charAt(0).toUpperCase() + syllable.slice(1);
         }
         return syllable;
     }
     // Maybe even return two first syllables.
-    if (getRandomRange() < 4) {
-        return getRandomElement(firstSyllables) + getRandomElement(firstSyllables).toLowerCase();
+    if (random() < 4) {
+        return randomElement(firstSyllables) + randomElement(firstSyllables).toLowerCase();
     }
     // Otherwise, let's use first and second syllables.
-    if (getRandomRange() < 50) {
-        if (getRandomRange() < 66) {
-            return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
+    if (random() < 50) {
+        if (random() < 66) {
+            return randomElement(firstSyllables) + randomElement(secondSyllables);
         }
         else {
-            syllable = getRandomElement(secondSyllables);
-            return syllable.charAt(0).toUpperCase() + syllable.slice(1) + getRandomElement(firstSyllables).toLowerCase();
+            syllable = randomElement(secondSyllables);
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1) + randomElement(firstSyllables).toLowerCase();
         }
     }
     // Of course, we can always just use first and third syllables.
     else {
-        syllable = getRandomElement(thirdSyllables);
-        if (getRandomRange() < 66) {
-            return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
+        syllable = randomElement(thirdSyllables);
+        if (random() < 66) {
+            return randomElement(firstSyllables) + randomElement(thirdSyllables);
         }
-        else if (getRandomRange() < 50) {
-            return syllable.charAt(0).toUpperCase() + syllable.slice(1)  + getRandomElement(secondSyllables);
+        else if (random() < 50) {
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1)  + randomElement(secondSyllables);
         }
         else {
-            return syllable.charAt(0).toUpperCase() + syllable.slice(1) + getRandomElement(firstSyllables).toLowerCase();
+            return syllable.charAt(0).toUpperCase() + syllable.slice(1) + randomElement(firstSyllables).toLowerCase();
         }
     }
 }
 
 /**
  * Returns an element from the array passed in at
- * random, based on getRandomRange. Using generics here
+ * random, based on random(). Using generics here
  * to ensure the return type matches the type of array
  * passed in.
  * @param {any[]} array in which to find a random element.
  */
-function getRandomElement(array: any[]): any {
-    return array[getRandomRange(0,array.length)];
+export function randomElement(array: any[]): any {
+    return array[random(0, array.length)];
 }
 
 /**
  * Returns a random property of an object that
  * will be provided.
- * @param {Object} An object to get a random property of
+ * @param {object} An object to get a random property of
  */
-function getRandomProperty(obj: Object): Object {
-      let result: string = "";
-      let count: number = 0;
-      for (let prop in obj)
+export function randomObject(obj: object): string {
+    let result: string = "";
+    let count: number = 0;
+    for (let prop in obj)
         if (obj.hasOwnProperty(prop))
-          if (Math.random() < 1 / ++count)
-             result = prop;
-      return result;
+        if (Math.random() < 1 / ++count)
+            result = prop;
+    return result;
 }
 
 /**
@@ -184,16 +188,16 @@ function getRandomProperty(obj: Object): Object {
  * @param {any[][]} An array containing
  * arrays.
  */
-function getSimilarEntries(mdArray: any[][]): any[] {
+export function getSimilarEntries(mdArray: any[][]): any[] {
     // Using a set here because we only want unique entries.
     let similarEntries = new Set();
     /* This will house temporary entries from the passed in mdArray,
-     * so it needs to be the same type. */
+    * so it needs to be the same type. */
     let indexArray: any[] = [];
     let numberOfArrays: number = mdArray.length;
     for (let i: number = 0; i < numberOfArrays; i++) {
         /* Use the first element of the multi-dimensional
-         * array as the "master" array to key off of. */
+        * array as the "master" array to key off of. */
         indexArray = mdArray[i];
         for (let array in mdArray) {
             for (let element in mdArray[array]) {
@@ -214,18 +218,8 @@ function getSimilarEntries(mdArray: any[][]): any[] {
  * formatNumberAsMoney(15788); // returns $15,788.00
  * @param {number} amount
  */
-function formatNumberAsMoney(amount: number): string {
+export function formatNumberAsMoney(amount: number): string {
     // TODO: Look into typing RegEx stuff... I don't like declaring this as an "any"
     const re: any = "\\d(?=(\\d{" + 3 + "})+" + "\\." + ")";
     return Number(amount).toFixed(Math.max(0, ~~2)).replace(new RegExp(re, "g"), "$&,");
 }
-
-// Return our utilities module
-module.exports = {
-    random: getRandomRange,
-    randomElement: getRandomElement,
-    randomObject: getRandomProperty,
-    createName,
-    formatNumberAsMoney,
-    getSimilarEntries,
-};

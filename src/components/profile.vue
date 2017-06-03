@@ -34,7 +34,7 @@
 <script>
 import OwnedBusinesses from "./owned-businesses.vue";
 import database from "../js/db";
-import utils from "../ts/utilities.ts";
+import * as Utils from "../ts/utilities";
 
 var currentUserRef = {};
 
@@ -49,7 +49,7 @@ export default {
             vm.userName = snapshot.val();
         });
         currentUserRef.child("money").on("value", function(snapshot) {
-            vm.currentUserMoney = utils.formatNumberAsMoney(snapshot.val());
+            vm.currentUserMoney = Utils.formatNumberAsMoney(snapshot.val());
         });
     },
     computed: {

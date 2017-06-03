@@ -1,4 +1,8 @@
-const skills = {
+/* ========================= */
+/* VUETURE MASTER SKILL LIST */
+/* ========================= */
+
+export const Skills: object = {
     "Listening": {
         happy: [
             "Beauty and Fragrances",
@@ -6,23 +10,23 @@ const skills = {
             "Health and Personal Care",
             "Legal and Financial Services",
             "Food Retail & Service",
-            "Vehicle Sales"
-        ]
+            "Vehicle Sales",
+        ],
     },
     "Speaking": {
         happy: [
             "Clothing, Accessories, and Shoes",
             "Real Estate",
             "Legal and Financial Services",
-            "Vehicle Sales"
-        ]
+            "Vehicle Sales",
+        ],
     },
     "Writing": {
         happy: [
             "Manufacturing",
             "Advertising Agency",
-            "Legal and Financial Services"
-        ]
+            "Legal and Financial Services",
+        ],
     },
     "Organization": {
         happy: [
@@ -33,16 +37,16 @@ const skills = {
             "Sanitation",
             "Legal and Financial Services",
             "Food Retail & Service",
-            "Vehicle Repair"
-        ]
+            "Vehicle Repair",
+        ],
     },
     "Planning": {
         happy: [
             "Manufacturing",
             "Advertising Agency",
             "Legal and Financial Services",
-            "Vehicle Sales"
-        ]
+            "Vehicle Sales",
+        ],
     },
     "Flexibility": {
         happy: [
@@ -50,31 +54,31 @@ const skills = {
             "Advertising Agency",
             "Real Estate",
             "Electronics and Technology",
-                "Vehicle Repair"
-        ]
+            "Vehicle Repair",
+        ],
     },
     "Team Building": {
         happy: [
             "Advertising Agency",
             "Health and Personal Care",
             "Legal and Financial Services",
-            "Food Retail & Service"
-        ]
+            "Food Retail & Service",
+        ],
     },
     "Typing": {
         happy: [
             "Manufacturing",
             "Electronics and Technology",
-            "Legal and Financial Services"
-        ]
+            "Legal and Financial Services",
+        ],
     },
     "Programming": {
         happy: [
             "Manufacturing",
             "Advertising Agency",
             "Electronics and Technology",
-            "Health and Personal Care"
-        ]
+            "Health and Personal Care",
+        ],
     },
     "Data Entry": {
         happy: [
@@ -82,8 +86,8 @@ const skills = {
             "Real Estate",
             "Electronics and Technology",
             "Sports and Outdoor",
-            "Legal and Financial Services"
-        ]
+            "Legal and Financial Services",
+        ],
     },
     "Dependability": {
         happy: [
@@ -91,8 +95,8 @@ const skills = {
             "Sanitation",
             "Sports and Outdoor",
             "Pets and Animals",
-            "Vehicle Repair"
-        ]
+            "Vehicle Repair",
+        ],
     },
     "Confidence": {
         happy: [
@@ -101,8 +105,8 @@ const skills = {
             "Clothing, Accessories, and Shoes",
             "Advertising Agency",
             "Real Estate",
-            "Vehicle Sales"
-        ]
+            "Vehicle Sales",
+        ],
     },
     "Positivity": {
         happy: [
@@ -113,15 +117,15 @@ const skills = {
             "Real Estate",
             "Sanitation",
             "Pets and Animals",
-            "Vehicle Sales"
-        ]
+            "Vehicle Sales",
+        ],
     },
     "Creativity": {
         happy: [
             "Manufacturing",
             "Advertising Agency",
-            "Electronics and Technology"
-        ]
+            "Electronics and Technology",
+        ],
     },
     "Problem Solving": {
         happy: [
@@ -131,9 +135,7 @@ const skills = {
             "Electronics and Technology",
             "Sanitation",
             "Legal and Financial Services",
-            "Vehicle Repair"
-        ]
+            "Vehicle Repair",
+        ],
     },
 };
-
-export default skills;

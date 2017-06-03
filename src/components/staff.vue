@@ -99,9 +99,9 @@
 
 <script>
 import database from "../js/db";
-import staff from "../js/staff";
-import utils from "../ts/utilities.ts";
 import router from "../js/routes";
+import * as Staff from "../ts/staff.ts";
+import * as Utils from "../ts/utilities.ts";
 
 export default {
     mounted: function() {
@@ -180,7 +180,7 @@ export default {
             }
         },
         formatPrice: function(value) {
-            let val = utils.formatNumberAsMoney(value);
+            let val = Utils.formatNumberAsMoney(value);
             return val;
         },
         select: function(row) {
@@ -190,7 +190,7 @@ export default {
             var staffMember = {};
             if(!this.availableStaff) {
                 for(var i = 0; i < 5; i++) {
-                    staffMember = staff.createStaff();
+                    staffMember = Staff.createStaff();
                     database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").push().update(staffMember);
                 }
             }

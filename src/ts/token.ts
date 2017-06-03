@@ -7,5 +7,5 @@ export default {
     storageBucket: "vueture-caf88.appspot.com",
     messagingSenderId: "1026212136384",
     email: "evangipson@gmail.com",
-    password: "K0BBsa|ad15OKAY"
+    password: "K0BBsa|ad15OKAY",
 };

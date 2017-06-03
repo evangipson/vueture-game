@@ -56,7 +56,7 @@
 
 <script>
 import database from "../js/db";
-import utils from "../ts/utilities.ts";
+import * as Utils from "../ts/utilities.ts";
 
 export default {
     mounted: function() {
@@ -75,7 +75,7 @@ export default {
     },
     methods: {
         formatPrice: function(value) {
-            let val = utils.formatNumberAsMoney(value);
+            let val = Utils.formatNumberAsMoney(value);
             return val;
         },
         select: function(row) {
