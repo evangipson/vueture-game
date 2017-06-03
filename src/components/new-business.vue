@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import business from "../js/business";
+import router from "../js/routes";
 import database from "../js/db";
 import * as Utils from "../ts/utilities";
-import router from "../js/routes";
+import * as Business from "../ts/business";
 
 // List all types of business cards used for our clearActiveOptions function.
 var businessCardTypes = [ "business-type", "business-class" ];
@@ -172,7 +172,7 @@ export default {
             /* The businessCost will be stored as a "money format" in businessCostAsMoney
              * because I do actual calculations with businessCost, so I can't
              * have that looking like money. */
-            var temporaryBusinessCost = business.calculateCost(this.selectedBusinessClass);
+            var temporaryBusinessCost = Business.calculateCost(this.selectedBusinessClass);
             this.businessCostAsMoney = Utils.formatNumberAsMoney(temporaryBusinessCost);
             this.businessCost = temporaryBusinessCost;
             // Now flag the page to go to the "name" section!
@@ -185,7 +185,7 @@ export default {
                     name: this.businessName,
                     type: this.selectedBusinessType,
                     class: this.selectedBusinessClass
-                    // TODO: value: business.calculateValue(this.selectedBusinessType, this.selectedBusinessClass)
+                    // TODO: value: Business.calculateValue(this.selectedBusinessType, this.selectedBusinessClass)
                 });
                 // And take their money!
                 database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
@@ -212,10 +212,10 @@ export default {
             var bizName = "";
             var oldBizName = this.businessName;
             if(this.selectedBusinessType) {
-                bizName = Utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                bizName = Utils.randomElement(Business.model.type[this.selectedBusinessType].names);
                 // Ensure we don't get a duplicate
                 while(bizName === oldBizName) {
-                    bizName = Utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                    bizName = Utils.randomElement(Business.model.type[this.selectedBusinessType].names);
                 }
             }
             this.businessName = bizName;
@@ -224,10 +224,10 @@ export default {
     data() {
         return {
             userBusinesses: '',
-            businessTypes: business.model.type,
+            businessTypes: Business.model.type,
             selectedBusinessType: '',
             typeSelected: false,
-            businessClasses: business.model.class,
+            businessClasses: Business.model.class,
             selectedBusinessClass: '',
             classSelected: false,
             businessName: '',

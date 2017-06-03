@@ -74,7 +74,6 @@ export default {
         autofocus: function() {
             // Ensure the "email" input is autofocused. Buefy really should find a way to do this!
             window.onload = function() {
-                console.log(document.getElementsByTagName("input"));
                 document.getElementsByTagName("input")[0].focus();
             };
         }

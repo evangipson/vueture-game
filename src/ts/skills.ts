@@ -2,7 +2,7 @@
 /* VUETURE MASTER SKILL LIST */
 /* ========================= */
 
-export const Skills: object = {
+export const model: object = {
     "Listening": {
         happy: [
             "Beauty and Fragrances",
