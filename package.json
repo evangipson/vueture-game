@@ -1,5 +1,6 @@
 {
-  "name": "Vueture",
+  "name": "vueture",
+  "version": "0.0.8",
   "author": "Evan Gipson",
   "license": "MIT",
   "dependencies": {
@@ -9,6 +10,7 @@
     "vue-template-compiler": "^2.2.6"
   },
   "devDependencies": {
+    "@types/node": "^7.0.27",
     "buefy": "^0.3.1",
     "bulma": "^0.4.0",
     "firebase": "^3.7.8",

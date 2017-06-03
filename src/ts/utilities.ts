@@ -79,7 +79,7 @@ function createName(): string {
         "fal",
         "tal",
         "wi",
-        "zo"
+        "zo",
     ];
     const thirdSyllables: string[] = [
         "son",
@@ -103,31 +103,33 @@ function createName(): string {
         "ing",
         "ting",
         "wes",
-        "ien"
+        "ien",
     ];
     // Low chance to return three syllables.
     // Note: default for getRandomRange is 0 - 100
-    if(getRandomRange() < 8) {
+    if (getRandomRange() < 8) {
         return getRandomElement(firstSyllables) + getRandomElement(secondSyllables) + getRandomElement(thirdSyllables);
     }
     // Low chance to return one syllable.
-    if(getRandomRange() < 4) {
-        syllable = getRandomElement(thirdSyllables);
-        if(getRandomRange() < 66) {
+    if (getRandomRange() < 4) {
+        if (getRandomRange() < 66) {
             syllable = getRandomElement(firstSyllables);
         }
-        else if(getRandomRange() < 50) {
+        else if (getRandomRange() < 50) {
             syllable = getRandomElement(secondSyllables);
         }
-        return getRandomElement(syllable).charAt(0).toUpperCase() + syllable.slice(1);
+        else {
+            syllable = getRandomElement(thirdSyllables).charAt(0).toUpperCase() + syllable.slice(1);
+        }
+        return syllable;
     }
     // Maybe even return two first syllables.
-    if(getRandomRange() < 4) {
+    if (getRandomRange() < 4) {
         return getRandomElement(firstSyllables) + getRandomElement(firstSyllables).toLowerCase();
     }
     // Otherwise, let's use first and second syllables.
-    if(getRandomRange() < 50) {
-        if(getRandomRange() < 66) {
+    if (getRandomRange() < 50) {
+        if (getRandomRange() < 66) {
             return getRandomElement(firstSyllables) + getRandomElement(secondSyllables);
         }
         else {
@@ -138,10 +140,10 @@ function createName(): string {
     // Of course, we can always just use first and third syllables.
     else {
         syllable = getRandomElement(thirdSyllables);
-        if(getRandomRange() < 66) {
+        if (getRandomRange() < 66) {
             return getRandomElement(firstSyllables) + getRandomElement(thirdSyllables);
         }
-        else if(getRandomRange() < 50) {
+        else if (getRandomRange() < 50) {
             return syllable.charAt(0).toUpperCase() + syllable.slice(1)  + getRandomElement(secondSyllables);
         }
         else {
@@ -155,9 +157,9 @@ function createName(): string {
  * random, based on getRandomRange. Using generics here
  * to ensure the return type matches the type of array
  * passed in.
- * @param {Element[]} array in which to find a random element.
+ * @param {any[]} array in which to find a random element.
  */
-function getRandomElement<Element>(array: Element[]): Element {
+function getRandomElement(array: any[]): any {
     return array[getRandomRange(0,array.length)];
 }
 
@@ -169,9 +171,9 @@ function getRandomElement<Element>(array: Element[]): Element {
 function getRandomProperty(obj: Object): Object {
       let result: string = "";
       let count: number = 0;
-      for (var prop in obj)
-        if(obj.hasOwnProperty(prop))
-          if (Math.random() < 1/++count)
+      for (let prop in obj)
+        if (obj.hasOwnProperty(prop))
+          if (Math.random() < 1 / ++count)
              result = prop;
       return result;
 }
@@ -179,21 +181,23 @@ function getRandomProperty(obj: Object): Object {
 /**
  * Will return any similar entires in the array
  * containing arrays that is passed in.
- * @param {MultidimensionalArray} An array containing
+ * @param {any[][]} An array containing
  * arrays.
  */
-function getSimilarEntries<Array>(mdArray: Array[][]): Array[] {
+function getSimilarEntries(mdArray: any[][]): any[] {
     // Using a set here because we only want unique entries.
     let similarEntries = new Set();
-    let indexArray: Array[] = [];
-    let dimensions: number = mdArray.length;
-    for(let i: number = 0; i < dimensions; i++) {
+    /* This will house temporary entries from the passed in mdArray,
+     * so it needs to be the same type. */
+    let indexArray: any[] = [];
+    let numberOfArrays: number = mdArray.length;
+    for (let i: number = 0; i < numberOfArrays; i++) {
         /* Use the first element of the multi-dimensional
          * array as the "master" array to key off of. */
         indexArray = mdArray[i];
-        for(let array in mdArray) {
-            for(let element in mdArray[array]) {
-                if(mdArray[array][element] === indexArray[i]) {
+        for (let array in mdArray) {
+            for (let element in mdArray[array]) {
+                if (mdArray[array][element] === indexArray[i]) {
                     similarEntries.add(mdArray[array][element]);
                 }
             }
@@ -212,16 +216,16 @@ function getSimilarEntries<Array>(mdArray: Array[][]): Array[] {
  */
 function formatNumberAsMoney(amount: number): string {
     // TODO: Look into typing RegEx stuff... I don't like declaring this as an "any"
-    const re: any = '\\d(?=(\\d{' + 3 + '})+' + '\\.' + ')';
-    return Number(amount).toFixed(Math.max(0, ~~2)).replace(new RegExp(re, 'g'), '$&,');
+    const re: any = "\\d(?=(\\d{" + 3 + "})+" + "\\." + ")";
+    return Number(amount).toFixed(Math.max(0, ~~2)).replace(new RegExp(re, "g"), "$&,");
 }
 
-// Return our utilities module 
+// Return our utilities module
 module.exports = {
     random: getRandomRange,
     randomElement: getRandomElement,
     randomObject: getRandomProperty,
     createName,
     formatNumberAsMoney,
-    getSimilarEntries
-}
+    getSimilarEntries,
+};
