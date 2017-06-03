@@ -56,7 +56,7 @@
 
 <script>
 import database from "../js/db";
-import * as Utils from "../ts/utilities.ts";
+import * as Utils from "../ts/utilities";
 
 export default {
     mounted: function() {

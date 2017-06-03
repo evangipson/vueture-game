@@ -100,8 +100,8 @@
 <script>
 import database from "../js/db";
 import router from "../js/routes";
-import * as Staff from "../ts/staff.ts";
-import * as Utils from "../ts/utilities.ts";
+import * as Staff from "../ts/staff";
+import * as Utils from "../ts/utilities";
 
 export default {
     mounted: function() {
