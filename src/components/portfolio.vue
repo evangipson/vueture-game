@@ -55,13 +55,13 @@
 </template>
 
 <script>
-import database from "../js/db";
+import * as Database from "../ts/db";
 import * as Utils from "../ts/utilities";
 
 export default {
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             // Turn userBusinesses into an array
             var databaseObj = snapshot.val();
             var returnArray = [];

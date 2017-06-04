@@ -10,7 +10,7 @@
 </template>
 <!-- Set up our export -->
 <script>
-import database from "../js/db";
+import * as Database from "../ts/db";
 import * as Utils from "../ts/utilities";
 
 export default {
@@ -28,7 +28,7 @@ export default {
     },
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/money").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/money").on("value", function(snapshot) {
             vm.money = Utils.formatNumberAsMoney(snapshot.val());
         });
     },

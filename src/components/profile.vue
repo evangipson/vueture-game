@@ -33,7 +33,7 @@
 
 <script>
 import OwnedBusinesses from "./owned-businesses.vue";
-import database from "../js/db";
+import * as Database from "../ts/db";
 import * as Utils from "../ts/utilities";
 
 var currentUserRef = {};
@@ -42,8 +42,8 @@ export default {
     components: { OwnedBusinesses },
     mounted: function() {
         // Fill our firebase-y variables
-        currentUserRef = database.firebaseInterface.db.ref("users/" + database.currentUser().uid);
-        this.user = database.currentUser();
+        currentUserRef = Database.db().ref("users/" + Database.currentUser().uid);
+        this.user = Database.currentUser();
         var vm = this;
         currentUserRef.child("name").on("value", function(snapshot) {
             vm.userName = snapshot.val();

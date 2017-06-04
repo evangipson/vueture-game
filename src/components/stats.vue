@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import database from "../js/db";
+import * as Database from "../ts/db";
 import RandomNumber from "./random-number.vue";
 
 export default {
@@ -43,10 +43,10 @@ export default {
     },
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("/money").on("value", function(snapshot) {
+        Database.db().ref("/money").on("value", function(snapshot) {
             vm.money = snapshot.val();
         });
-        database.firebaseInterface.db.ref("/users").on("value", function(snapshot) {
+        Database.db().ref("/users").on("value", function(snapshot) {
             vm.registeredUsers = snapshot.val();
         });
     },

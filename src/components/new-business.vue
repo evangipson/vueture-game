@@ -61,8 +61,8 @@
 </template>
 
 <script>
-import router from "../js/routes";
-import database from "../js/db";
+import Router from "../ts/routes";
+import * as Database from "../ts/db";
 import * as Utils from "../ts/utilities";
 import * as Business from "../ts/business";
 
@@ -72,10 +72,10 @@ var businessCardTypes = [ "business-type", "business-class" ];
 export default {
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             vm.userBusinesses = snapshot.val();
         });
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/money").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/money").on("value", function(snapshot) {
             vm.playerMoney = snapshot.val();
         });
     },
@@ -181,14 +181,14 @@ export default {
         buyBusiness: function() {
             if(Number(this.businessCost) < this.playerMoney) {
                 // Update the database with the user's new business
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
+                Database.db().ref("users/" + Database.currentUser().uid + "/businesses").push().update({
                     name: this.businessName,
                     type: this.selectedBusinessType,
                     class: this.selectedBusinessClass
                     // TODO: value: Business.calculateValue(this.selectedBusinessType, this.selectedBusinessClass)
                 });
                 // And take their money!
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
+                Database.db().ref("users/" + Database.currentUser().uid).update({
                     money: (this.playerMoney - this.businessCost).toFixed(2)
                 });
                 // Let the user know we were successful in updating
@@ -198,7 +198,7 @@ export default {
                 });
                 this.resetBusinessCreationProgress();
                 // Redirect to a specified route
-                router.push({path:"/"});
+                Router.push({path:"/"});
             }
             else {
                 // Let the user know we were successful in updating

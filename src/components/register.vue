@@ -41,14 +41,17 @@
 </template>
 
 <script>
-import database from "../js/db"
-import router from "../js/routes"
+import * as Database from "../ts/db";
+import Router from "../ts/routes";
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
 var startingMoney = 10000;
-var usersRef = database.firebaseInterface.db.ref("users");
+var usersRef = {};
 
 export default {
+    mounted: function() {
+        usersRef = Database.db().ref("users");
+    },
     // computed property for form validation state
     computed: {
         validation: function () {
@@ -116,10 +119,10 @@ export default {
             e.preventDefault();
             // Need to cast "this" because promises just don't understand
             var vm = this;
-            database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
+            Database.auth().signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 vm.authReturnCode = 0;
                 if(createUser) {
-                    var currentUserUID = database.currentUser().uid;
+                    var currentUserUID = Database.currentUser().uid;
                     // Write out this user to the userRef and use the UID for the name
                     usersRef.update({
                         [currentUserUID]:{
@@ -130,7 +133,7 @@ export default {
                 // I need this here as well as the route.beforeEach rule
                 // that checks your router.path == "/login" w/ a redirect to home.
                 // TODO: Remove this and figure out why I need it.
-                router.push({path:"/"});
+                Router.push({path:"/"});
                 // We're redirecting to "/" in the chunk above this export default
                 // even though it'd fall here naturally.
             }).catch(function(error) {
@@ -149,7 +152,7 @@ export default {
             e.preventDefault();
             // Need to cast "this" because promises just don't understand
             var vm = this;
-            database.firebaseInterface.auth.createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
+            Database.auth().createUserWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 // Passing in true here to indicate we want to create a user in the DB
                 vm.logInUser(e, true);
             }).catch(function(error) {

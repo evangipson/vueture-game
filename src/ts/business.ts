@@ -49,7 +49,7 @@ export const model = {
                 "Safety Cone",
                 "Pine",
                 "Applewood",
-            ]
+            ],
         },
         "Arts, Crafts, and Collectibles": {
             names: [
@@ -59,7 +59,7 @@ export const model = {
                 "New Anitques",
                 "Baseball Card Store",
                 "Sport Memora-Deal-ia",
-            ]
+            ],
         },
         "Beauty and Fragrances": {
             names: [
@@ -68,7 +68,7 @@ export const model = {
                 "Petals Inc.",
                 "Fumers",
                 "Nose Invaders",
-            ]
+            ],
         },
         "Clothing, Accessories, and Shoes": {
             names: [
@@ -79,7 +79,7 @@ export const model = {
                 "General Clothes Outlet",
                 "Trendy Chic",
                 "A E R O",
-            ]
+            ],
         },
         "Advertising Agency": {
             names: [
@@ -92,7 +92,7 @@ export const model = {
                 "Pemtigone",
                 "Davis & Mitchell",
                 "Trendatt",
-            ]
+            ],
         },
         "Health and Personal Care": {
             names: [
@@ -106,7 +106,7 @@ export const model = {
                 "White Mage, M.D.",
                 "Black Mage, D.D.S.",
                 "Red Mage, M.D.",
-            ]
+            ],
         },
         "Real Estate": {
             names: [
@@ -120,7 +120,7 @@ export const model = {
                 "Government Acquisitions",
                 "FORE Closures",
                 "4 Closures",
-            ]
+            ],
         },
         "Electronics and Technology": {
             names: [
@@ -136,7 +136,7 @@ export const model = {
                 "Clonn's Old School Electronics",
                 "Binguss Saminns' Computers",
                 "Farbit's Hard Disks",
-            ]
+            ],
         },
         "Sanitation": {
             names: [
@@ -152,7 +152,7 @@ export const model = {
                 "Clean 'Er Up",
                 "Fixin' Maids",
                 "Mutual Butlers",
-            ]
+            ],
         },
         "Sports and Outdoor": {
             names: [
@@ -163,7 +163,7 @@ export const model = {
                 "Rettela's",
                 "Outdoor Lifestyles",
                 "Indoors Shmindoors",
-            ]
+            ],
         },
         "Pets and Animals": {
             names: [
@@ -174,7 +174,7 @@ export const model = {
                 "Take Me Home!",
                 "Bird Food & Other Things",
                 "Buy Lizards Here",
-            ]
+            ],
         },
         "Nonprofit": {
             names: [
@@ -183,7 +183,7 @@ export const model = {
                 "NO",
                 "STOP",
                 "QUIT",
-            ]
+            ],
         },
         "Legal and Financial Services": {
             names: [
@@ -199,7 +199,7 @@ export const model = {
                 "Warren, Dio, Mason & Baws",
                 "Trembiss, State & Law",
                 "Law Offices Of Dayumit",
-            ]
+            ],
         },
         "Food Retail & Service": {
             names: [
@@ -214,7 +214,7 @@ export const model = {
                 "Rabbits Eating Rabbits",
                 "Table To Farm, Inc.",
                 "Farm To Fable",
-            ]
+            ],
         },
         "Vehicle Sales": {
             names: [
@@ -233,7 +233,7 @@ export const model = {
                 "Dangler's Used Autos",
                 "Drinbin Used Auto Lot",
                 "Canninban Car",
-            ]
+            ],
         },
         "Vehicle Repair": {
             names: [
@@ -243,7 +243,7 @@ export const model = {
                 "Canninban Car Repair",
                 "Heineke",
                 "AutoPlus",
-            ]
+            ],
         },
     },
     debt: 0,

@@ -86,6 +86,7 @@ function generateFavoriteJob(skillList: object): string[] {
     return targetBusinessTypes;
 }
 
+/* ================== */
 /* External Functions */
 /* ================== */
 

@@ -6,21 +6,22 @@
 </template>
 <!-- Set up our export -->
 <script>
-import Navigation from "./navigation.vue"
-import database from "../js/db"
+import Navigation from "./navigation.vue";
+import * as Database from "../ts/db";
+
 export default {
   props: ["authenticated"],
   components: { Navigation },
   computed: {
         authenticated: {
             get: function() {
-                return database.currentUser() == null ? false : true;
+                return Database.currentUser() == null ? false : true;
             }
         }
   },
   data () {
     return {
-    }
+    };
   }
 }
 </script>

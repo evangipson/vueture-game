@@ -1,5 +1,5 @@
 // Define the object w/ all my secret firebase stuff
-export default {
+export const secret = {
     apiKey: "AIzaSyAgQR53lgPu39fWHUZ-kYqy4ZHO3xGuw-g",
     authDomain: "vueture-caf88.firebaseapp.com",
     databaseURL: "https://vueture-caf88.firebaseio.com",
