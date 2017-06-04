@@ -1,16 +1,16 @@
 import firebase from "firebase";
 import Router from "./routes";
-import * as Token from "./token";
+import Token from "./token";
 
 /* INPUT YOUR FIREBASE CONFIG HERE
  * OR ELSE THIS WHOLE PROJECT DOESN'T WORK */
 const firebaseConfig: object = {
-    apiKey: Token.secret.apiKey,
-    authDomain: Token.secret.authDomain,
-    databaseURL: Token.secret.databaseURL,
-    projectId: Token.secret.projectId,
-    storageBucket: Token.secret.storageBucket,
-    messagingSenderId: Token.secret.messagingSenderId,
+    apiKey: Token.apiKey,
+    authDomain: Token.authDomain,
+    databaseURL: Token.databaseURL,
+    projectId: Token.projectId,
+    storageBucket: Token.storageBucket,
+    messagingSenderId: Token.messagingSenderId,
 };
 firebase.initializeApp(firebaseConfig);
 
