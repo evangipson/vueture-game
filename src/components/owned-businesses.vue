@@ -20,18 +20,18 @@
 </template>
 
 <script>
-import database from "../js/db";
+import * as Database from "../ts/db";
 
 export default {
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             vm.userBusinesses = snapshot.val();
         });
     },
     methods: {
         removeUserBusiness: function() {
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").remove();
+            Database.db().ref("users/" + Database.currentUser().uid + "/businesses").remove();
             // Let the user know we were successful in updating
             this.$toast.open({
                 message: 'All businesses removed!',

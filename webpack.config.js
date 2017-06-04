@@ -2,13 +2,16 @@
 var webpack = require("webpack");
 
 module.exports = {
-    context: __dirname + "/src/js",
+    context: __dirname + "/src/ts",
     entry: {
-        vueture: __dirname + "/src/js/main.js",
+        vueture: __dirname + "/src/ts/main.ts",
     },
     output: {
         path: __dirname + "/dist/js",
         filename: "[name].js"
+    },
+    resolve: {
+        extensions: ['.js', '.vue', '.ts'],
     },
     // vue-loader configuration
     module: {
@@ -16,6 +19,10 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader'
+            },
+            {
+                test: /\.tsx?$/,
+                loader: 'ts-loader'
             }
         ]
     },

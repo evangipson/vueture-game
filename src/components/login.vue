@@ -41,13 +41,16 @@
 </template>
 
 <script>
-import database from "../js/db"
-import router from "../js/routes"
+import * as Database from "../ts/db";
+import Router from "../ts/routes";
 
 var emailRE = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-var usersRef = database.firebaseInterface.db.ref("users");
+var usersRef = {};
 
 export default {
+    mounted: function() {
+        usersRef = Database.db().ref("users");
+    },
     // computed property for form validation state
     computed: {
         validation: function () {
@@ -73,7 +76,6 @@ export default {
         autofocus: function() {
             // Ensure the "email" input is autofocused. Buefy really should find a way to do this!
             window.onload = function() {
-                console.log(document.getElementsByTagName("input"));
                 document.getElementsByTagName("input")[0].focus();
             };
         }
@@ -116,12 +118,12 @@ export default {
             e.preventDefault();
             // Need to cast "this" because promises just don't understand
             var vm = this;
-            database.firebaseInterface.auth.signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
+            Database.auth().signInWithEmailAndPassword(this.newUser.email, this.newUser.password).then(function() {
                 vm.authReturnCode = 0;
                 // I need this here as well as the route.beforeEach rule
                 // that checks your router.path == "/login" w/ a redirect to home.
                 // TODO: Remove this and figure out why I need it.
-                router.push({path:"/"});
+                Router.push({path:"/"});
                 // We're redirecting to "/" in the chunk above this export default
                 // even though it'd fall here naturally.
             }).catch(function(error) {

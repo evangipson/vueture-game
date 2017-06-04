@@ -15,20 +15,20 @@
 
 <!-- Set up our export -->
 <script>
-import database from "../js/db";
+import * as Database from "../ts/db";
 
 export default {
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/name").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/name").on("value", function(snapshot) {
             var oldUserName = vm.currentUserName;
             vm.currentUserName = snapshot.val().length > 0 ? snapshot.val() : oldUserName;
         });
     },
     data () {
         return {
-            user: database.currentUser(),
-            currentUserName: database.currentUser().email,
+            user: Database.currentUser(),
+            currentUserName: Database.currentUser().email,
         };
     }
 }

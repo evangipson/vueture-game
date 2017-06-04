@@ -61,13 +61,13 @@
 <script>
 import Hero from "./hero.vue";
 import AccountInformation from "./account-information.vue";
-import database from "../js/db";
+import * as Database from "../ts/db";
 
 export default {
     components: { Hero, AccountInformation },
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             vm.availableBusinesses = snapshot.val();
         });
     },

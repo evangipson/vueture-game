@@ -67,7 +67,7 @@
                     <h3>{{ key.name }}</h3>
                     <p>Expected Salary: ${{ formatPrice(key.salary) }}</p>
                     <p>Year(s) experience: {{ key.experience }}</p>
-                    <div v-if="key.favoriteJob.length > 1">
+                    <div v-if="key.favoriteJob.length">
                         <p><b>Favorite Businesses:</b></p>
                         <p v-for="favoriteJob in key.favoriteJob">{{ favoriteJob }}</p>
                     </div>
@@ -98,18 +98,18 @@
 </template>
 
 <script>
-import database from "../js/db";
-import staff from "../js/staff";
-import utils from "../js/utilities";
-import router from "../js/routes";
+import * as Database from "../ts/db";
+import Router from "../ts/routes";
+import * as Staff from "../ts/staff";
+import * as Utils from "../ts/utilities";
 
 export default {
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/staff").on("value", function(snapshot) {
             vm.availableStaff = snapshot.val();
         });
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             // Turn userBusinesses into an array
             var databaseObj = snapshot.val();
             // Save our businesses for later use
@@ -164,23 +164,23 @@ export default {
             }
             if(businessKey !== "" && staffKey !== "") {
                 // Add the staff member to the businesses section of the user
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses/" + businessKey + "/staff").push().update(this.selectedStaff);
+                Database.db().ref("users/" + Database.currentUser().uid + "/businesses/" + businessKey + "/staff").push().update(this.selectedStaff);
                 // remove the staff that was hired
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff/" + staffKey).remove();
+                Database.db().ref("users/" + Database.currentUser().uid + "/staff/" + staffKey).remove();
                 // Let the user know we were successful in updating
                 this.$toast.open({
                     message: "Hired " + this.selectedStaff.name.split(" ")[0] + " at " + this.selectedBusiness.name + "!",
                     type: "is-info"
                 });
                 // Redirect to a specified route
-                router.push({path:"/"});
+                Router.push({path:"/"});
             }
             else {
                 console.log("There was an error hiring the employee!");
             }
         },
         formatPrice: function(value) {
-            let val = utils.formatNumberAsMoney(value);
+            let val = Utils.formatNumberAsMoney(value);
             return val;
         },
         select: function(row) {
@@ -190,15 +190,15 @@ export default {
             var staffMember = {};
             if(!this.availableStaff) {
                 for(var i = 0; i < 5; i++) {
-                    staffMember = staff.createStaff();
-                    database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").push().update(staffMember);
+                    staffMember = Staff.createStaff();
+                    Database.db().ref("users/" + Database.currentUser().uid + "/staff").push().update(staffMember);
                 }
             }
             else {
                 this.availableStaff = "";
                 this.selectedStaff = "";
                 this.clearActiveOptions();
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/staff").remove();
+                Database.db().ref("users/" + Database.currentUser().uid + "/staff").remove();
                 // WHACHYA SAY- WHACHYA SAY- WHACHYA SAY- WHAT!!!
                 this.generateStaff();
             }

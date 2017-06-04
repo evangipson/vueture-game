@@ -10,8 +10,7 @@ var run = require("run-sequence");
 var logs = {
     introMessage: "Running Gulp to build SASS and JavaScript...",
     sass: "Finished building SCSS into css/style.css...",
-    //javascript: "Ensuring javascript will build...",
-    endMessage: "Bundling up javascript into one file for deployment..."
+    endMessage: "Bundling up typescript into one file for deployment..."
 };
 
 gulp.task("begin", function() {
@@ -29,6 +28,9 @@ gulp.task("sass", function() {
     .pipe(gulp.dest("./dist/css"));
 });
 
+/* =========================================== */
+/* JS/TS compliation is now handled in webpack */
+/* =========================================== */
 /* gulp.task("javascript", function() {
     gutil.log(logs.javascript);
     return gulp.src("src/js/*.js")
@@ -56,7 +58,7 @@ function onBuild(done) {
             Object.keys(stats.compilation.assets).forEach(function(key) {
                 gutil.log('Webpack: output ', gutil.colors.green(key));
             });
-            gutil.log('Webpack: ', gutil.colors.blue('finished - javascript packaged!'));
+            gutil.log('Webpack: ', gutil.colors.blue('finished - typescript packaged!'));
             if (done) {
                 done();
             }

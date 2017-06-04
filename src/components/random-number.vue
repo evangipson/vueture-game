@@ -11,9 +11,10 @@
 
 <!-- Set up our export -->
 <script>
-import utils from "../js/utilities"
+import * as Utils from "../ts/utilities";
+
 function generateLargeRandomNumber() {
-    return utils.random(-1383574.1,13135030);
+    return Utils.random(-1383574.1,13135030);
 };
 export default {
     methods: {

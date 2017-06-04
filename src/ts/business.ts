@@ -1,9 +1,34 @@
-import utils from "./utilities";
-import skills from "./skills";
+import * as Skills from "../ts/skills";
+import * as Utils from "../ts/utilities";
+
+/* ========================== */
+/* VUETURE BUSINESS FUNCTIONS */
+/* ========================== */
+
+/**
+ * Calculates the value that modifies the
+ * value of the business.
+ * @param {Number} The type of business that you want to evaluate.
+ * @param {Number} The class of business that you want to evaluate.
+ */
+function calculateValueModifier(selectedBusinessType: number, selectedBusinessClass: number): number {
+    let valueModifier: number = 0;
+    // If staff at business
+        // If they are happy
+            // Add to evaluation
+    // If company has been around
+        // If they are historically good
+            // Add to evalution
+    return valueModifier;
+}
+
+function calculateValue(): void {
+    // return previousValue + calculateValueModifier();
+}
 
 /* Object which represents the master "skeleton"
  * for the business object. */
-const businessModel = {
+export const model = {
     class: [
         "Small",
         "Medium",
@@ -12,7 +37,7 @@ const businessModel = {
         "Conglomeration",
     ],
     /* If you add a new type, remember
-     * to update some skills in staff.js! */
+     * to update some skills in staff.ts! */
     type: {
         "Manufacturing": {
             names: [
@@ -23,8 +48,8 @@ const businessModel = {
                 "Robot Assembly",
                 "Safety Cone",
                 "Pine",
-                "Applewood"
-            ]
+                "Applewood",
+            ],
         },
         "Arts, Crafts, and Collectibles": {
             names: [
@@ -33,8 +58,8 @@ const businessModel = {
                 "Beads And Other Small Items",
                 "New Anitques",
                 "Baseball Card Store",
-                "Sport Memora-Deal-ia"
-            ]
+                "Sport Memora-Deal-ia",
+            ],
         },
         "Beauty and Fragrances": {
             names: [
@@ -42,8 +67,8 @@ const businessModel = {
                 "Anton Wuembre",
                 "Petals Inc.",
                 "Fumers",
-                "Nose Invaders"
-            ]
+                "Nose Invaders",
+            ],
         },
         "Clothing, Accessories, and Shoes": {
             names: [
@@ -53,8 +78,8 @@ const businessModel = {
                 "Tunix",
                 "General Clothes Outlet",
                 "Trendy Chic",
-                "A E R O"
-            ]
+                "A E R O",
+            ],
         },
         "Advertising Agency": {
             names: [
@@ -67,7 +92,7 @@ const businessModel = {
                 "Pemtigone",
                 "Davis & Mitchell",
                 "Trendatt",
-            ]
+            ],
         },
         "Health and Personal Care": {
             names: [
@@ -80,8 +105,8 @@ const businessModel = {
                 "Doctors N' Doctors",
                 "White Mage, M.D.",
                 "Black Mage, D.D.S.",
-                "Red Mage, M.D."
-            ]
+                "Red Mage, M.D.",
+            ],
         },
         "Real Estate": {
             names: [
@@ -94,8 +119,8 @@ const businessModel = {
                 "Cronlin Vista Sales",
                 "Government Acquisitions",
                 "FORE Closures",
-                "4 Closures"
-            ]
+                "4 Closures",
+            ],
         },
         "Electronics and Technology": {
             names: [
@@ -110,8 +135,8 @@ const businessModel = {
                 "Daxis Video Games",
                 "Clonn's Old School Electronics",
                 "Binguss Saminns' Computers",
-                "Farbit's Hard Disks"
-            ]
+                "Farbit's Hard Disks",
+            ],
         },
         "Sanitation": {
             names: [
@@ -126,8 +151,8 @@ const businessModel = {
                 "Go Dish",
                 "Clean 'Er Up",
                 "Fixin' Maids",
-                "Mutual Butlers"
-            ]
+                "Mutual Butlers",
+            ],
         },
         "Sports and Outdoor": {
             names: [
@@ -137,8 +162,8 @@ const businessModel = {
                 "Mobela's",
                 "Rettela's",
                 "Outdoor Lifestyles",
-                "Indoors Shmindoors"
-            ]
+                "Indoors Shmindoors",
+            ],
         },
         "Pets and Animals": {
             names: [
@@ -148,8 +173,8 @@ const businessModel = {
                 "Binkus N' Friends",
                 "Take Me Home!",
                 "Bird Food & Other Things",
-                "Buy Lizards Here"   
-            ]
+                "Buy Lizards Here",
+            ],
         },
         "Nonprofit": {
             names: [
@@ -157,8 +182,8 @@ const businessModel = {
                 "WHY",
                 "NO",
                 "STOP",
-                "QUIT"
-            ]
+                "QUIT",
+            ],
         },
         "Legal and Financial Services": {
             names: [
@@ -173,8 +198,8 @@ const businessModel = {
                 "Scribbit, Mason & Harding",
                 "Warren, Dio, Mason & Baws",
                 "Trembiss, State & Law",
-                "Law Offices Of Dayumit"
-            ]
+                "Law Offices Of Dayumit",
+            ],
         },
         "Food Retail & Service": {
             names: [
@@ -188,8 +213,8 @@ const businessModel = {
                 "Monkeys Taste Fine",
                 "Rabbits Eating Rabbits",
                 "Table To Farm, Inc.",
-                "Farm To Fable"
-            ]
+                "Farm To Fable",
+            ],
         },
         "Vehicle Sales": {
             names: [
@@ -207,8 +232,8 @@ const businessModel = {
                 "Focust",
                 "Dangler's Used Autos",
                 "Drinbin Used Auto Lot",
-                "Canninban Car"
-            ]
+                "Canninban Car",
+            ],
         },
         "Vehicle Repair": {
             names: [
@@ -217,63 +242,37 @@ const businessModel = {
                 "Rigatoni Automoni",
                 "Canninban Car Repair",
                 "Heineke",
-                "AutoPlus"
-            ]
+                "AutoPlus",
+            ],
         },
     },
     debt: 0,
     employees: 0,
-    operationalCost: 0
+    operationalCost: 0,
 };
 
 /**
  * Will calculate the cost of a business
  * based on the type of business, which should
  * be passed in.
- * @param {String} businessClass
- * @return {Number} Cost of the business.
+ * @param {String} The class of business for which to calculate the cost.
  */
-function calculateBusinessCost(businessClass) {
-    var businessCost = 3000000;
-    if(businessClass === "Small") {
-        businessCost = utils.random(4000, 6000);
+export function calculateCost(businessClass): string {
+    let businessCost: number = 3000000;
+    if (businessClass === "Small") {
+        businessCost = Utils.random(4000, 6000);
     }
-    else if(businessClass === "Medium") {
-        businessCost = utils.random(11000, 22000);
+    else if (businessClass === "Medium") {
+        businessCost = Utils.random(11000, 22000);
     }
-    else if(businessClass === "Large") {
-        businessCost = utils.random(25000, 88000);
+    else if (businessClass === "Large") {
+        businessCost = Utils.random(25000, 88000);
     }
-    else if(businessClass === "Enterprise") {
-        businessCost = utils.random(105000, 800000);
+    else if (businessClass === "Enterprise") {
+        businessCost = Utils.random(105000, 800000);
     }
     // Now modify based on randomness
     businessCost = businessCost * (Math.random() * (1.55 - 0.75) + 0.75);
+    // And return the string representation of the number with 2 decimal places.
     return businessCost.toFixed(2);
 }
-
-/**
- * Calculates the value that modifies the
- * value of the business.
- * @param {Number} selectedBusinessType 
- * @param {Number} selectedBusinessClass 
- */
-function calculateValueModifier(selectedBusinessType, selectedBusinessClass) {
-    valueModifier = 0;
-    // If staff at business
-        // If they are happy
-            // Add to evaluation
-    // If company has been around
-        // If they are historically good
-            // Add to evalution
-    return valueModifier;
-}
-
-function calculateValue() {
-    //return previousValue + calculateValueModifier();
-}
-
-export default {
-    model: businessModel,
-    calculateCost: calculateBusinessCost
-};

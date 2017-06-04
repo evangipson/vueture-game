@@ -29,21 +29,21 @@
 </template>
 <!-- Set up our export -->
 <script>
-import database from "../js/db"
-import router from "../js/routes"
+import * as Database from "../ts/db"
+import Router from "../ts/routes"
 
 export default {
     mounted: function() {
         if(this.authenticated) {
             var vm = this;
-            database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+            Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
                 vm.availableBusinesses = snapshot.val();
             });
         }
     },
     methods: {
         logUserOut: function() {
-            database.logout();
+            Database.logout();
         },
         handleNavToggle: function() {
             document.getElementById('nav-toggle').classList.toggle('is-active');
@@ -59,7 +59,7 @@ export default {
     computed: {
         authenticated: {
             get: function() {
-                return database.currentUser() == null ? false : true;
+                return Database.currentUser() == null ? false : true;
             }
         }
     },

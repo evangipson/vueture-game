@@ -61,10 +61,10 @@
 </template>
 
 <script>
-import business from "../js/business";
-import database from "../js/db";
-import utils from "../js/utilities";
-import router from "../js/routes";
+import Router from "../ts/routes";
+import * as Database from "../ts/db";
+import * as Utils from "../ts/utilities";
+import * as Business from "../ts/business";
 
 // List all types of business cards used for our clearActiveOptions function.
 var businessCardTypes = [ "business-type", "business-class" ];
@@ -72,10 +72,10 @@ var businessCardTypes = [ "business-type", "business-class" ];
 export default {
     mounted: function() {
         var vm = this;
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/businesses").on("value", function(snapshot) {
             vm.userBusinesses = snapshot.val();
         });
-        database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/money").on("value", function(snapshot) {
+        Database.db().ref("users/" + Database.currentUser().uid + "/money").on("value", function(snapshot) {
             vm.playerMoney = snapshot.val();
         });
     },
@@ -172,8 +172,8 @@ export default {
             /* The businessCost will be stored as a "money format" in businessCostAsMoney
              * because I do actual calculations with businessCost, so I can't
              * have that looking like money. */
-            var temporaryBusinessCost = business.calculateCost(this.selectedBusinessClass);
-            this.businessCostAsMoney = utils.formatNumberAsMoney(temporaryBusinessCost);
+            var temporaryBusinessCost = Business.calculateCost(this.selectedBusinessClass);
+            this.businessCostAsMoney = Utils.formatNumberAsMoney(temporaryBusinessCost);
             this.businessCost = temporaryBusinessCost;
             // Now flag the page to go to the "name" section!
             this.classSelected = true;
@@ -181,14 +181,14 @@ export default {
         buyBusiness: function() {
             if(Number(this.businessCost) < this.playerMoney) {
                 // Update the database with the user's new business
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid + "/businesses").push().update({
+                Database.db().ref("users/" + Database.currentUser().uid + "/businesses").push().update({
                     name: this.businessName,
                     type: this.selectedBusinessType,
                     class: this.selectedBusinessClass
-                    // TODO: value: business.calculateValue(this.selectedBusinessType, this.selectedBusinessClass)
+                    // TODO: value: Business.calculateValue(this.selectedBusinessType, this.selectedBusinessClass)
                 });
                 // And take their money!
-                database.firebaseInterface.db.ref("users/" + database.currentUser().uid).update({
+                Database.db().ref("users/" + Database.currentUser().uid).update({
                     money: (this.playerMoney - this.businessCost).toFixed(2)
                 });
                 // Let the user know we were successful in updating
@@ -198,7 +198,7 @@ export default {
                 });
                 this.resetBusinessCreationProgress();
                 // Redirect to a specified route
-                router.push({path:"/"});
+                Router.push({path:"/"});
             }
             else {
                 // Let the user know we were successful in updating
@@ -212,10 +212,10 @@ export default {
             var bizName = "";
             var oldBizName = this.businessName;
             if(this.selectedBusinessType) {
-                bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                bizName = Utils.randomElement(Business.model.type[this.selectedBusinessType].names);
                 // Ensure we don't get a duplicate
                 while(bizName === oldBizName) {
-                    bizName = utils.randomElement(business.model.type[this.selectedBusinessType].names);
+                    bizName = Utils.randomElement(Business.model.type[this.selectedBusinessType].names);
                 }
             }
             this.businessName = bizName;
@@ -224,10 +224,10 @@ export default {
     data() {
         return {
             userBusinesses: '',
-            businessTypes: business.model.type,
+            businessTypes: Business.model.type,
             selectedBusinessType: '',
             typeSelected: false,
-            businessClasses: business.model.class,
+            businessClasses: Business.model.class,
             selectedBusinessClass: '',
             classSelected: false,
             businessName: '',

@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es2015",
+        "strictNullChecks": true,
+        "removeComments": false,
+        "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "lib": [
+            "dom",
+            "es5",
+            "es2015.promise"
+        ]
+    },
+    "include": [
+        "src/ts/*.ts",
+        "src/ts/types/*.d.ts"
+    ]
+}
