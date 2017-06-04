@@ -1,6 +1,6 @@
 import firebase from "firebase";
 import Router from "./routes";
-import Token from "./token";
+import Token from "./token"; // Create your own token file!
 
 /* INPUT YOUR FIREBASE CONFIG HERE
  * OR ELSE THIS WHOLE PROJECT DOESN'T WORK */
