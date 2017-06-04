@@ -1,4 +1,4 @@
 node_modules/
 dist/
-src/js/token.js
+src/ts/token.ts
 .vscode/
