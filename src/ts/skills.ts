@@ -10,11 +10,11 @@ export const model: object = {
             "Health and Personal Care",
             "Legal and Financial Services",
             "Food Retail & Service",
-            "Vehicle Sales",
         ],
     },
     "Speaking": {
         happy: [
+            "Advertising Agency",
             "Clothing, Accessories, and Shoes",
             "Real Estate",
             "Legal and Financial Services",
@@ -23,18 +23,18 @@ export const model: object = {
     },
     "Writing": {
         happy: [
-            "Manufacturing",
             "Advertising Agency",
+            "Journalism",
             "Legal and Financial Services",
         ],
     },
     "Organization": {
         happy: [
-            "Manufacturing",
             "Clothing, Accessories, and Shoes",
             "Health and Personal Care",
             "Electronics and Technology",
             "Sanitation",
+            "Journalism",
             "Legal and Financial Services",
             "Food Retail & Service",
             "Vehicle Repair",
@@ -42,8 +42,8 @@ export const model: object = {
     },
     "Planning": {
         happy: [
-            "Manufacturing",
-            "Advertising Agency",
+            "Journalism",
+            "Real Estate",
             "Legal and Financial Services",
             "Vehicle Sales",
         ],
@@ -52,9 +52,6 @@ export const model: object = {
         happy: [
             "Arts, Crafts, and Collectibles",
             "Advertising Agency",
-            "Real Estate",
-            "Electronics and Technology",
-            "Vehicle Repair",
         ],
     },
     "Team Building": {
@@ -67,6 +64,7 @@ export const model: object = {
     },
     "Typing": {
         happy: [
+            "Journalism",
             "Manufacturing",
             "Electronics and Technology",
             "Legal and Financial Services",
@@ -82,7 +80,6 @@ export const model: object = {
     },
     "Data Entry": {
         happy: [
-            "Manufacturing",
             "Real Estate",
             "Electronics and Technology",
             "Sports and Outdoor",
@@ -93,14 +90,22 @@ export const model: object = {
         happy: [
             "Health and Personal Care",
             "Sanitation",
+            "Journalism",
             "Sports and Outdoor",
             "Pets and Animals",
             "Vehicle Repair",
         ],
     },
+    "Empathy": {
+        happy: [
+            "Health and Personal Care",
+            "Sanitation",
+            "Pets and Animals",
+            "Nonprofit",
+        ],
+    },
     "Confidence": {
         happy: [
-            "Arts, Crafts, and Collectibles",
             "Beauty and Fragrances",
             "Clothing, Accessories, and Shoes",
             "Advertising Agency",
@@ -115,6 +120,7 @@ export const model: object = {
             "Clothing, Accessories, and Shoes",
             "Health and Personal Care",
             "Real Estate",
+            "Nonprofit",
             "Sanitation",
             "Pets and Animals",
             "Vehicle Sales",
@@ -125,6 +131,13 @@ export const model: object = {
             "Manufacturing",
             "Advertising Agency",
             "Electronics and Technology",
+        ],
+    },
+    "Innovation": {
+        happy: [
+            "Manufacturing",
+            "Arts, Crafts, and Collectibles",
+            "Advertising Agency",
         ],
     },
     "Problem Solving": {

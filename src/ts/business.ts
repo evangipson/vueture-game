@@ -154,6 +154,21 @@ export const model = {
                 "Mutual Butlers",
             ],
         },
+        "Journalism": {
+            names: [
+                "San Peigo Times",
+                "Lou Bega Herald",
+                "Mambo Journal",
+                "You Weekly",
+                "Writer's Digest",
+                "Reader's Journals",
+                "Andorack Times",
+                "Jackson Times",
+                "Prunes Monthly",
+                "Facial Hair Digest",
+                "Phloston Publishing",
+            ],
+        },
         "Sports and Outdoor": {
             names: [
                 "Rebola's",
