@@ -82,7 +82,14 @@ function generateFavoriteJob(skillList: object): string[] {
             allBusinessTypes[i].push(currentSkill.happy[jobType]);
         }
     }
-    targetBusinessTypes = Utils.getSimilarEntries(allBusinessTypes);
+    // If we have more than 1 set of happy business types.
+    if(allBusinessTypes.length > 1) {
+        targetBusinessTypes = Utils.getSimilarEntries(allBusinessTypes);
+    }
+    // Otherwise, just pick a random happy business type.
+    else {
+        targetBusinessTypes[0] = Utils.randomElement(allBusinessTypes[0]);
+    }
     return targetBusinessTypes;
 }
 
