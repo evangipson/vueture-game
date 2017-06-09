@@ -71,7 +71,7 @@ export function createName(): string {
     ];
     const secondSyllables: string[] = [
         "ov",
-        "ski",
+        "si",
         "wate",
         "ate",
         "te",
@@ -87,7 +87,6 @@ export function createName(): string {
     ];
     const thirdSyllables: string[] = [
         "son",
-        "sson",
         "orn",
         "is",
         "es",
@@ -104,6 +103,7 @@ export function createName(): string {
         "man",
         "sun",
         "ig",
+        "ik",
         "ing",
         "ting",
         "wes",
@@ -111,7 +111,7 @@ export function createName(): string {
     ];
     // Low chance to return three syllables.
     // Note: default for random is 0 - 100
-    if (random() < 8) {
+    if (random() < 6) {
         return randomElement(firstSyllables) + randomElement(secondSyllables) + randomElement(thirdSyllables);
     }
     // Low chance to return one syllable.
@@ -121,9 +121,11 @@ export function createName(): string {
         }
         else if (random() < 50) {
             syllable = randomElement(secondSyllables);
+            syllable = syllable.charAt(0).toUpperCase() + syllable.slice(1);
         }
         else {
-            syllable = randomElement(thirdSyllables).charAt(0).toUpperCase() + syllable.slice(1);
+            syllable = randomElement(thirdSyllables);
+            syllable = syllable.charAt(0).toUpperCase() + syllable.slice(1);
         }
         return syllable;
     }
@@ -185,10 +187,9 @@ export function randomObject(obj: object): string {
 /**
  * Will return any similar entires in the array
  * containing arrays that is passed in.
- * @param {any[][]} An array containing
- * arrays.
+ * @param {any[]} An array containing arrays.
  */
-export function getSimilarEntries(mdArray: any[][]): any[] {
+export function getSimilarEntries(mdArray: any[]): any[] {
     // Using a set here because we only want unique entries.
     let similarEntries = new Set();
     /* This will house temporary entries from the passed in mdArray,
@@ -197,7 +198,7 @@ export function getSimilarEntries(mdArray: any[][]): any[] {
     let numberOfArrays: number = mdArray.length;
     for (let i: number = 0; i < numberOfArrays; i++) {
         /* Use the first element of the multi-dimensional
-        * array as the "master" array to key off of. */
+         * array as the "master" array to key off of. */
         indexArray = mdArray[i];
         for (let array in mdArray) {
             for (let element in mdArray[array]) {
@@ -208,7 +209,10 @@ export function getSimilarEntries(mdArray: any[][]): any[] {
         }
     }
     // Cast the Set back to an array to return it.
-    return  [...similarEntries];
+    const returnArray: any[] = [...similarEntries];
+    /* If we have any entries, return those. Otherwise,
+     * make sure to just pick a random job for the staff to like. */
+    return  returnArray.length > 0 ? returnArray : randomElement(mdArray[random(0, mdArray.length)]);
 }
 
 /**

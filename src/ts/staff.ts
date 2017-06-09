@@ -28,7 +28,7 @@ function createStaffPortrait(): string {
 
 function pickStaffSkills(): object {
     // pick HOW many skills we get
-    const skillAmount: number = Utils.random(1, 3);
+    const skillAmount: number = Utils.random(1, 4);
     let staffSkillKey: string = "";
     let staffSkillProp: object = {};
     let skillsObject: object = {};
