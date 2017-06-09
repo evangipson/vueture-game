@@ -5,6 +5,30 @@
     }
 }
 
+.staff-member .name {
+    color: white;
+    padding: 1rem;
+    position: relative;
+    margin-top: -1.5rem;
+    margin-bottom: 1rem;
+    &::after, &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 1.5rem;
+        background: inherit;
+    }
+    &::after {
+        right: -1.5rem;
+        border-bottom-right-radius: 140%;
+    }
+    &::before {
+        left: -1.5rem;
+        border-bottom-left-radius: 110%;
+    }
+}
+
 .business-type, .business-class, .staff-member, #newBusinessPlus {
     cursor: pointer;
 }

@@ -64,20 +64,32 @@
             <h2>Interview Candidates</h2>
             <div v-for="(key, property) in availableStaff" class="card staff-member" v-on:click="toggleActiveStaff($event, key)">
                 <div class="card-content">
-                    <h3>{{ key.name }}</h3>
+                    <h3 class="name" :style="{ background: key.portrait }">{{ key.name }}</h3>
                     <p>Expected Salary: ${{ formatPrice(key.salary) }}</p>
                     <p>Year(s) experience: {{ key.experience }}</p>
-                    <div v-if="key.favoriteJob.length">
-                        <p><b>Favorite Businesses:</b></p>
+                    <hr />
+                    <div v-if="Object.keys(key.skills).map(index => key.skills[index]).length > 1">
+                        <h3>Skills</h3>
+                        <p v-for="(key, skill) in key.skills">
+                            {{skill}}
+                        </p>
+                    </div>
+                    <div v-else>
+                        <h3>Skill</h3>
+                        <p>{{ Object.keys(key.skills)[0] }}</p>
+                    </div>
+                    <hr />
+                    <div v-if="key.favoriteJob.length > 1">
+                        <h3>Favorite Jobs:</h3>
                         <p v-for="favoriteJob in key.favoriteJob">{{ favoriteJob }}</p>
                     </div>
-                    <p v-else><b>Favorite Business:</b> {{ key.favoriteJob[0] }}</p>
-                    <p style="color: white; margin-top: 1rem;" :style="{ background: key.portrait }">Favorite color: {{ key.portrait }}</p>
-                    <hr />
-                    <p><b>Skills:</b></p>
-                    <p v-for="(key, skill) in key.skills">
-                        {{skill}}
-                    </p>
+                    <div v-else>
+                        <h3>Favorite Job:</h3>
+                        <p>{{ key.favoriteJob[0] }}</p>
+                    </div>
+                </div>
+                <div class="card-footer" style="border-top:none; color: white; padding: 1rem; display: block;border-radius: 5530% 1330% 224% 110%;" :style="{ background: key.portrait }">
+                    <p>Favorite color: {{ key.portrait }}</p>
                 </div>
             </div>
             <div v-if="selectedStaff.name" class="submit-button">
@@ -189,7 +201,7 @@ export default {
         generateStaff: function() {
             var staffMember = {};
             if(!this.availableStaff) {
-                for(var i = 0; i < 5; i++) {
+                for(var i = 0; i < 10; i++) {
                     staffMember = Staff.createStaff();
                     Database.db().ref("users/" + Database.currentUser().uid + "/staff").push().update(staffMember);
                 }
